@@ -1,0 +1,74 @@
+<div ng-controller="RecurringTasksCtrl as tasks">
+  <div class="page-header m-b-0">
+      <div class="row">
+        <div class="col-md-6">
+          <h1><span class="text-muted font-weight-light">Recurring Tasks / </span>{{ tasks.year }} Timeline</h1>
+        </div>
+        <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right">
+            <a href ui-sref="pages.create-task" class="btn btn-primary"><span class="btn-label-icon left ion-plus-round"></span>Add a task</a>
+          </div>
+      </div>
+    </div>
+<div class="page-wide-block p-a-4 bg-white font-size-15">
+  <p>
+    View and manage tasks that recur throughout the year.
+  </p>
+</div>
+<hr class="page-wide-block m-t-0">
+<div class="row">
+  <div class="col-md-12">
+    <div class="widget-timeline">
+
+      <div class="widget-timeline-section font-weight-semibold" ng-repeat-start="(idx, month) in tasks.months" id="anchor{ month.id }" ng-class="{ 'bg-primary': tasks.month == month.id }">
+          {{ month.name }}
+      </div>
+      <div class="widget-timeline-item"
+        ng-repeat-end ng-repeat="task in tasks.tasks | filter: byMonth(idx)"
+        ng-controller="RecurringTaskInstanceCtrl as i"
+        ng-init="i.init({ year: tasks.year, month: month.id, taskId: task.id })">
+        <div class="widget-timeline-info">
+          <div class="widget-timeline-icon" ng-class="i.instance.completed ? 'bg-success' : ''">
+              <i class="fa fa-check"></i>
+          </div>
+          <div class="widget-timeline-time">{{ task.owner }}</div>
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+              <span class="panel-title" ng-class="i.instance.completed ? 'text-strike' : ''">{{ task.name }}</span>
+              <div class="panel-heading-controls">
+                <button class="btn btn-xs" ng-class="i.instance.completed ? 'btn-success' : 'btn-outline btn-outline-colorless' " ng-click="i.setCompleted(!i.instance.completed)"><i class="fa fa-check"></i> Complete</button>
+                <div class="btn-group btn-group-xs">
+                  <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-cog"></i></button>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href ui-sref="pages.edit-task({ id: task.id })">Edit task</a></li>
+                    <li><a href="#">Archive task</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body" ng-class="i.instance.completed ? 'hidden' : ''">
+              <div class="col-md-12 p-l-0 m-l-0">
+                {{ task.description }}
+              </div>
+              <div class="col-md-6 m-t-1 m-l-0 p-l-0">
+                  <label for="basic-url">JIRA Issue</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">https://libpm.ucr.edu/browse/</span>
+                    <input type="text" class="form-control text-uppercase" id="basic-url" ng-blur="save()" ng-model="i.instance.caseNumber">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn">Open</button>
+                      </span>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+</script>
+</div>

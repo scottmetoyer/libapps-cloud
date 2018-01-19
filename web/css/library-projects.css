@@ -1,0 +1,22 @@
+tr.placeholder {
+  height: 20px;
+  border: 0;
+}
+
+.panel .widget-comments-item {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.widget-comments-item {
+  position: relative;
+  padding: 12px 15px 12px 0px;
+}
+
+.widget-timeline-icon {
+  cursor: pointer;
+}
+
+.text-strike{
+  text-decoration: line-through;
+}

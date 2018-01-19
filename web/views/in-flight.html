@@ -1,0 +1,71 @@
+<div ng-controller="ProjectListCtrl as projects">
+<div class="page-header m-b-0">
+  <div class="row">
+    <div class="col-md-6">
+      <h1><span class="text-muted font-weight-light">Projects / </span>In-flight</h1>
+    </div>
+    <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right">
+        <a href ui-sref="pages.create-project" class="btn btn-primary"><span class="btn-label-icon left ion-plus-round"></span>Create a project</a>
+      </div>
+  </div>
+</div>
+<div class="page-wide-block p-a-4 bg-white font-size-15">
+    <p>
+      Projects that are in execution. Drag to change priority.
+    </p>
+</div>
+<hr class="page-wide-block m-t-0">
+<div class="row">
+  <div class="col-md-12">
+      <p ng-show="projects.projects.length == 0">There are no projects in-flight. Kick some off from <a href ui-sref="pages.on-deck">on-deck</a>.</p>
+      <div class="table-light">
+          <table class="table table-bordered table-striped" id="projects" ng-show="projects.projects.length > 0">
+              <thead>
+                <tr>
+                  <th>Key</th>
+                  <th>Name</th>
+                  <th style="width: 12%">Status</th>
+                  <th>Lead</th>
+                  <th>Owner</th>
+                  <th style="width: 35%">Latest Update</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="p in projects.projects">
+                  <td><a href ui-sref="pages.view-project({ key: p.key })">{{ p.key }}</a></td>
+                  <td>{{ p.name }}</td>
+                  <td><i class="ion-record {{ p.status.class }}"></i>&nbsp;{{ p.status.description }}</td>
+                  <td>{{ p.lead }}</td>
+                  <td>{{ p.owner }}</td>
+                  <td>
+                      <div class="widget-comments-item" ng-show="p.latestUpdate != null">
+                          <div class="widget-comments-header">
+                            <a href="#" title="">{{ p.latestUpdate.user }}</a> commented:
+                          </div>
+                          <div class="widget-comments-text">
+                          {{ p.latestUpdate.text }}
+                          </div>
+                          <div class="widget-comments-footer">
+                          {{ p.latestUpdate.created | humandate }}
+                          </div>
+                      </div>
+
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    $('#projects').sortable({
+      containerSelector: 'table',
+      itemPath: '> tbody',
+      itemSelector: 'tr',
+      placeholder: '<tr class="placeholder">'
+    });
+  });
+</script>
+</div>

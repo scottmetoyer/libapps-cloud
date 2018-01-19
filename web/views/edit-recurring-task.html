@@ -1,0 +1,52 @@
+<div ng-controller="TaskCtrl as task">
+  <div class="page-header m-b-0">
+    <h1><span class="text-muted font-weight-light">{{ task.task.name }} / </span>Edit</h1>
+  </div>
+  <hr class="page-wide-block m-t-0">
+  <div class="row">
+      <div class="col-md-12">
+          <div class="panel">
+
+              <form name="updateForm" ng-submit="task.updateTask(updateForm.$valid)" novalidate>
+                  <div class="panel-heading">
+                      <div class="panel-title">Please update the task details</div>
+                  </div>
+
+                  <div class="panel-body">
+                      <div class="alert alert-danger" ng-show="task.hasError == true">
+                          <strong>Something went wrong</strong> There was an error updating your task. Please check the AWS CloudWatch logs.
+                      </div>
+
+                      <input type="hidden" ng-model="task.task.id">
+
+                      <fieldset class="form-group">
+                            <label>Name</label>
+                            <input class="form-control" type="text" ng-model="task.task.name" required>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label>Description</label>
+                            <input class="form-control" type="text" ng-model="task.task.description">
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label>Owner</label>
+                            <input class="form-control" type="text" ng-model="task.task.owner">
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label>Schedule</label><br>
+                            <label class="checkbox-inline" ng-repeat="month in task.task.schedule">
+                                <input type="checkbox" value="month.name" ng-model="month.selected"> {{ month.name }}
+                            </label>
+                        </fieldset>
+                  </div>
+
+                  <div class="panel-footer text-right">
+                        <a class="btn btn-danger" type="button" href ui-sref="pages.recurring-tasks">Cancel</a>
+                        <button class="btn btn-primary" ng-disabled="updateForm.$invalid" type="submit">Save task</button>
+                    </div>
+              </form>
+
+        </div>
+
+    </div>
+  </div>
+  </div>

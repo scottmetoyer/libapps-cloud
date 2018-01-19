@@ -1,0 +1,140 @@
+<div class="page-header m-b-0">
+  <h1><span class="text-muted font-weight-light">Projects / </span>Create a project</h1>
+</div>
+<div class="page-wide-block p-a-4 bg-white font-size-15">
+  <p>
+    Create a new project. Add links to project documentation, mission statement, and other project attributes.
+  </p>
+</div>
+<hr class="page-wide-block m-t-0">
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div ng-controller="ProjectCtrl as project">
+                <form name="createForm" ng-submit="project.createProject(createForm.$valid)" novalidate>
+                    <div class="panel-heading">
+                        <div class="panel-title">Please enter the project details</div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="alert alert-danger" ng-show="project.hasError == true">
+                            <strong>Something went wrong</strong> There was an error creating your project. Please check the AWS CloudWatch logs.
+                        </div>
+                        <fieldset class="form-group">
+                            <label>Name</label>
+                            <input class="form-control" type="text" ng-model="project.project.name" required>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label>Project Key</label>
+                            <input class="form-control text-uppercase" type="text" ng-model="project.project.key" required disallow-spaces>
+                            <small class="text-muted">A short alphanumeric ID for your project. No spaces.</small>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label>Project purpose</label>
+                            <textarea class="form-control" placeholder="Why are we doing this project?" ng-model="project.project.description"></textarea>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label>Owner/Stakeholder</label>
+                            <input class="form-control" type="text" ng-model="project.project.owner">
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label>Cyberinfrastructure Lead</label>
+                            <input class="form-control" type="text" ng-model="project.project.lead">
+                        </fieldset>
+
+                        <fieldset class="form-group">
+                            <label class="control-label">Has a Project Plan?</label>
+                            <label class="switcher switcher-success">
+                                <input type="checkbox" checked="" ng-model="project.project.hasProjectPlan">
+                                <div class="switcher-indicator">
+                                    <div class="switcher-yes">YES</div>
+                                    <div class="switcher-no">NO</div>
+                                </div>
+                                &nbsp;
+                            </label>
+                        </fieldset>
+
+                        <fieldset class="form-group" ng-show="project.project.hasProjectPlan">
+                            <label>Link to the Project Plan</label>
+                            <input class="form-control" type="text" ng-model="project.project.projectPlanLink" />
+                        </fieldset>
+
+                        <fieldset class="form-group">
+                            <label class="control-label">Has a Confluence Wiki?</label>
+                            <label class="switcher switcher-success">
+                                <input type="checkbox" checked="" ng-model="project.project.hasWiki">
+                                <div class="switcher-indicator">
+                                    <div class="switcher-yes">YES</div>
+                                    <div class="switcher-no">NO</div>
+                                </div>
+                                &nbsp;
+                            </label>
+                        </fieldset>
+
+                        <fieldset class="form-group" ng-show="project.project.hasWiki">
+                            <label>Link to the Confluence Wiki</label>
+                            <input class="form-control" type="text" ng-model="project.project.wikiLink" />
+                        </fieldset>
+
+                        <div class="form-group">
+                            <label class="control-label">Has a JIRA Project?</label>
+                            <label class="switcher switcher-success">
+                                <input type="checkbox" checked="" ng-model="project.project.hasJiraProject">
+                                <div class="switcher-indicator">
+                                    <div class="switcher-yes">YES</div>
+                                    <div class="switcher-no">NO</div>
+                                </div>
+                                &nbsp;
+                            </label>
+                        </div>
+                        <fieldset class="form-group" ng-show="project.project.hasJiraProject">
+                            <label>Link to the JIRA Project</label>
+                            <input class="form-control" type="text" ng-model="project.project.jiraLnk"/>
+                        </fieldset>
+
+                        <div class="form-group">
+                            <label class="control-label">Has a Stash Repository?</label>
+                            <label class="switcher switcher-success">
+                                <input type="checkbox" checked="" ng-model="project.project.hasCodeRepository">
+                                <div class="switcher-indicator">
+                                    <div class="switcher-yes">YES</div>
+                                    <div class="switcher-no">NO</div>
+                                </div>
+                                &nbsp;
+                            </label>
+                        </div>
+                        <fieldset class="form-group" ng-show="project.project.hasCodeRepository">
+                            <label>Link to the Stash Repository</label>
+                            <input class="form-control" type="text" ng-model="project.project.codeRepositoryLink" />
+                        </fieldset>
+
+                        <div class="form-group">
+                            <label class="control-label">Execution Status</label>
+                            <div class="radio m-t-0">
+                                <label>
+                                    <input type="radio" name="execution-status" ng-model="project.project.executionStatus" value="backlog"> Backlog
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="execution-status" ng-model="project.project.executionStatus" value="on-deck"> On-deck
+                                </label>
+                            </div>
+                            <div class="radio m-b-0">
+                                <label>
+                                    <input type="radio" name="execution-status" ng-model="project.project.executionStatus" value="in-flight"> In-flight
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-footer text-right">
+                        <a class="btn btn-danger" type="button" href ui-sref="pages.in-flight">Cancel</a>
+                        <button class="btn btn-primary" ng-disabled="createForm.$invalid" type="submit">Create project</button>
+                    </div>
+                </form>
+            </div>
+      </div>
+
+  </div>
+</div>
