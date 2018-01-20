@@ -14,6 +14,10 @@
 
     // Routes
     $stateProvider
+      .state('login', {
+        url: '/login',
+        templateUrl: 'views/authentication/login.html'
+      })
       .state('pages', {
         abstract: true,
         url: '/',
