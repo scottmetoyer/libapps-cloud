@@ -41,25 +41,6 @@
           },
         }
       })
-      .state('pages.on-deck', {
-        url: 'on-deck',
-        templateUrl: 'views/on-deck.html',
-        data: { pageTitle: 'On-deck projects' },
-        resolve: {
-          // Load plugins here
-          loadPlugin: function ($ocLazyLoad) {
-            return $ocLazyLoad.load([
-              {
-                serie: true,
-                name: 'ng-sortable',
-                files: [
-                  'js/libs/jquery-sortable.js'
-                ]
-              },
-            ]);
-          },
-        },
-      })
       .state('pages.backlog', {
         url: 'backlog',
         templateUrl: 'views/backlog.html',
@@ -149,6 +130,17 @@
         url: 'edit-task/:id',
         templateUrl: 'views/edit-recurring-task.html',
         data: { pageTitle: 'Edit task' },
+        resolve: {
+          // Load plugins here
+          loadPlugin: function ($ocLazyLoad) {
+            return $ocLazyLoad.load([]);
+          },
+        },
+      })
+      .state('pages.create-request', {
+        url: 'create-request',
+        templateUrl: 'views/request/create.html',
+        data: { pageTitle: 'New request' },
         resolve: {
           // Load plugins here
           loadPlugin: function ($ocLazyLoad) {

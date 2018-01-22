@@ -14,13 +14,6 @@
       });
     }
 
-    self.moveToOnDeck = function(key) {
-      data.saveProjectStatus('on-deck', key)
-      .then(function(response) {
-        loadProjects();
-      });
-    }
-
     self.moveToBacklog = function(key) {
       data.saveProjectStatus('backlog', key)
       .then(function(response) {
@@ -37,10 +30,6 @@
         if ($state.current.name == 'pages.backlog') {
           self.projects = items.filter(function(project) {
             return (project.executionStatus == 'backlog');
-          });
-        } else if ($state.current.name == 'pages.on-deck') {
-          self.projects = items.filter(function(project) {
-            return (project.executionStatus == 'on-deck');
           });
         } else if ($state.current.name == 'pages.archive') {
           self.projects = items.filter(function(project) {
