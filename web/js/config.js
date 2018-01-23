@@ -137,10 +137,39 @@
           },
         },
       })
-      .state('pages.create-request', {
-        url: 'create-request',
+      .state('pages.request', {
+        url: 'request/create',
         templateUrl: 'views/requests/create.html',
         data: { pageTitle: 'New request' },
+        resolve: {
+          // Load plugins here
+          loadPlugin: function ($ocLazyLoad) {
+            return $ocLazyLoad.load([]);
+          },
+        },
+      })
+      .state('pages.create-annual-equipment-request', {
+        url: 'request/create/annual-equipment',
+        templateUrl: 'views/requests/annual-equipment/start.html',
+        data: { pageTitle: 'New Annual Equipment purchase request' },
+        resolve: {
+          // Load plugins here
+          loadPlugin: function ($ocLazyLoad) {
+            return $ocLazyLoad.load([
+              {
+                name: 'px-wizard',
+                files: [
+                  'js/pixeladmin/plugins/px-wizard.js'
+                ]
+              },
+            ]);
+          },
+        },
+      })
+      .state('pages.annual-equipment-request-submitted', {
+        url: 'request/create/annual-equipment/success',
+        templateUrl: 'views/requests/annual-equipment/success.html',
+        data: { pageTitle: 'Annual Equipment purchase request submitted' },
         resolve: {
           // Load plugins here
           loadPlugin: function ($ocLazyLoad) {

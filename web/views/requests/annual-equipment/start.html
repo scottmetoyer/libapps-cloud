@@ -1,0 +1,132 @@
+<div class="page-header m-b-0">
+  <h1>
+    <span class="text-muted font-weight-light">Request / </span>Submit a Request</h1>
+</div>
+<hr class="page-wide-block m-t-0">
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-title">Annual Equipment Request</div>
+      <small class="panel-subtitle text-muted">Annual Equipment Requests are used to submit requests for annual equipment and furniture purchases. These requests
+        are reviewed, prioritized, and approved by the Library AULs and UL. You can check on the status of an existing requestby
+        clicking Annual Equipment in the sidebar to the left.</small>
+      <div class="wizard panel-wizard" id="wizard-panel">
+        <div class="wizard-wrapper">
+          <ul class="wizard-steps" style="width: auto; left: 0px;">
+            <li data-target="#wizard-panel-step1" class="active">
+              <span class="wizard-step-number">1</span>
+              <span class="wizard-step-complete">
+                <i class="fa fa-check text-success"></i>
+              </span>
+              <span class="wizard-step-caption">What are you requesting?</span>
+            </li>
+            <li data-target="#wizard-panel-step2">
+              <span class="wizard-step-number">2</span>
+              <span class="wizard-step-complete">
+                <i class="fa fa-check text-success"></i>
+              </span>
+              <span class="wizard-step-caption">Why is it needed?</span>
+            </li>
+            <li data-target="#wizard-panel-step3">
+              <span class="wizard-step-number">3</span>
+              <span class="wizard-step-complete">
+                <i class="fa fa-check text-success"></i>
+              </span>
+              <span class="wizard-step-caption">Who is it for?</span>
+            </li>
+          </ul>
+        </div>
+        <div class="wizard-content">
+          <div class="wizard-pane active" id="wizard-panel-step1">
+            <p class="text-muted p-b-1">Tell us about your request, including a brief description, how many are needed, how much it costs, and where
+              it can be purchased.</p>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Brief description of the request</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Quantity</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <label>Esimated cost (each)</label>
+                <div class="input-group form-group">
+                  <span class="input-group-addon">$</span>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Vendor</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Item website link</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="pull-right">
+              <button type="button" class="btn btn-primary" data-wizard-action="next">Save and continue</button>
+            </div>
+
+          </div>
+          <div class="wizard-pane" id="wizard-panel-step2">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Justification for this request</label>
+                  <textarea class="form-control" rows="6"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="pull-right">
+              <button type="button" class="btn" data-wizard-action="prev">Go back</button>
+              <button type="button" class="btn btn-primary" data-wizard-action="next">Save and continue</button>
+            </div>
+          </div>
+          <div class="wizard-pane" id="wizard-panel-step3">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Department</label>
+                  <select class="form-control"></select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                    <label>Location / staff member</label>
+                    <input type="text" class="form-control"></input>
+                </div>
+              </div>
+            </div>
+            <div class="pull-right">
+              <button type="button" class="btn" data-wizard-action="prev">Go back</button>
+              <button type="button" class="btn btn-primary" data-wizard-action="next" ui-sref="pages.annual-equipment-request-submitted">Submit request</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <script>
+      $(function () {
+        $('#wizard-panel').pxWizard();
+      });
+    </script>
+
+  </div>
+</div>
