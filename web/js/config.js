@@ -139,7 +139,7 @@
       })
       .state('pages.create-request', {
         url: 'create-request',
-        templateUrl: 'views/request/create.html',
+        templateUrl: 'views/requests/create.html',
         data: { pageTitle: 'New request' },
         resolve: {
           // Load plugins here

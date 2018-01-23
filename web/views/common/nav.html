@@ -12,11 +12,25 @@
 
         <ul class="px-nav-dropdown-menu" style="">
             <li class="px-nav-item" ui-sref-active="active">
-                <a href ui-sref="pages.in-flight"><i class="px-nav-icon ion-paper-airplane"></i><span class="px-nav-label">In-flight</span></a>
+                <a href ui-sref="pages.create-project"><i class="px-nav-icon ion-plus text-success"></i><span class="px-nav-label">New Project</span></a>
             </li>
-            <li class="px-nav-item" ui-sref-active="active">
-                <a href ui-sref="pages.backlog"><i class="px-nav-icon ion-filing"></i><span class="px-nav-label">Backlog</span></a>
+
+            <li class="px-nav-item px-nav-dropdown">
+                <a href="#"><i class="px-nav-icon ion-ios-book"></i><span class="px-nav-label">Project Atlas</span></a>
+
+                <ul class="px-nav-dropdown-menu" style="">
+                    <li class="px-nav-item" ui-sref-active="active">
+                        <a href ui-sref="pages.in-flight"><span class="px-nav-label">In-flight</span></a>
+                    </li>
+                    <li class="px-nav-item" ui-sref-active="active">
+                        <a href ui-sref="pages.backlog"><span class="px-nav-label">Backlog</span></a>
+                    </li>
+                    <li class="px-nav-item" ui-sref-active="active">
+                        <a href ui-sref="pages.archive"><span class="px-nav-label">Archive</span></a>
+                    </li>
+                </ul>
             </li>
+
             <li class="px-nav-item" ui-sref-active="active">
                 <a href ui-sref="pages.recurring-tasks"><i class="px-nav-icon ion-calendar"></i><span class="px-nav-label">Recurring Tasks</span></a>
             </li>
@@ -33,9 +47,6 @@
                     <li class="px-nav-item"><a href=""><span class="px-nav-label">Ramon</span></a></li>
                 </ul>
             </li>
-            <li class="px-nav-item" ui-sref-active="active">
-                <a href ui-sref="pages.archive"><i class="px-nav-icon ion-archive"></i><span class="px-nav-label">Archive</span></a>
-            </li>
         </ul>
     </li>
 
@@ -44,7 +55,7 @@
 
         <ul class="px-nav-dropdown-menu" style="">
             <li class="px-nav-item" ui-sref-active="active">
-                <a href><i class="px-nav-icon ion-plus"></i><span class="px-nav-label">New Request</span></a>
+                <a href ui-sref="pages.create-request"><i class="px-nav-icon ion-plus text-success"></i><span class="px-nav-label">New Request</span></a>
             </li>
             <li class="px-nav-item" ui-sref-active="active">
                 <a href><i class="px-nav-icon ion-plane"></i><span class="px-nav-label">Travel</span></a>
@@ -56,9 +67,5 @@
                 <a href><i class="px-nav-icon ion-monitor"></i><span class="px-nav-label">Annual Equipment</span></a>
             </li>
         </ul>
-    </li>
-
-    <li class="px-nav-box b-t-1 p-a-2">
-        <a href ui-sref="pages.create-project" class="btn btn-primary btn-block btn-outline"><span class="btn-label-icon left ion-plus-round"></span>Create a project</a>
     </li>
 </ul>
