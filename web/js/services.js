@@ -16,12 +16,12 @@
         return status;
       }
     })
-    .service('authInterceptor', function ($q) {
+    .service('authInterceptor', function ($q, $location) {
       var service = this;
 
       service.responseError = function (response) {
         if (response.status == 401) {
-          window.location = "/login";
+          $location.path('/login');
         }
         return $q.reject(response);
       };
