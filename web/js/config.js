@@ -1,9 +1,9 @@
-(function() {
+(function () {
   // ===============================================================================
   // Config
   //
 
-  function config($stateProvider, $locationProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+  function config($stateProvider, $locationProvider, $httpProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     // Default url
     $urlRouterProvider.otherwise("/");
     $locationProvider.hashPrefix('!');
@@ -14,6 +14,10 @@
 
     // Routes
     $stateProvider
+      .state('login', {
+        url: '/login',
+        templateUrl: 'views/auth/login.html'
+      })
       .state('pages', {
         abstract: true,
         url: '/',
@@ -173,12 +177,14 @@
           },
         },
       });
+
+      $httpProvider.interceptors.push('authInterceptor');
   };
 
-  function run($rootScope, $state) {
+  function run($rootScope, $state, $http) {
     $rootScope.$state = $state;
 
-    $rootScope.$on('$stateChangeStart', function() {
+    $rootScope.$on('$stateChangeStart', function () {
       // Restart page loader
       if (window.Pace && typeof window.Pace.restart === 'function') {
         window.Pace.restart();
@@ -187,7 +193,6 @@
   }
 
   angular.module('pixeladmin')
-    .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$ocLazyLoadProvider', config])
-    .run(['$rootScope', '$state', run]);
-
+    .config(['$stateProvider', '$locationProvider', '$httpProvider', '$urlRouterProvider', '$ocLazyLoadProvider', config])
+    .run(['$rootScope', '$state', '$http', run]);
 })();
