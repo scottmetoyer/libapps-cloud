@@ -22,12 +22,11 @@
 
         user.authenticateUser(authenticationDetails, {
           onSuccess: function (result) {
-            console.log(result);
             var accessToken = result.getAccessToken().getJwtToken();
             // $scope.accessToken = accessToken;
 
             var currentUser = userPool.getCurrentUser();
-            console.log(currentUser);
+
             // $location.path('/contents');
             $scope.$apply();
           },
@@ -45,9 +44,21 @@
               }
             }
 
+            // User not found
+            if (err.code == 'UserNotFoundException') {
+            }
+
             // Password does not meet requirements
 
             // Verification code is incorrect
+            if (err.code == 'CodeMismatchException') {
+              $scope.resetPasswordForm.verificationCode.$setValidity('code',  false);
+            }
+
+            if (err.code == 'InvalidPasswordException') {
+              $scope.resetPasswordForm.password.$setValidity('complexity',  false);
+            }
+            // MinRangeError ?
 
             $scope.$apply();
           },
@@ -60,9 +71,6 @@
               user.completeNewPasswordChallenge(self.newPassword, userAttributes, newPasswordCallback);
               angular.element('#setPasswordModal').modal('hide');
             }
-          },
-          passwordResetRequired: function() {
-
           }
         });
       }

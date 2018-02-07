@@ -29,10 +29,14 @@
             </fieldset>
             <div ng-messages="resetPasswordForm.password.$error">
                 <p ng-message="compareTo" class="text-danger">The passwords do not match</p>
+                <p ng-message="compareTo" class="text-danger">The password does not meet complexity requirements</p>
             </div>
+            <div ng-messages="resetPasswordForm.verificationCode.$error">
+              <p ng-message="code" class="text-danger">The verification code is incorrect</p>
+          </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" ng-disabled="resetPasswordForm.$invalid">Save and login</button>
+            <button type="submit" class="btn btn-primary">Save and login</button>
           </div>
         </form>
       </div>
