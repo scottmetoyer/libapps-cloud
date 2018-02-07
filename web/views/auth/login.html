@@ -1,86 +1,7 @@
-<div ng-controller="LoginCtrl as login">
-  <div class="modal fade" tabindex="-1" role="dialog" id="resetPasswordModal" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <form name="resetPasswordForm" ng-submit="login.resetPassword(resetPasswordForm.$valid)" novalidate>
-          <div class="modal-header">
-            <h4 class="modal-title">Please set a new password</h4>
-          </div>
-          <div class="modal-body">
-            <p>Please set a new password for your LibApps cloud account.</p>
-            <p>Your password must contain:</p>
-            <ul>
-              <li>At least one number</li>
-              <li>At least one capital letter</li>
-              <li>At least one lowercase letter</li>
-              <li>At least 8 characters</li>
-            </ul>
-            <fieldset class="form-group form-group-lg">
-              <label>Verification Code</label>
-              <input type="text" name="verificationCode" class="form-control" ng-model="login.verificationCode" required>
-            </fieldset>
-            <fieldset class="form-group form-group-lg">
-              <label>New password</label>
-              <input type="password" name="password" class="form-control" ng-model="login.newPassword" compare-to="login.retypeNewPassword" required>
-            </fieldset>
-            <fieldset class="form-group form-group-lg">
-              <label>Retype new password</label>
-              <input type="password" name="retypePassword" class="form-control" ng-model="login.retypeNewPassword" required>
-            </fieldset>
-            <div ng-messages="resetPasswordForm.password.$error">
-                <p ng-message="compareTo" class="text-danger">The passwords do not match</p>
-                <p ng-message="compareTo" class="text-danger">The password does not meet complexity requirements</p>
-            </div>
-            <div ng-messages="resetPasswordForm.verificationCode.$error">
-              <p ng-message="code" class="text-danger">The verification code is incorrect</p>
-          </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Save and login</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" tabindex="-1" role="dialog" id="setPasswordModal" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <form name="newPasswordForm" ng-submit="login.submitNewPassword(newPasswordForm.$valid)" novalidate>
-          <div class="modal-header">
-            <h4 class="modal-title">Please set your password</h4>
-          </div>
-          <div class="modal-body">
-            <p>Please set a password for your LibApps cloud account.</p>
-            <p>Your password must contain:</p>
-            <ul>
-              <li>At least one number</li>
-              <li>At least one capital letter</li>
-              <li>At least one lowercase letter</li>
-              <li>At least 8 characters</li>
-            </ul>
-            <fieldset class="form-group form-group-lg">
-              <label>New password</label>
-              <input type="password" name="password" class="form-control" ng-model="login.newPassword" compare-to="login.retypeNewPassword" required>
-            </fieldset>
-            <fieldset class="form-group form-group-lg">
-              <label>Retype new password</label>
-              <input type="password" name="retypePassword" class="form-control" ng-model="login.retypeNewPassword" required>
-            </fieldset>
-            <div ng-messages="newPasswordForm.password.$error">
-                <p ng-message="compareTo" class="text-danger">The passwords do not match</p>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" ng-disabled="newPasswordForm.$invalid">Save and login</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+<div ng-controller="LoginCtrl as l">
 
   <div class="page-signin-header p-a-2 text-sm-center bg-white">
-    <a class="px-demo-brand px-demo-brand-lg text-default" href="index.html">
+    <a class="px-demo-brand px-demo-brand-lg text-default">
       <i class="ion-cloud text-primary"></i>
       &nbsp;UCR Library LibApps Cloud</a>
   </div>
@@ -88,13 +9,13 @@
   <div class="page-signin-container" id="page-signin-form">
     <h2 class="m-t-0 m-b-4 text-xs-center font-weight-semibold font-size-20 text-white font-weight-bold">Sign In to your Account</h2>
 
-    <form name="loginForm" ng-submit="login.login(loginForm.$valid)" novalidate class="panel p-a-4">
+    <form name="loginForm" ng-submit="l.login(loginForm.$valid)" novalidate class="panel p-a-4">
       <fieldset class="form-group form-group-lg">
-        <input type="text" class="form-control" ng-model="login.email" placeholder="Email" required>
+        <input type="text" class="form-control" ng-model="l.email" placeholder="Email" required>
       </fieldset>
 
       <fieldset class=" form-group form-group-lg">
-        <input type="password" ng-model="login.password" class="form-control" placeholder="Password" required>
+        <input type="password" ng-model="l.password" class="form-control" placeholder="Password" required>
       </fieldset>
 
       <div class="clearfix">
@@ -105,23 +26,8 @@
         </label>
         <a href="#" class="font-size-12 text-muted pull-xs-right" id="page-signin-forgot-link">Forgot your password?</a>
       </div>
-
+      <div class="text-danger" ng-show="l.badCredentials">Invalid email or password</div>
       <button type="submit" ng-disabled="loginForm.$invalid" class="btn btn-block btn-lg btn-primary m-t-3">Sign In</button>
-    </form>
-  </div>
-
-  <div class="page-signin-container" id="page-signin-forgot-form">
-    <h2 class="m-t-0 m-b-4 text-xs-center font-weight-semibold font-size-20">Password reset</h2>
-
-    <form action="index.html" class="panel p-a-4">
-      <fieldset class="form-group form-group-lg">
-        <input type="email" class="form-control" placeholder="Your Email">
-      </fieldset>
-
-      <button type="submit" class="btn btn-block btn-lg btn-primary m-t-3">Send password reset link</button>
-      <div class="m-t-2 text-muted">
-        <a href="#" id="page-signin-forgot-back">&larr; Back</a>
-      </div>
     </form>
   </div>
 

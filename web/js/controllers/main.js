@@ -3,13 +3,30 @@
   // Controllers / Main
   //
 
-  function MainCtrl($window) {
+  function MainCtrl($rootScope, $state, User, Login) {
+    var main = this;
     this.companyName = 'UCR Library';
-    this.username = 'User Name';
 
     this.logout = function() {
-      $window.location.href = '/login.html';
+      Login.logout()
+      .then(function(response) {
+          main.currentUser = User.setCurrentUser(null);
+          $state.go('login');
+      }, function(error) {
+          console.log(error);
+      });
     }
+
+    $rootScope.$on('authorized', function() {
+        main.currentUser = User.getCurrentUser();
+    });
+
+    $rootScope.$on('unauthorized', function() {
+        main.currentUser = User.setCurrentUser(null);
+        $state.go('login');
+    });
+
+    main.currentUser = User.getCurrentUser();
   }
 
   angular.module('pixeladmin')

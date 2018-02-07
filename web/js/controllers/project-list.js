@@ -3,7 +3,7 @@
   // Controllers / ProjectList
   //
 
-  function ProjectListCtrl($http, $state, $filter, bl, data, jira, cognito) {
+  function ProjectListCtrl($http, $state, $filter, bl, data, jira) {
     var self = this;
     self.projects = [];
 
@@ -22,11 +22,6 @@
     }
 
     function loadProjects() {
-      // Test AWS Cognito functions
-      var userPool = cognito.getUserPool();
-      var currentUser = userPool.getCurrentUser();
-      console.log(currentUser);
-
       data.getProjects()
       .then(function(response) {
         var items = response.data.Items;
@@ -62,7 +57,7 @@
             });
           })
         }
-      });
+      }).catch(function(err){ console.log(err)} );
     }
 
     // Kick off the initial load

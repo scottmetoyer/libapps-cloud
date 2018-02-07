@@ -16,17 +16,56 @@
         return status;
       }
     })
-    .service('authInterceptor', function ($q, $location) {
+    .service('User', function (store) {
+      var service = this;
+      var currentUser = null;
+
+      service.setCurrentUser = function (user) {
+        currentUser = user;
+        store.set('user', user);
+        return currentUser;
+      };
+
+      service.getCurrentUser = function () {
+        if (!currentUser) {
+          currentUser = store.get('user');
+        }
+        return currentUser;
+      };
+    })
+    .service('Login', function ($http) {
       var service = this;
 
+      service.login = function (email, password) {
+        // Post credentials to an authentication method, return an $http promise
+        return $http.post("http://httpbin.org/post", JSON.stringify({ 'email': email, 'password': password }));
+      };
+
+      service.logout = function () {
+        return $http.post("http://httpbin.org/post", JSON.stringify({ 'q': 'hello' }));
+      };
+    })
+    .service('authInterceptor', function ($q, $location, User) {
+      var service = this;
+
+      service.request = function (config) {
+        var currentUser = User.getCurrentUser();
+        var accessToken = currentUser ? currentUser.accessToken : null;
+
+        if (accessToken) {
+          config.headers.authToken = accessToken;
+        }
+
+        return config;
+      };
       service.responseError = function (response) {
-        if (response.status == 401) {
+        if (response.status == 401 || response.status == 403) {
           $location.path('/login');
         }
         return $q.reject(response);
       };
     })
-    .service('cognito', function() {
+    .service('cognito', function () {
       // AWS configuration values
       AWS.config.region = 'us-west-2';
       /*
