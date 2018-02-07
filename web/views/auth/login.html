@@ -1,4 +1,44 @@
 <div ng-controller="LoginCtrl as login">
+  <div class="modal fade" tabindex="-1" role="dialog" id="resetPasswordModal" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form name="resetPasswordForm" ng-submit="login.resetPassword(resetPasswordForm.$valid)" novalidate>
+          <div class="modal-header">
+            <h4 class="modal-title">Please set a new password</h4>
+          </div>
+          <div class="modal-body">
+            <p>Please set a new password for your LibApps cloud account.</p>
+            <p>Your password must contain:</p>
+            <ul>
+              <li>At least one number</li>
+              <li>At least one capital letter</li>
+              <li>At least one lowercase letter</li>
+              <li>At least 8 characters</li>
+            </ul>
+            <fieldset class="form-group form-group-lg">
+              <label>Verification Code</label>
+              <input type="text" name="verificationCode" class="form-control" ng-model="login.verificationCode" required>
+            </fieldset>
+            <fieldset class="form-group form-group-lg">
+              <label>New password</label>
+              <input type="password" name="password" class="form-control" ng-model="login.newPassword" compare-to="login.retypeNewPassword" required>
+            </fieldset>
+            <fieldset class="form-group form-group-lg">
+              <label>Retype new password</label>
+              <input type="password" name="retypePassword" class="form-control" ng-model="login.retypeNewPassword" required>
+            </fieldset>
+            <div ng-messages="resetPasswordForm.password.$error">
+                <p ng-message="compareTo" class="text-danger">The passwords do not match</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" ng-disabled="resetPasswordForm.$invalid">Save and login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <div class="modal fade" tabindex="-1" role="dialog" id="setPasswordModal" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -13,7 +53,7 @@
               <li>At least one number</li>
               <li>At least one capital letter</li>
               <li>At least one lowercase letter</li>
-              <li>At least 8 characters long</li>
+              <li>At least 8 characters</li>
             </ul>
             <fieldset class="form-group form-group-lg">
               <label>New password</label>
@@ -34,6 +74,7 @@
       </div>
     </div>
   </div>
+
   <div class="page-signin-header p-a-2 text-sm-center bg-white">
     <a class="px-demo-brand px-demo-brand-lg text-default" href="index.html">
       <i class="ion-cloud text-primary"></i>

@@ -11,6 +11,7 @@
     // Variables for holding new password properties
     var newPassword = '';
     var retypeNewPassword = '';
+    var verificationCode = '';
 
     self.login = function(isValid) {
       // Test set password modal
@@ -31,7 +32,23 @@
             $scope.$apply();
           },
           onFailure: function (err) {
-            console.log(err);
+            console.log(err.code);
+            var newPasswordCallback = this;
+
+            // Password reset required
+            if (err.code == 'PasswordResetRequiredException') {
+              angular.element('#resetPasswordModal').modal('show');
+
+              self.resetPassword = function() {
+                user.confirmPassword(self.verificationCode, self.newPassword, newPasswordCallback);
+                angular.element('#setPasswordModal').modal('hide');
+              }
+            }
+
+            // Password does not meet requirements
+
+            // Verification code is incorrect
+
             $scope.$apply();
           },
           newPasswordRequired: function(userAttributes, requiredAttributes) {
@@ -40,7 +57,7 @@
 
             angular.element('#setPasswordModal').modal('show');
             self.submitNewPassword = function() {
-              user.completeNewPasswordChallenge(self.newPassword, self.userAttributes, newPasswordCallback);
+              user.completeNewPasswordChallenge(self.newPassword, userAttributes, newPasswordCallback);
               angular.element('#setPasswordModal').modal('hide');
             }
           },
