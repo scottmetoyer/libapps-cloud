@@ -14,5 +14,4 @@
 
   angular.module('pixeladmin')
     .controller('MainCtrl', MainCtrl);
-
 })();

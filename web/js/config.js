@@ -16,12 +16,23 @@
     $stateProvider
       .state('login', {
         url: '/login',
-        templateUrl: 'views/auth/login.html'
+        templateUrl: 'views/auth/login.html',
+        resolve: {
+          loadPlugin: function ($ocLazyLoad) {
+            return $ocLazyLoad.load([
+              {
+                files: [
+                  'js/pixeladmin/plugins/px-responsive-bg.js'
+                ]
+              },
+            ]);
+          },
+        }
       })
       .state('pages', {
         abstract: true,
         url: '/',
-        templateUrl: 'views/common/layout.html',
+        templateUrl: 'views/common/layout.html'
       })
       .state('pages.in-flight', {
         url: '',

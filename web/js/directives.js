@@ -31,8 +31,30 @@
     };
   }
 
+  function compareToDirective() {
+    return {
+      require: "ngModel",
+      scope: {
+        compareTolValue: "=compareTo"
+      },
+      link: function (scope, element, attributes, ngModel) {
+
+        ngModel.$validators.compareTo = function (modelValue) {
+          return modelValue == scope.compareTolValue;
+        };
+
+        scope.$watch("compareTolValue", function () {
+          ngModel.$validate();
+        });
+      }
+    };
+  }
+
+  function complexDirective() {
+  }
+
   angular.module('pixeladmin')
     .directive('pageTitle', ['$rootScope', pageTitleDirective])
-    .directive('disallowSpaces', ['$rootScope', disallowSpacesDirective]);
-
+    .directive('disallowSpaces', ['$rootScope', disallowSpacesDirective])
+    .directive('compareTo', ['$rootScope', compareToDirective]);
 })();
