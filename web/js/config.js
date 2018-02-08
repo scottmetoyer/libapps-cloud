@@ -14,6 +14,12 @@
 
     // Routes
     $stateProvider
+      .state('store-token', {
+        url: '/store-token',
+        onEnter: function() {
+          alert('Hi');
+        },
+      })
       .state('login', {
         url: '/login',
         templateUrl: 'views/auth/login.html',
