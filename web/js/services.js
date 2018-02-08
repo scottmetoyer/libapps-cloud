@@ -46,6 +46,7 @@
       };
     })
     .service('authInterceptor', function ($q, $location, User) {
+      var casRoot = 'https://dev.scottmetoyer.com:8443/cas-server-webapp-4.0.0';
       var service = this;
 
       service.request = function (config) {
@@ -60,7 +61,9 @@
       };
       service.responseError = function (response) {
         if (response.status == 401 || response.status == 403) {
-          $location.path('/login');
+
+          // Redirect to CAS
+          window.location = casRoot + '?service='; // Append the application URL + requested path
         }
         return $q.reject(response);
       };
