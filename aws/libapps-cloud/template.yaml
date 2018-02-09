@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: UCR Library LibApps Cloud applicaton
+
+Resources:
+
+  Products:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: projects.handler
+      Runtime: nodejs6.10
+      Events:
+        ListProjects:
+          Type: Api
+          Properties:
+            Path: /projects
+            Method: get
+        CreateProject:
+          Type: Api
+          Properties:
+            Path: /projects
+            Method: post
+        Project:
+          Type: Api
+          Properties:
+            Path: /project/{project}
+            Method: any
