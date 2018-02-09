@@ -4,7 +4,7 @@ Description: UCR Library LibApps Cloud applicaton
 
 Resources:
 
-  Products:
+  Projects:
     Type: AWS::Serverless::Function
     Properties:
       Handler: projects.handler

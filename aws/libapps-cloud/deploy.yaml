@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: UCR Library LibApps Cloud applicaton
+Resources:
+  Projects:
+    Properties:
+      CodeUri: s3://libapps-cloud-deployment/0f5c8bce7efc3a5a8d348e761d128f21
+      Events:
+        CreateProject:
+          Properties:
+            Method: post
+            Path: /projects
+          Type: Api
+        ListProjects:
+          Properties:
+            Method: get
+            Path: /projects
+          Type: Api
+        Project:
+          Properties:
+            Method: any
+            Path: /project/{project}
+          Type: Api
+      Handler: projects.handler
+      Runtime: nodejs6.10
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31
