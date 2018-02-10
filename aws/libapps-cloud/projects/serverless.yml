@@ -1,0 +1,27 @@
+service: projects
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: us-west-1
+
+functions:
+  projects:
+    handler: handler.projects
+    events:
+      - http:
+          path: /projects
+          method: get
+      - http:
+          path: /projects
+          method: post
+          cors: true
+      - http:
+          path: /project/{project}
+          method: any
+          cors: true
+          request:
+            parameters:
+              paths:
+                project: true
+

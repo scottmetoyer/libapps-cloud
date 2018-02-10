@@ -1,9 +1,30 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: UCR Library LibApps Cloud applicaton
 Resources:
+  ApiGatewayApi:
+    Properties:
+      DefinitionUri: s3://libapps-cloud-deployment/7dde2f57f170d234939bf69b0b96862e
+      StageName: Prod
+      Variables:
+        LambdaFunctionName:
+          Ref: Projects
+    Type: AWS::Serverless::Api
+  ProjectUpdatesTable:
+    Properties:
+      PrimaryKey:
+        Name: key
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+    Type: AWS::Serverless::SimpleTable
   Projects:
     Properties:
-      CodeUri: s3://libapps-cloud-deployment/0f5c8bce7efc3a5a8d348e761d128f21
+      CodeUri: s3://libapps-cloud-deployment/297a243a3a8df8866b80ffc2ef0ccb41
+      Environment:
+        Variables:
+          PROJECTS_TABLE_NAME:
+            Ref: ProjectsTable
       Events:
         CreateProject:
           Properties:
@@ -21,6 +42,43 @@ Resources:
             Path: /project/{project}
           Type: Api
       Handler: projects.handler
+      Policies: AmazonDynamoDBFullAccess
       Runtime: nodejs6.10
     Type: AWS::Serverless::Function
+  ProjectsTable:
+    Properties:
+      PrimaryKey:
+        Name: key
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+    Type: AWS::Serverless::SimpleTable
+  RecurringTaskInstancesTable:
+    Properties:
+      PrimaryKey:
+        Name: id
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+    Type: AWS::Serverless::SimpleTable
+  RecurringTasksTable:
+    Properties:
+      PrimaryKey:
+        Name: id
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+    Type: AWS::Serverless::SimpleTable
+  RequestsTable:
+    Properties:
+      PrimaryKey:
+        Name: id
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+    Type: AWS::Serverless::SimpleTable
 Transform: AWS::Serverless-2016-10-31

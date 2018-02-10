@@ -2,12 +2,12 @@
 
   angular.module('pixeladmin')
     .factory('data', ['$http', function ($http) {
-      var urlBase = 'https://nlm8zahqm4.execute-api.us-west-1.amazonaws.com/test';
+      var urlBase = 'https://bncxtg1x83.execute-api.us-west-1.amazonaws.com/Stage';
       var dataFactory = {};
 
-      dataFactory.getProjects = function (key) {
-        if (key) {
-          return $http.get(urlBase + '/projects/' + key);
+      dataFactory.getProjects = function (id) {
+        if (id) {
+          return $http.get(urlBase + '/project/' + id);
         } else {
           return $http.get(urlBase + '/projects');
         }
@@ -17,17 +17,12 @@
         return $http.post(urlBase + "/projects", JSON.stringify(project));
       }
 
-      dataFactory.getStatusUpdates = function (key) {
-        return $http.get(urlBase + '/project-updates/' + key);
+      dataFactory.getStatusUpdates = function (projectId) {
+        return $http.get(urlBase + "/project/" + projectId + "/project-updates");
       }
 
       dataFactory.saveStatusUpdate = function (status) {
-        return $http.post(urlBase + "/project-updates", JSON.stringify(status))
-      }
-
-      dataFactory.saveProjectStatus = function (newStatus, key) {
-        var postData = { key: key, executionStatus: newStatus };
-        return $http.post(urlBase + '/projects/' + key + '/execution-status', angular.toJson(postData))
+        return $http.post(urlBase + "/project/" + projectId + "/project-updates", JSON.stringify(status))
       }
 
       dataFactory.getRecurringTasks = function () {

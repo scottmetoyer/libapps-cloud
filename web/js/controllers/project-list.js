@@ -7,20 +7,6 @@
     var self = this;
     self.projects = [];
 
-    self.moveToInFlight = function(key) {
-      data.saveProjectStatus('in-flight', key)
-      .then(function(response) {
-        loadProjects();
-      });
-    }
-
-    self.moveToBacklog = function(key) {
-      data.saveProjectStatus('backlog', key)
-      .then(function(response) {
-        loadProjects();
-      });
-    }
-
     function loadProjects() {
       data.getProjects()
       .then(function(response) {
@@ -48,7 +34,7 @@
               var list = res.data.Items;
 
               if (list.length > 0) {
-                list = $filter('orderBy')(list, "created", true);
+                list = $filter('orderBy')(list, "updated", true);
                 project.latestUpdate = list[0];
               }
             }, function(response){

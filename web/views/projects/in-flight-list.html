@@ -22,7 +22,6 @@
           <table class="table table-bordered table-striped" id="projects" ng-show="projects.projects.length > 0">
               <thead>
                 <tr>
-                  <th>Key</th>
                   <th>Name</th>
                   <th style="width: 12%">Status</th>
                   <th>Lead</th>
@@ -32,8 +31,7 @@
               </thead>
               <tbody>
                 <tr ng-repeat="p in projects.projects">
-                  <td><a href ui-sref="pages.view-project({ key: p.key })">{{ p.key }}</a></td>
-                  <td>{{ p.name }}</td>
+                  <td><a href ui-sref="pages.view-project({ key: p.id })">{{ p.name }}</a></td>
                   <td><i class="ion-record {{ p.status.class }}"></i>&nbsp;{{ p.status.description }}</td>
                   <td>{{ p.lead }}</td>
                   <td>{{ p.owner }}</td>

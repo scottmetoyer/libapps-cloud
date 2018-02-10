@@ -3,7 +3,7 @@ var AWS = require('aws-sdk');
 var docClient = new AWS.DynamoDB.DocumentClient();
 var uuidv1 = require('uuid/v1');
 
-exports.handler = (event, context, callback) => {
+module.exports.projects = (event, context, callback) => {
   var projectsTableName = process.env.PROJECTS_TABLE_NAME;
   let id = (event.pathParameters !== null ? event.pathParameters.project : false);
 
@@ -137,4 +137,4 @@ exports.handler = (event, context, callback) => {
       "body": JSON.stringify(data)
     });
   }
-}
+};

@@ -42,7 +42,7 @@
       })
       .state('pages.in-flight', {
         url: '',
-        templateUrl: 'views/in-flight.html',
+        templateUrl: 'views/projects/in-flight-list.html',
         data: { pageTitle: 'In-flight projects' },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
@@ -60,7 +60,7 @@
       })
       .state('pages.backlog', {
         url: 'backlog',
-        templateUrl: 'views/backlog.html',
+        templateUrl: 'views/projects/backlog-list.html',
         data: { pageTitle: 'Backlog projects' },
         resolve: {
           // Load plugins here
@@ -79,7 +79,7 @@
       })
       .state('pages.create-project', {
         url: 'create-project',
-        templateUrl: 'views/create-project.html',
+        templateUrl: 'views/projects/create.html',
         data: { pageTitle: 'Create a project' },
         resolve: {
           // Load plugins here
@@ -89,8 +89,8 @@
         },
       })
       .state('pages.view-project', {
-        url: 'view-project/:key',
-        templateUrl: 'views/view-project.html',
+        url: 'view-project/:id',
+        templateUrl: 'views/projects/view.html',
         data: { pageTitle: 'Project dashboard' },
         resolve: {
           // Load plugins here
@@ -101,7 +101,7 @@
       })
       .state('pages.archive', {
         url: 'archive',
-        templateUrl: 'views/archive.html',
+        templateUrl: 'views/projects/archive-list.html',
         data: { pageTitle: 'Archived projects' },
         resolve: {
           // Load plugins here
@@ -111,8 +111,8 @@
         },
       })
       .state('pages.edit-project', {
-        url: 'edit-project/:key',
-        templateUrl: 'views/edit-project.html',
+        url: 'edit-project/:id',
+        templateUrl: 'views/projects/edit.html',
         data: { pageTitle: 'Edit project' },
         resolve: {
           // Load plugins here

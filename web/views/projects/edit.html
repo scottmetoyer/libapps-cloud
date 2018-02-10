@@ -8,6 +8,7 @@
         <div class="panel">
 
             <form name="updateForm" ng-submit="project.updateProject(updateForm.$valid)" novalidate>
+                <input type="hidden" value="{{ project.project.id }}"/>
                 <div class="panel-heading">
                     <div class="panel-title">Please update the project details</div>
                 </div>
@@ -19,10 +20,6 @@
                     <fieldset class="form-group">
                         <label>Name</label>
                         <input class="form-control" type="text" ng-model="project.project.name" required>
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <label>Project Key</label>
-                        <input class="form-control text-uppercase" type="text" ng-model="project.project.key" required>
                     </fieldset>
                     <fieldset class="form-group">
                         <label>Project purpose</label>
@@ -124,13 +121,11 @@
                 </div>
 
                 <div class="panel-footer text-right">
-                    <a class="btn btn-danger" type="button" href ui-sref="pages.view-project({ key: project.project.key })">Cancel</a>
+                    <a class="btn btn-danger" type="button" href ui-sref="pages.view-project({ key: project.project.id })">Cancel</a>
                     <button class="btn btn-primary" ng-disabled="updateForm.$invalid" type="submit">Save project</button>
                 </div>
             </form>
-
       </div>
-
   </div>
 </div>
 </div>

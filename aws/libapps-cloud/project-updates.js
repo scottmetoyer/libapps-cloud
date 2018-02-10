@@ -4,7 +4,7 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 var uuidv1 = require('uuid/v1');
 
 exports.handler = (event, context, callback) => {
-  var projectsTableName = process.env.PROJECTS_TABLE_NAME;
+  var projectUpdatesTableName = process.env.PROJECT_UPDATES_TABLE_NAME;
   let id = (event.pathParameters !== null ? event.pathParameters.project : false);
 
   switch (event.httpMethod) {
@@ -74,7 +74,7 @@ exports.handler = (event, context, callback) => {
   }
 
   function deleteProject(id) {
-    docClient.deleteItem({
+    dynamodb.deleteItem({
       TableName: projectsTableName,
       Key: {
         "id": {

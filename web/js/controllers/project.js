@@ -15,7 +15,7 @@
 
     self.saveStatusUpdate = function(isValid) {
       if (isValid) {
-        self.statusUpdate.key = $stateParams.key;
+        self.statusUpdate.projectId = $stateParams.projectId;
 
         data.saveStatusUpdate(self.statusUpdate)
         .then(function(response) {
@@ -37,10 +37,8 @@
 
     self.createProject = function(isValid) {
       if (isValid) {
-        self.project.key = self.project.key.toUpperCase();
-
         saveProject(function(){
-          $location.path('/pages/view-project/' + self.project.key).search({ new: 'true' });
+          $location.path('/pages/view-project/' + self.project.id).search({ new: 'true' });
         });
       }
     }
@@ -48,7 +46,7 @@
     self.updateProject = function(isValid) {
       if (isValid) {
         saveProject(function(){
-          $location.path('/pages/view-project/' + self.project.key).search({ updated: 'true' });
+          $location.path('/pages/view-project/' + self.project.id).search({ updated: 'true' });
         });
       }
     }
@@ -63,8 +61,8 @@
       });
     }
 
-    function getStatusUpdates(key) {
-      data.getStatusUpdates(key)
+    function getStatusUpdates(projectId) {
+      data.getStatusUpdates(projectId)
       .then(function(response) {
         self.statusUpdateList = response.data;
 
@@ -77,8 +75,8 @@
     }
 
     // Load up a project if we have passed a key in the state parameters
-    if ($stateParams.key) {
-      data.getProjects($stateParams.key)
+    if ($stateParams.id) {
+      data.getProjects($stateParams.id)
       .then(function(response) {
         self.project = response.data.Item;
 

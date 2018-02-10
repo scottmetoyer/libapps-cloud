@@ -16,7 +16,6 @@
           <table class="table table-bordered table-striped" id="projects" ng-show="projects.projects.length > 0">
               <thead>
                 <tr>
-                  <th>Key</th>
                   <th>Name</th>
                   <th>Lead</th>
                   <th>Owner</th>
@@ -24,8 +23,7 @@
               </thead>
               <tbody>
                 <tr ng-repeat="p in projects.projects">
-                  <td><a href ui-sref="pages.view-project({ key: p.key })">{{ p.key }}</a></td>
-                  <td>{{ p.name }}</td>
+                  <td><a href ui-sref="pages.view-project({ key: p.id })">{{ p.name }}</a></td>
                   <td>{{ p.lead }}</td>
                   <td>{{ p.owner }}</td>
                 </tr>

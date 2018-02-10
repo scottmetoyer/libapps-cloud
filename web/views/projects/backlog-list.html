@@ -22,22 +22,16 @@
         <table class="table table-bordered table-striped" id="projects" ng-show="projects.projects.length > 0">
             <thead>
               <tr>
-                <th>Key</th>
                 <th>Name</th>
                 <th>Lead</th>
                 <th>Owner</th>
-                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="p in projects.projects">
-                <td><a href ui-sref="pages.view-project({ key: p.key })">{{ p.key }}</a></td>
-                <td>{{ p.name }}</td>
+                <td><a href ui-sref="pages.view-project({ id: p.id })">{{ p.name }}</a></td>
                 <td>{{ p.lead }}</td>
                 <td>{{ p.owner }}</td>
-                <td style="width: 300px;">
-                  <button class="btn btn-info btn-xs" ng-click="projects.moveToInFlight(p.key)">Move to in-flight</button>
-                </td>
               </tr>
             </tbody>
         </table>
