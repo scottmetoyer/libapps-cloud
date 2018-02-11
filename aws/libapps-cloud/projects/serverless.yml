@@ -4,10 +4,24 @@ provider:
   name: aws
   runtime: nodejs6.10
   region: us-west-1
-
+  environment:
+    PROJECTS_TABLE: projects-${opt:stage, self:provider.stage}
+    PROJECT_UPDATES_TABLE: project-updates-${opt:stage, self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - { "Fn::GetAtt": ["ProjectsDynamoDbTable", "Arn"] }
+        - { "Fn::GetAtt": ["ProjectUpdatesDynamoDbTable", "Arn"] }
 functions:
   projects:
-    handler: handler.projects
+    handler: projects.handler
     events:
       - http:
           path: /projects
@@ -24,4 +38,57 @@ functions:
             parameters:
               paths:
                 project: true
+  project-updates:
+    handler: project-updates.handler
+    events:
+      - http:
+          path: /project/{project}/project-updates
+          method: get
+          request:
+            parameters:
+              paths:
+                project: true
+      - http:
+          path: /project/{project}/project-updates
+          method: post
+          cors: true
+          request:
+            parameters:
+              paths:
+                project: true
 
+resources:
+  Resources:
+    ProjectsDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        TableName: ${self:provider.environment.PROJECTS_TABLE}
+
+    ProjectUpdatesDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        TableName: ${self:provider.environment.PROJECT_UPDATES_TABLE}

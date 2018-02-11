@@ -31,12 +31,12 @@
               </thead>
               <tbody>
                 <tr ng-repeat="p in projects.projects">
-                  <td><a href ui-sref="pages.view-project({ key: p.id })">{{ p.name }}</a></td>
+                  <td><a href ui-sref="pages.view-project({ id: p.id })">{{ p.name }}</a></td>
                   <td><i class="ion-record {{ p.status.class }}"></i>&nbsp;{{ p.status.description }}</td>
                   <td>{{ p.lead }}</td>
                   <td>{{ p.owner }}</td>
                   <td>
-                      <div class="widget-comments-item" ng-show="p.latestUpdate != null">
+                      <div class="widget-comments-item p-t-0" ng-show="p.latestUpdate != null">
                           <div class="widget-comments-header">
                             <a href="#" title="">{{ p.latestUpdate.user }}</a> commented:
                           </div>
@@ -44,7 +44,7 @@
                           {{ p.latestUpdate.text }}
                           </div>
                           <div class="widget-comments-footer">
-                          {{ p.latestUpdate.created | humandate }}
+                          {{ p.latestUpdate.timestamp | humandate }}
                           </div>
                       </div>
 

@@ -8,7 +8,8 @@
         <div class="panel">
 
             <form name="updateForm" ng-submit="project.updateProject(updateForm.$valid)" novalidate>
-                <input type="hidden" value="{{ project.project.id }}"/>
+                <input type="hidden" ng-model="project.project.id"/>
+
                 <div class="panel-heading">
                     <div class="panel-title">Please update the project details</div>
                 </div>

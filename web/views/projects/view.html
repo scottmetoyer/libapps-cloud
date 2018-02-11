@@ -1,157 +1,180 @@
 <div ng-controller="ProjectCtrl as project">
-<div class="alert alert-success" ng-show="project.showCreatedAlert == true">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    <strong>Project created!</strong> This is the project dashboard. Here you can view project details, team members, status, and links to external resources.
-</div>
-<div class="alert alert-success" ng-show="project.showUpdatedAlert == true">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    <strong>Project saved!</strong> The project has been updated.
-</div>
-<div class="alert alert-danger" ng-show="project.hasError == true">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    <strong>Something went wrong</strong> There was an error. Please check the AWS CloudWatch logs.
-</div>
+    <div class="alert alert-success" ng-show="project.showCreatedAlert == true">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Project created!</strong> This is the project dashboard. Here you can view project details, team members, status,
+        and links to external resources.
+    </div>
+    <div class="alert alert-success" ng-show="project.showUpdatedAlert == true">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Project saved!</strong> The project has been updated.
+    </div>
+    <div class="alert alert-danger" ng-show="project.hasError == true">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Something went wrong</strong> There was an error. Please check the AWS CloudWatch logs.
+    </div>
 
-<div class="page-header" ng-hide="project.hasError">
-    <div class="row">
-      <div class="col-md-6">
-          <h1><i class="page-header-icon ion-ios-pulse-strong"></i>{{ project.project.name }} <span class="text-muted font-weight-light">Dashboard</span></h1>
-      </div>
-        <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right">
-            <a href ui-sref="pages.edit-project({ id: project.project.id })" class="btn btn-block"><span class="btn-label-icon left ion-edit"></span>Edit project</a>
+    <div class="page-header" ng-hide="project.hasError">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>
+                    <i class="page-header-icon ion-ios-pulse-strong"></i>{{ project.project.name }}
+                    <span class="text-muted font-weight-light">Dashboard</span>
+                </h1>
+            </div>
+            <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right">
+                <a href ui-sref="pages.edit-project({ id: project.project.id })" class="btn btn-block">
+                    <span class="btn-label-icon left ion-edit"></span>Edit project</a>
+            </div>
         </div>
-  </div>
-</div>
+    </div>
 
-<div class="row" ng-hide="project.hasError">
-    <div class="col-md-6">
-        <div class="panel box">
-            <div class="box-row">
-                <div class="box-container">
-                    <div class="box-cell p-a-3 valign-middle bg-primary">
-                        <i class="box-bg-icon middle right font-size-52 ion-ios-information-outline"></i>
-                        <div class="font-size-17">Project Overview</div>
-                        <div class="text-muted font-size-12">{{ project.project.description }}</div>
+    <div class="row" ng-hide="project.hasError">
+        <div class="col-md-6">
+            <div class="panel box">
+                <div class="box-row">
+                    <div class="box-container">
+                        <div class="box-cell p-a-3 valign-middle bg-primary">
+                            <i class="box-bg-icon middle right font-size-52 ion-ios-information-outline"></i>
+                            <div class="font-size-17">Project Overview</div>
+                            <div class="text-muted font-size-12">{{ project.project.description }}</div>
+                        </div>
                     </div>
+                </div>
+
+                <div class="box-row">
+                    <div class="box-container text-xs-center">
+
+                        <div class="box-row valign-middle">
+                            <div class="box-cell p-y-1 b-r-1 b-b-1 b-t-1">
+                                <div class="font-size-15">
+                                    <strong>&nbsp;{{ project.project.lead }}&nbsp;</strong>
+                                </div>
+                                <div class="font-size-11">TECH LEAD</div>
+                            </div>
+
+                            <div class="box-cell p-y-1 b-r-1 b-b-1 b-t-1">
+                                <div class="font-size-15">
+                                    <strong>&nbsp;{{ project.project.owner }}&nbsp;</strong>
+                                </div>
+                                <div class="font-size-11">OWNER</div>
+                            </div>
+
+                            <div class="box-cell p-y-1 b-b-1 b-t-1">
+                                <div class="font-size-17">
+                                    <i class="ion-record {{ project.project.status.class }}"></i>
+                                </div>
+                                <div class="font-size-11">STATUS</div>
+                            </div>
+                        </div>
+
+                        <div class="box-row valign-middle">
+                            <a ng-if="project.project.hasProjectPlan" class="box-cell p-y-1 b-r-1 b-b-1 b-t-1" href="{{ project.project.projectPlanLink }}"
+                                target="_blank">
+                                <div class="font-size-17">
+                                    <i class="ion-checkmark-circled text-success"></i>
+                                </div>
+                                <div class="font-size-11">PROJECT PLAN</div>
+                            </a>
+                            <div ng-if="!project.project.hasProjectPlan" class="box-cell p-y-1 b-r-1 b-b-1 b-t-1">
+                                <div class="font-size-17">
+                                    <i class="ion-close text-danger"></i>
+                                </div>
+                                <div class="font-size-11">PROJECT PLAN</div>
+                            </div>
+
+                            <a ng-if="project.project.hasWiki" class="box-cell p-y-1 b-r-1 b-b-1 b-t-1" href="{{ project.project.wikiLink }}" target="_blank">
+                                <div class="font-size-17">
+                                    <i class="ion-checkmark-circled text-success"></i>
+                                </div>
+                                <div class="font-size-11">WIKI</div>
+                            </a>
+                            <div ng-if="!project.project.hasWiki" class="box-cell p-y-1 b-r-1 b-b-1 b-t-1">
+                                <div class="font-size-17">
+                                    <i class="ion-close text-danger"></i>
+                                </div>
+                                <div class="font-size-11">WIKI</div>
+                            </div>
+
+                            <a ng-if="project.project.hasJiraProject" class="box-cell p-y-1 b-r-1 b-b-1 b-t-1" href="{{ project.project.jiraLink }}"
+                                target="_blank">
+                                <div class="font-size-17">
+                                    <i class="ion-checkmark-circled text-success"></i>
+                                </div>
+                                <div class="font-size-11">JIRA PROJECT</div>
+                            </a>
+                            <div ng-if="!project.project.hasJiraProject" class="box-cell p-y-1 b-r-1 b-b-1 b-t-1">
+                                <div class="font-size-17">
+                                    <i class="ion-close text-danger"></i>
+                                </div>
+                                <div class="font-size-11">JIRA PROJECT</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-footer pull-right">
+                    <span class="font-size-11 text-muted">EXECUTION STATUS</span>&nbsp;
+                    <span class="font-size-11 text-uppercase">
+                        <strong>{{ project.project.executionStatus}}</strong>
+                    </span>
                 </div>
             </div>
 
-            <div class="box-row">
-                <div class="box-container text-xs-center">
+        </div>
 
-                    <div class="box-row valign-middle">
-                        <div class="box-cell p-y-1 b-r-1 b-b-1 b-t-1">
-                            <div class="font-size-15"><strong>&nbsp;{{ project.project.lead }}&nbsp;</strong></div>
-                            <div class="font-size-11">TECH LEAD</div>
-                        </div>
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading">
+                    <span class="panel-title">Status Updates</span>
+                    <div class="panel-heading-controls">
+                        <button class="btn btn-xs btn-success btn-outline" ng-click="project.toggleStatusUpdateForm()">
+                            <i class="fa" ng-class="project.showStatusUpdateForm ? 'fa-minus' : 'fa-plus'"></i>
+                        </button>
+                    </div>
+                </div>
 
-                        <div class="box-cell p-y-1 b-r-1 b-b-1 b-t-1">
-                            <div class="font-size-15"><strong>&nbsp;{{ project.project.owner }}&nbsp;</strong></div>
-                            <div class="font-size-11">OWNER</div>
-                        </div>
+                <div class="widget-comments-item" ng-show="project.showStatusUpdateForm">
+                    <form name="statusUpdateForm" ng-submit="project.saveStatusUpdate(statusUpdateForm.$valid)" novalidate>
+                        <select class="form-control" ng-model="project.statusUpdate.user">
+                            <option>Barry</option>
+                            <option>Dan</option>
+                            <option>Dennis</option>
+                            <option>Joe</option>
+                            <option>Scott</option>
+                            <option>Sean</option>
+                            <option>Ramon</option>
+                        </select>
+                        <textarea rows="3" class="form-control widget-tree-comments-input" placeholder="Update project status..." required ng-model="project.statusUpdate.text"></textarea>
+                        <button type="submit" class="btn btn-primary btn-sm" ng-disabled="statusUpdateForm.$invalid">Post</button>&nbsp;
+                        <button type="button" class="btn btn-sm" ng-click="project.cancelStatusUpdate()">Cancel</button>
+                    </form>
+                </div>
 
-                        <div class="box-cell p-y-1 b-b-1 b-t-1">
-                            <div class="font-size-17"><i class="ion-record {{ project.project.status.class }}"></i></div>
-                            <div class="font-size-11">STATUS</div>
+                <div class="widget-comments-item" ng-repeat="comment in project.statusUpdateList.Items | orderBy: '-created'">
+                    <div class="widget-comments-header">
+                        <a href="#" title="">{{ comment.user }}</a> commented on
+                        <a href="#" title="">{{ project.project.name }}</a>
+                    </div>
+                    <div class="widget-comments-text">
+                        {{ comment.text }}
+                    </div>
+                    <div class="widget-comments-footer">
+                        {{ comment.timestamp | humandate }}
+                        <div class="pull-right">
+                            <a href="#">
+                                <i class="fa fa-pencil"></i>
+                            </a>
                         </div>
                     </div>
+                </div>
 
-                    <div class="box-row valign-middle">
-                        <a ng-if="project.project.hasProjectPlan" class="box-cell p-y-1 b-r-1 b-b-1 b-t-1" href="{{ project.project.projectPlanLink }}" target="_blank">
-                            <div class="font-size-17"><i class="ion-checkmark-circled text-success"></i></div>
-                            <div class="font-size-11">PROJECT PLAN</div>
-                        </a>
-                        <div ng-if="!project.project.hasProjectPlan" class="box-cell p-y-1 b-r-1 b-b-1 b-t-1">
-                            <div class="font-size-17"><i class="ion-close text-danger"></i></div>
-                            <div class="font-size-11">PROJECT PLAN</div>
-                        </div>
-
-                        <a ng-if="project.project.hasWiki" class="box-cell p-y-1 b-r-1 b-b-1 b-t-1" href="{{ project.project.wikiLink }}" target="_blank">
-                            <div class="font-size-17"><i class="ion-checkmark-circled text-success"></i></div>
-                            <div class="font-size-11">WIKI</div>
-                        </a>
-                        <div ng-if="!project.project.hasWiki" class="box-cell p-y-1 b-r-1 b-b-1 b-t-1">
-                            <div class="font-size-17"><i class="ion-close text-danger"></i></div>
-                            <div class="font-size-11">WIKI</div>
-                        </div>
-
-                        <a ng-if="project.project.hasJiraProject" class="box-cell p-y-1 b-r-1 b-b-1 b-t-1" href="{{ project.project.jiraLink }}" target="_blank">
-                            <div class="font-size-17"><i class="ion-checkmark-circled text-success"></i></div>
-                            <div class="font-size-11">JIRA PROJECT</div>
-                        </a>
-                        <div ng-if="!project.project.hasJiraProject" class="box-cell p-y-1 b-r-1 b-b-1 b-t-1">
-                            <div class="font-size-17"><i class="ion-close text-danger"></i></div>
-                            <div class="font-size-11">JIRA PROJECT</div>
-                        </div>
-
-                        <a ng-if="project.project.hasCodeRepository" class="box-cell p-y-1 b-r-1 b-b-1 b-t-1" href="{{ project.project.codeRepositoryLink }}" target="_blank">
-                            <div class="font-size-17"><i class="ion-checkmark-circled text-success"></i></div>
-                            <div class="font-size-11">CODE REPOSITORY</div>
-                        </a>
-                        <div ng-if="!project.project.hasCodeRepository" class="box-cell p-y-1 b-r-1 b-b-1 b-t-1">
-                            <div class="font-size-17"><i class="ion-close text-danger"></i></div>
-                            <div class="font-size-11">CODE REPOSITORY</div>
-                        </div>
-                    </div>
-
+                <div class="panel-footer text-xs-right">
+                    Showing {{ project.statusUpdateList.Count }} of {{ project.statusUpdateList.Count }} updates.
+                    <a href="">View all</a>.
                 </div>
             </div>
 
-            <div class="panel-footer pull-right">
-                <span class="font-size-11 text-muted">EXECUTION STATUS</span>&nbsp;
-                <span class="font-size-11 text-uppercase"><strong>{{ project.project.executionStatus}}</strong></span>
-            </div>
         </div>
 
     </div>
-
-    <div class="col-md-6">
-        <div class="panel">
-            <div class="panel-heading">
-                <span class="panel-title">Status Updates</span>
-                <div class="panel-heading-controls">
-                    <button class="btn btn-xs btn-success btn-outline" ng-click="project.toggleStatusUpdateForm()"><i class="fa" ng-class="project.showStatusUpdateForm ? 'fa-minus' : 'fa-plus'"></i></button>
-                </div>
-            </div>
-
-            <div class="widget-comments-item" ng-show="project.showStatusUpdateForm">
-                <form name="statusUpdateForm" ng-submit="project.saveStatusUpdate(statusUpdateForm.$valid)" novalidate>
-                    <select class="form-control" ng-model="project.statusUpdate.user">
-                        <option>Barry</option>
-                        <option>Dan</option>
-                        <option>Dennis</option>
-                        <option>Joe</option>
-                        <option>Scott</option>
-                        <option>Sean</option>
-                        <option>Ramon</option>
-                    </select>
-                    <textarea rows="3" class="form-control widget-tree-comments-input" placeholder="Update project status..." required ng-model="project.statusUpdate.text"></textarea>
-                    <button type="submit" class="btn btn-primary btn-sm" ng-disabled="statusUpdateForm.$invalid">Post</button>&nbsp;
-                    <button type="button" class="btn btn-sm" ng-click="project.cancelStatusUpdate()">Cancel</button>
-                </form>
-            </div>
-
-            <div class="widget-comments-item" ng-repeat="comment in project.statusUpdateList.Items | orderBy: '-created'">
-                <div class="widget-comments-header">
-                <a href="#" title="">{{ comment.user }}</a> commented on <a href="#" title="">{{ project.project.name }}</a>
-                </div>
-                <div class="widget-comments-text">
-                {{ comment.text }}
-                </div>
-                <div class="widget-comments-footer">
-                {{ comment.created | humandate }}
-                    <div class="pull-right">
-                            <a href="#"><i class="fa fa-pencil"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel-footer text-xs-right">
-                 Showing {{ project.statusUpdateList.Count }} of {{ project.statusUpdateList.Count }} updates. <a href="">View all</a>.
-            </div>
-        </div>
-
-    </div>
-
-</div>
 </div>

@@ -29,12 +29,12 @@
           self.projects.forEach(function(project) {
             project.status = bl.calculateStatus(project);
 
-            data.getStatusUpdates(project.key)
+            data.getStatusUpdates(project.id)
             .then(function(res) {
               var list = res.data.Items;
 
               if (list.length > 0) {
-                list = $filter('orderBy')(list, "updated", true);
+                list = $filter('orderBy')(list, "timestamp", true);
                 project.latestUpdate = list[0];
               }
             }, function(response){

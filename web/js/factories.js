@@ -2,7 +2,7 @@
 
   angular.module('pixeladmin')
     .factory('data', ['$http', function ($http) {
-      var urlBase = 'https://bncxtg1x83.execute-api.us-west-1.amazonaws.com/Stage';
+      var urlBase = 'https://88mrptswxd.execute-api.us-west-1.amazonaws.com/dev';
       var dataFactory = {};
 
       dataFactory.getProjects = function (id) {
@@ -14,7 +14,11 @@
       }
 
       dataFactory.saveProject = function (project) {
-        return $http.post(urlBase + "/projects", JSON.stringify(project));
+        if (project.id != null) {
+          return $http.put(urlBase + "/project/" + project.id, JSON.stringify(project));
+        } else {
+          return $http.post(urlBase + "/projects", JSON.stringify(project));
+        }
       }
 
       dataFactory.getStatusUpdates = function (projectId) {
@@ -22,7 +26,7 @@
       }
 
       dataFactory.saveStatusUpdate = function (status) {
-        return $http.post(urlBase + "/project/" + projectId + "/project-updates", JSON.stringify(status))
+        return $http.post(urlBase + "/project/" + status.projectId + "/project-updates", JSON.stringify(status))
       }
 
       dataFactory.getRecurringTasks = function () {

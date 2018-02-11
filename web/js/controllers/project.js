@@ -15,11 +15,11 @@
 
     self.saveStatusUpdate = function(isValid) {
       if (isValid) {
-        self.statusUpdate.projectId = $stateParams.projectId;
+        self.statusUpdate.projectId = $stateParams.id;
 
         data.saveStatusUpdate(self.statusUpdate)
         .then(function(response) {
-          getStatusUpdates($stateParams.key);
+          getStatusUpdates($stateParams.id);
         }, function(response){
           self.hasError = true;
         });
@@ -96,7 +96,7 @@
         }
 
         // Load up the project status updates
-        getStatusUpdates($stateParams.key);
+        getStatusUpdates($stateParams.id);
       }, function(response){
         $anchorScroll();
         self.hasError = true;

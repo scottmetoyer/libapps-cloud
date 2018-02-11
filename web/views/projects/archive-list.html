@@ -23,7 +23,7 @@
               </thead>
               <tbody>
                 <tr ng-repeat="p in projects.projects">
-                  <td><a href ui-sref="pages.view-project({ key: p.id })">{{ p.name }}</a></td>
+                  <td><a href ui-sref="pages.view-project({ id: p.id })">{{ p.name }}</a></td>
                   <td>{{ p.lead }}</td>
                   <td>{{ p.owner }}</td>
                 </tr>

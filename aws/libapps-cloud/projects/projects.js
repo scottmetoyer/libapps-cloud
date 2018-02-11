@@ -3,8 +3,8 @@ var AWS = require('aws-sdk');
 var docClient = new AWS.DynamoDB.DocumentClient();
 var uuidv1 = require('uuid/v1');
 
-exports.handler = (event, context, callback) => {
-  var projectUpdatesTableName = process.env.PROJECT_UPDATES_TABLE_NAME;
+module.exports.handler = (event, context, callback) => {
+  var projectsTableName = process.env.PROJECTS_TABLE;
   let id = (event.pathParameters !== null ? event.pathParameters.project : false);
 
   switch (event.httpMethod) {
@@ -17,21 +17,16 @@ exports.handler = (event, context, callback) => {
       break;
 
     case "POST":
-      saveProject(id);
-      break;
-
     case "PUT":
       saveProject(id);
       break;
 
     case "DELETE":
-      deleteProject(id)
+      deleteProject(id);
       break;
 
     default:
-      // Send HTTP 501: Not Implemented
-      console.log("Error: unsupported HTTP method (" + event.httpMethod + ")");
-      callback(null, { statusCode: 501 })
+      sendResponse(501, { "Error": "Unsupported HTTP method(" + event.httpMethod + ")" }, callback);
   }
 
   function saveProject(id) {
@@ -39,13 +34,8 @@ exports.handler = (event, context, callback) => {
     var datetime = new Date().getTime().toString();
     var params = JSON.parse(event.body);
 
-    if (id) {
-      item.id = id;
-    } else {
-      item.id = uuidv1();
-    }
-
-    item.updated = datetime;
+    id ? item.id = id : item.id = uuidv1();
+    item.timestamp = datetime;
     params.department != null ? item.department = params.department : null;
     params.name != null ? item.name = params.name : null;
     params.description != null ? item.description = params.description : null;
@@ -64,17 +54,14 @@ exports.handler = (event, context, callback) => {
     docClient.put({
       "TableName": projectsTableName,
       "Item": item
-    }, function (err, data) {
-      if (err) {
-        sendResponse(400, err);
-      } else {
-        sendResponse(200, data);
-      }
-    });
+    },
+      function (err, data) {
+        sendResponse(err, data, callback);
+      });
   }
 
   function deleteProject(id) {
-    dynamodb.deleteItem({
+    docClient.deleteItem({
       TableName: projectsTableName,
       Key: {
         "id": {
@@ -83,11 +70,7 @@ exports.handler = (event, context, callback) => {
       }
     },
       function (err, data) {
-        if (err) {
-          sendResponse(400, err);
-        } else {
-          sendResponse(200, data);
-        }
+        sendResponse(err, data, callback);
       });
   }
 
@@ -99,11 +82,7 @@ exports.handler = (event, context, callback) => {
       }
     },
       function (err, data) {
-        if (err) {
-          sendResponse(400, err);
-        } else {
-          sendResponse(200, data);
-        }
+        sendResponse(err, data, callback);
       });
   }
 
@@ -119,22 +98,29 @@ exports.handler = (event, context, callback) => {
     docClient.scan(
       params,
       function (err, data) {
-        if (err) {
-          sendResponse(400, err);
-        } else {
-          sendResponse(200, data);
-        }
+        sendResponse(err, data, callback);
       });
   }
+};
 
-  function sendResponse(statusCode, data) {
+function sendResponse(err, data, callback) {
+  if (err) {
     callback(null, {
       "isBase64Encoded": false,
-      "statusCode": statusCode,
+      "statusCode": 400,
+      "headers": {
+        "Access-Control-Allow-Origin": "*"
+      },
+      "body": JSON.stringify(err)
+    });
+  } else {
+    callback(null, {
+      "isBase64Encoded": false,
+      "statusCode": 200,
       "headers": {
         "Access-Control-Allow-Origin": "*"
       },
       "body": JSON.stringify(data)
     });
   }
-}
+};
