@@ -2,7 +2,7 @@
 var AWS = require('aws-sdk');
 var utility = require('utility');
 
-exports.handler =  function(event, context, callback) {
+exports.handler = function(event, context, callback) {
     var token = event.authorizationToken;
     switch (token.toLowerCase()) {
         case 'allow':

@@ -17,7 +17,7 @@
       .state('store-token', {
         url: '/store-token',
         onEnter: function() {
-          alert('Hi');
+          // TODO: Save the token
         },
       })
       .state('login', {
