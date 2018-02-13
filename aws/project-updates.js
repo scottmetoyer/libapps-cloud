@@ -2,6 +2,7 @@
 var AWS = require('aws-sdk');
 var docClient = new AWS.DynamoDB.DocumentClient();
 var uuidv1 = require('uuid/v1');
+var utility = require('utility');
 
 module.exports.handler = (event, context, callback) => {
   var projectUpdatesTableName = process.env.PROJECT_UPDATES_TABLE;
@@ -17,7 +18,7 @@ module.exports.handler = (event, context, callback) => {
       break;
 
     default:
-      sendResponse({ "Error": "Unsupported HTTP method(" + event.httpMethod + ")" }, null, callback);
+      utility.sendResponse({ "Error": "Unsupported HTTP method(" + event.httpMethod + ")" }, null, callback);
   }
 
   function getProjectUpdates(project) {
@@ -31,7 +32,7 @@ module.exports.handler = (event, context, callback) => {
     docClient.scan(
       params,
       function (err, data) {
-        sendResponse(err, data, callback);
+        utility.sendResponse(err, data, callback);
       });
   }
 
@@ -50,29 +51,7 @@ module.exports.handler = (event, context, callback) => {
       "TableName": projectUpdatesTableName,
       "Item": item
     }, function (err, data) {
-      sendResponse(err, data, callback);
-    });
-  }
-};
-
-function sendResponse(err, data, callback) {
-  if (err) {
-    callback(null, {
-      "isBase64Encoded": false,
-      "statusCode": 400,
-      "headers": {
-        "Access-Control-Allow-Origin": "*"
-      },
-      "body": JSON.stringify(err)
-    });
-  } else {
-    callback(null, {
-      "isBase64Encoded": false,
-      "statusCode": 200,
-      "headers": {
-        "Access-Control-Allow-Origin": "*"
-      },
-      "body": JSON.stringify(data)
+      utility.sendResponse(err, data, callback);
     });
   }
 };
