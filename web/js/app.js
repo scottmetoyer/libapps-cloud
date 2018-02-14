@@ -5,6 +5,7 @@
 
   angular.module('pixeladmin', [
     'auth0.auth0',
+    'angular-jwt',
     'ui.router',
     'oc.lazyLoad',
     'ui.bootstrap',

@@ -8,7 +8,6 @@
     self.projects = [];
 
     self.testLogin = function() {
-      console.log('ok?');
       Auth.login();
     }
 

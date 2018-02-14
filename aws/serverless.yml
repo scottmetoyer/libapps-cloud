@@ -34,14 +34,17 @@ functions:
           path: /projects
           method: get
           cors: true
+          authorizer: auth
       - http:
           path: /projects
           method: post
           cors: true
+          authorizer: auth
       - http:
           path: /project/{project}
           method: any
           cors: true
+          authorizer: auth
           request:
             parameters:
               paths:
@@ -53,6 +56,7 @@ functions:
           path: /project/{project}/project-updates
           method: get
           cors: true
+          authorizer: auth
           request:
             parameters:
               paths:
@@ -61,6 +65,7 @@ functions:
           path: /project/{project}/project-updates
           method: post
           cors: true
+          authorizer: auth
           request:
             parameters:
               paths:

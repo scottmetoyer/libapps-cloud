@@ -16,28 +16,78 @@
         return status;
       }
     })
-    .service('User', function (store) {
+    .service('unauthorizedInterceptor', function ($q, $location, Auth) {
       var service = this;
-      var currentUser = null;
 
-      service.setCurrentUser = function (user) {
-        currentUser = user;
-        store.set('user', user);
-        return currentUser;
-      };
-
-      service.getCurrentUser = function () {
-        if (!currentUser) {
-          currentUser = store.get('user');
+      service.responseError = function (response) {
+        if (response.status == 401 || response.status == 403) {
+          Auth.login();
         }
-        return currentUser;
+        return $q.reject(response);
       };
     })
-    .service('Auth', function(angularAuth0){
+    .service('Auth', function($state, angularAuth0, $timeout){
       var service = this;
+      var userProfile;
 
       service.login = function() {
         angularAuth0.authorize();
-      }
+      };
+
+      service.handleAuthentication = function() {
+        angularAuth0.parseHash(function(err, authResult) {
+          if (authResult && authResult.accessToken && authResult.idToken) {
+            service.setSession(authResult);
+            $state.go('/');
+          } else if (err) {
+            $timeout(function() {
+              $state.go('/');
+            });
+            console.log(err);
+          }
+        });
+      };
+
+      service.setSession = function(authResult) {
+        // Set the time that the Access Token will expire at
+        let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+        localStorage.setItem('access_token', authResult.accessToken);
+        localStorage.setItem('id_token', authResult.idToken);
+        localStorage.setItem('expires_at', expiresAt);
+      };
+
+      service.logout = function() {
+        // Remove tokens and expiry time from localStorage
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('id_token');
+        localStorage.removeItem('expires_at');
+      };
+
+      service.isAuthenticated = function() {
+        // Check whether the current time is past the Access Token's expiry time
+        let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+        return new Date().getTime() < expiresAt;
+      };
+
+      service.getProfile = function(cb) {
+        var accessToken = localStorage.getItem('access_token');
+        if (!accessToken) {
+          throw new Error('Access Token must exist to fetch profile');
+        }
+        angularAuth0.client.userInfo(accessToken, function(err, profile) {
+          if (profile) {
+            service.setUserProfile(profile);
+          }
+          cb(err, profile);
+        });
+      };
+
+      service.setUserProfile = function(profile) {
+        userProfile = profile;
+      };
+
+      service.getCachedProfile = function() {
+        return userProfile;
+      };
     })
 })();

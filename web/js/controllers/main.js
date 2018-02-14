@@ -3,10 +3,9 @@
   // Controllers / Main
   //
 
-  function MainCtrl($rootScope, $state, User) {
+  function MainCtrl($rootScope, $state) {
     var main = this;
     this.companyName = 'UCR Library';
-    main.currentUser = User.getCurrentUser();
   }
 
   angular.module('pixeladmin')

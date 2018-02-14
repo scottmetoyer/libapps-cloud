@@ -9,10 +9,12 @@
     $httpProvider,
     $urlRouterProvider,
     $ocLazyLoadProvider,
-    angularAuth0Provider) {
+    angularAuth0Provider,
+    jwtOptionsProvider) {
+
     // Default url
     $urlRouterProvider.otherwise("/");
-    $locationProvider.hashPrefix('!');
+    $locationProvider.hashPrefix('');
 
     $ocLazyLoadProvider.config({
       debug: false
@@ -20,12 +22,6 @@
 
     // Routes
     $stateProvider
-      .state('auth-callback', {
-        url: '/auth-callback',
-        controller: 'AuthCallbackController',
-        templateUrl: 'views/auth/auth-callback.html',
-        controllerAs: 'vm'
-      })
       .state('pages', {
         abstract: true,
         url: '/',
@@ -186,22 +182,30 @@
         },
       });
 
-      // Configure Auth0
-      angularAuth0Provider.init({
-        clientID: 'ztBzBDuj-KNuBqUt8cCGgvhuPl8SVYOH',
-        domain: 'scott-metoyer.auth0.com',
-        responseType: 'token id_token',
-        audience: 'https://scott-metoyer.auth0.com/userinfo',
-        redirectUri: 'http://libapps-cloud.test/auth-callback',
-        scope: 'openid'
-      });
+    // Configure Auth0
+    angularAuth0Provider.init({
+      clientID: 'ztBzBDuj-KNuBqUt8cCGgvhuPl8SVYOH',
+      domain: 'scott-metoyer.auth0.com',
+      responseType: 'token id_token',
+      audience: 'https://ucr-library-aws-custom-authorizer',
+      redirectUri: 'http://libapps-cloud.test',
+      scope: 'openid profile'
+    });
 
+    // Configure JWT tokens
+    jwtOptionsProvider.config({
+      tokenGetter: function () {
+        console.log(localStorage.getItem('access_token'));
+        return localStorage.getItem('access_token');
+      },
+      whiteListedDomains: ['localhost', 'libapps-cloud.test']
+    });
 
-
-    $locationProvider.html5Mode(true);
+    $httpProvider.interceptors.push('jwtInterceptor');
+    $httpProvider.interceptors.push('unauthorizedInterceptor');
   };
 
-  function run($rootScope, $state, $http) {
+  function run($rootScope, $state, $http, Auth) {
     $rootScope.$state = $state;
 
     $rootScope.$on('$stateChangeStart', function () {
@@ -210,6 +214,8 @@
         window.Pace.restart();
       }
     });
+
+    Auth.handleAuthentication();
   }
 
   angular.module('pixeladmin')
@@ -219,6 +225,7 @@
       '$httpProvider',
       '$urlRouterProvider',
       '$ocLazyLoadProvider',
-      'angularAuth0Provider', config])
-    .run(['$rootScope', '$state', '$http', run]);
+      'angularAuth0Provider',
+      'jwtOptionsProvider', config])
+    .run(['$rootScope', '$state', '$http', 'Auth', run]);
 })();

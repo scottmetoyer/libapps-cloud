@@ -39,26 +39,4 @@
 
       return dataFactory;
     }])
-
-    .factory('jira', ['$http', function ($http) {
-      var urlBase = 'https://libpm.ucr.edu/rest';
-      var jiraFactory = {};
-
-      jiraFactory.startSession = function () {
-        $http({
-          method: 'POST',
-          url: urlBase + '/auth/1/session',
-          data: { "username": "", "password": "" },
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }).then(function (sucess) {
-          console.log(success);
-        }, function (error) {
-          console.log(error);
-        });
-      }
-
-      return jiraFactory;
-    }]);
 })();
