@@ -2,7 +2,7 @@
 
   angular.module('pixeladmin')
     .factory('data', ['$http', function ($http) {
-      var urlBase = 'https://88mrptswxd.execute-api.us-west-1.amazonaws.com/dev';
+      var urlBase = 'https://sb1pdk15he.execute-api.us-west-1.amazonaws.com/dev';
       var dataFactory = {};
 
       dataFactory.getProjects = function (id) {

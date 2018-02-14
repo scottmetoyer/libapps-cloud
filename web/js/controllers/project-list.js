@@ -3,9 +3,14 @@
   // Controllers / ProjectList
   //
 
-  function ProjectListCtrl($http, $state, $filter, bl, data, jira) {
+  function ProjectListCtrl($http, $state, $filter, bl, data, Auth) {
     var self = this;
     self.projects = [];
+
+    self.testLogin = function() {
+      console.log('ok?');
+      Auth.login();
+    }
 
     function loadProjects() {
       data.getProjects()

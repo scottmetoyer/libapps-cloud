@@ -5,7 +5,7 @@
 
   function RequestCtrl($http, $stateParams, $anchorScroll, $location, bl, data) {
     var self = this;
-    
+
     // Initialize with sensible defaults
     self.request = {};
 
@@ -25,7 +25,7 @@
     self.create = function(isValid) {
       if (isValid) {
         saveProject(function(){
-          $location.path('/pages/view-project/' + self.project.id).search({ new: 'true' });
+          $location.path('/pages/create-project/' + self.project.id).search({ new: 'true' });
         });
       }
     }

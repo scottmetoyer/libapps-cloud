@@ -3,7 +3,13 @@
   // Config
   //
 
-  function config($stateProvider, $locationProvider, $httpProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+  function config(
+    $stateProvider,
+    $locationProvider,
+    $httpProvider,
+    $urlRouterProvider,
+    $ocLazyLoadProvider,
+    angularAuth0Provider) {
     // Default url
     $urlRouterProvider.otherwise("/");
     $locationProvider.hashPrefix('!');
@@ -14,26 +20,11 @@
 
     // Routes
     $stateProvider
-      .state('store-token', {
-        url: '/store-token',
-        onEnter: function() {
-          // TODO: Save the token
-        },
-      })
-      .state('login', {
-        url: '/login',
-        templateUrl: 'views/auth/login.html',
-        resolve: {
-          loadPlugin: function ($ocLazyLoad) {
-            return $ocLazyLoad.load([
-              {
-                files: [
-                  'js/pixeladmin/plugins/px-responsive-bg.js'
-                ]
-              },
-            ]);
-          },
-        }
+      .state('auth-callback', {
+        url: '/auth-callback',
+        controller: 'AuthCallbackController',
+        templateUrl: 'views/auth/auth-callback.html',
+        controllerAs: 'vm'
       })
       .state('pages', {
         abstract: true,
@@ -195,7 +186,19 @@
         },
       });
 
-      $httpProvider.interceptors.push('authInterceptor');
+      // Configure Auth0
+      angularAuth0Provider.init({
+        clientID: 'ztBzBDuj-KNuBqUt8cCGgvhuPl8SVYOH',
+        domain: 'scott-metoyer.auth0.com',
+        responseType: 'token id_token',
+        audience: 'https://scott-metoyer.auth0.com/userinfo',
+        redirectUri: 'http://libapps-cloud.test/auth-callback',
+        scope: 'openid'
+      });
+
+
+
+    $locationProvider.html5Mode(true);
   };
 
   function run($rootScope, $state, $http) {
@@ -210,6 +213,12 @@
   }
 
   angular.module('pixeladmin')
-    .config(['$stateProvider', '$locationProvider', '$httpProvider', '$urlRouterProvider', '$ocLazyLoadProvider', config])
+    .config([
+      '$stateProvider',
+      '$locationProvider',
+      '$httpProvider',
+      '$urlRouterProvider',
+      '$ocLazyLoadProvider',
+      'angularAuth0Provider', config])
     .run(['$rootScope', '$state', '$http', run]);
 })();

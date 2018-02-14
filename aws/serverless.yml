@@ -7,6 +7,9 @@ provider:
   environment:
     PROJECTS_TABLE: projects-${opt:stage, self:provider.stage}
     PROJECT_UPDATES_TABLE: project-updates-${opt:stage, self:provider.stage}
+    AUTH0_CLIENT_ID: ${file(./secrets.json):AUTH0_CLIENT_ID}
+    AUTH0_CLIENT_SECRET: ${file(./secrets.json):AUTH0_CLIENT_SECRET}
+
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -30,16 +33,14 @@ functions:
       - http:
           path: /projects
           method: get
-          authorizer: auth
+          cors: true
       - http:
           path: /projects
           method: post
           cors: true
-          authorizer: auth
       - http:
           path: /project/{project}
           method: any
-          authorizer: auth
           cors: true
           request:
             parameters:
@@ -51,7 +52,7 @@ functions:
       - http:
           path: /project/{project}/project-updates
           method: get
-          authorizer: auth
+          cors: true
           request:
             parameters:
               paths:
@@ -59,7 +60,6 @@ functions:
       - http:
           path: /project/{project}/project-updates
           method: post
-          authorizer: auth
           cors: true
           request:
             parameters:
@@ -106,7 +106,15 @@ resources:
         ResponseParameters:
           gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
           gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
-        ResponseType: UNAUTHORIZED
+        ResponseType: DEFAULT_4XX
         RestApiId:
           Ref: 'ApiGatewayRestApi'
-        StatusCode: '401'
+    ServerErrorGatewayResponse:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_5XX
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'

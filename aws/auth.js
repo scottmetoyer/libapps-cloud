@@ -1,46 +1,62 @@
 'use strict';
-var AWS = require('aws-sdk');
-var utility = require('utility');
+const jwt = require('jsonwebtoken');
 
-exports.handler = function(event, context, callback) {
-    var token = event.authorizationToken;
-    switch (token.toLowerCase()) {
-        case 'allow':
-            callback(null, generatePolicy('user', 'Allow', event.methodArn));
-            break;
-        case 'deny':
-            callback(null, generatePolicy('user', 'Deny', event.methodArn));
-            break;
-        case 'unauthorized':
-            callback("Unauthorized");   // Return a 401 Unauthorized response
-            break;
-        default:
-            callback("Error: Invalid token"); 
-    }
-};
+const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID;
+const AUTH0_CLIENT_SECRET = process.env.AUTH0_CLIENT_SECRET;
 
-// Help function to generate an IAM policy
-var generatePolicy = function(principalId, effect, resource) {
-    var authResponse = {};
-    
+// Policy helper
+const generatePolicy = (principalId, effect, resource) => {
+    const authResponse = {};
     authResponse.principalId = principalId;
+
     if (effect && resource) {
-        var policyDocument = {};
-        policyDocument.Version = '2012-10-17'; 
+        const policyDocument = {};
+        policyDocument.Version = '2012-10-17';
         policyDocument.Statement = [];
-        var statementOne = {};
-        statementOne.Action = 'execute-api:Invoke'; 
+        const statementOne = {};
+        statementOne.Action = 'execute-api:Invoke';
         statementOne.Effect = effect;
         statementOne.Resource = resource;
         policyDocument.Statement[0] = statementOne;
         authResponse.policyDocument = policyDocument;
-    }
-    
-    // Optional output with custom properties of the String, Number or Boolean type.
-    authResponse.context = {
-        "stringKey": "stringval",
-        "numberKey": 123,
-        "booleanKey": true
     };
+
     return authResponse;
-}
+};
+
+// Reusable Authorizer function, set on `authorizer` field in serverless.yml
+module.exports.auth = (event, context, callback) => {
+    if (!event.authorizationToken) {
+        return callback('Unauthorized');
+    }
+
+    const tokenParts = event.authorizationToken.split(' ');
+    const tokenValue = tokenParts[1];
+
+    if (!(tokenParts[0].toLowerCase() === 'bearer' && tokenValue)) {
+        // No auth token provided in the request
+        return callback('Unauthorized');
+    }
+    const options = {
+        audience: AUTH0_CLIENT_ID,
+    };
+
+    // Decode base64 secret. ref: http://bit.ly/2hA6CrO
+    const secret = new Buffer.from(AUTH0_CLIENT_SECRET, 'base64');
+
+    try {
+        jwt.verify(tokenValue, secret, options, (verifyError, decoded) => {
+            if (verifyError) {
+                console.log('verifyError', verifyError);
+                console.log(`Token invalid. ${verifyError}`);
+                return callback('Unauthorized');
+            }
+
+            // Valid and authorized request
+            return callback(null, generatePolicy(decoded.sub, 'Allow', event.methodArn));
+        });
+    } catch (err) {
+        console.log('Invalid token', err);
+        return callback('Unauthorized');
+    }
+};

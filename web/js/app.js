@@ -4,6 +4,7 @@
   //
 
   angular.module('pixeladmin', [
+    'auth0.auth0',
     'ui.router',
     'oc.lazyLoad',
     'ui.bootstrap',
