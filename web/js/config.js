@@ -184,12 +184,12 @@
 
     // Configure Auth0
     angularAuth0Provider.init({
-      clientID: 'ztBzBDuj-KNuBqUt8cCGgvhuPl8SVYOH',
+      clientID: 'Ykc0nxkt4nE3up5Za0Zekb2TK0mR7bkO',
       domain: 'scott-metoyer.auth0.com',
       responseType: 'token id_token',
-      audience: 'https://ucr-library-aws-custom-authorizer',
+      audience: 'https://ucr-library-custom-authorizer.ucr.edu',
       redirectUri: 'http://libapps-cloud.test',
-      scope: 'openid profile'
+      scope: 'openid profile access'
     });
 
     // Configure JWT tokens
@@ -198,7 +198,7 @@
         console.log(localStorage.getItem('access_token'));
         return localStorage.getItem('access_token');
       },
-      whiteListedDomains: ['localhost', 'libapps-cloud.test']
+      whiteListedDomains: ['localhost', 'sb1pdk15he.execute-api.us-west-1.amazonaws.com']
     });
 
     $httpProvider.interceptors.push('jwtInterceptor');
