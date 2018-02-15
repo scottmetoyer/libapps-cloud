@@ -24,7 +24,7 @@ const generatePolicy = (principalId, effect, resource) => {
     return authResponse;
 };
 
-module.exports.auth = (event, context, callback) => {
+module.exports.handler = (event, context, callback) => {
     if (!event.authorizationToken) {
         return callback('Unauthorized');
     }
@@ -37,14 +37,14 @@ module.exports.auth = (event, context, callback) => {
         return callback('Unauthorized');
     }
     const options = {
-        audience: AUTH0_CLIENT_ID,
+        // audience: AUTH0_CLIENT_ID,
     };
 
     // Decode base64 secret. ref: http://bit.ly/2hA6CrO
-    const secret = new Buffer.from(AUTH0_CLIENT_SECRET, 'base64');
+    // const secret = new Buffer.from(AUTH0_CLIENT_SECRET, 'base64');
 
     try {
-        jwt.verify(tokenValue, secret, options, (verifyError, decoded) => {
+        jwt.verify(tokenValue, AUTH0_CLIENT_SECRET, options, (verifyError, decoded) => {
             if (verifyError) {
                 console.log('verifyError', verifyError);
                 console.log(`Token invalid. ${verifyError}`);
