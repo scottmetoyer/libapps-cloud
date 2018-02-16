@@ -3457,9 +3457,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var _window = windowHelper.getWindow();
 
 		var hashStr = options.hash === undefined ? _window.location.hash : options.hash;
-
 	  hashStr = hashStr.replace(/^#?\/?/, '');
-
 	  parsedQs = qs.parse(hashStr);
 
 	  if (parsedQs.hasOwnProperty('error')) {

@@ -16,16 +16,6 @@
         return status;
       }
     })
-    .service('unauthorizedInterceptor', function ($q, $location, Auth) {
-      var service = this;
-
-      service.responseError = function (response) {
-        if (response.status == 401 || response.status == 403) {
-          Auth.login();
-        }
-        return $q.reject(response);
-      };
-    })
     .service('Auth', function($state, angularAuth0, $timeout){
       var service = this;
       var userProfile;
@@ -35,21 +25,22 @@
       };
 
       service.handleAuthentication = function() {
+        console.log('auth check!');
         angularAuth0.parseHash(function(err, authResult) {
           if (authResult && authResult.accessToken && authResult.idToken) {
             service.setSession(authResult);
             $state.go('/');
           } else if (err) {
-            $timeout(function() {
+            $timeout(function(){
               $state.go('/');
             });
+
             console.log(err);
           }
         });
       };
 
       service.setSession = function(authResult) {
-        // Set the time that the Access Token will expire at
         let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
         localStorage.setItem('access_token', authResult.accessToken);
         localStorage.setItem('id_token', authResult.idToken);
@@ -57,7 +48,6 @@
       };
 
       service.logout = function() {
-        // Remove tokens and expiry time from localStorage
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
@@ -88,6 +78,18 @@
 
       service.getCachedProfile = function() {
         return userProfile;
+      };
+    })
+    .service('unauthorizedInterceptor', function ($q, $location, $state) {
+      var service = this;
+
+      service.responseError = function (response) {
+        console.log('we got a 401 back!');
+        if (response.status == 401 || response.status == 403) {
+          $state.go('login');
+        }
+
+        return $q.reject(response);
       };
     })
 })();

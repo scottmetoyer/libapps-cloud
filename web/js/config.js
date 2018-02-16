@@ -22,9 +22,12 @@
 
     // Routes
     $stateProvider
+      .state('login', {
+        url: '/',
+        templateUrl: 'views/auth/login.html'
+      })
       .state('pages', {
         abstract: true,
-        url: '/',
         templateUrl: 'views/common/layout.html'
       })
       .state('pages.in-flight', {
@@ -195,7 +198,6 @@
     // Configure JWT tokens
     jwtOptionsProvider.config({
       tokenGetter: function () {
-        console.log(localStorage.getItem('access_token'));
         return localStorage.getItem('access_token');
       },
       whiteListedDomains: ['localhost', 'sb1pdk15he.execute-api.us-west-1.amazonaws.com']
@@ -206,6 +208,7 @@
   };
 
   function run($rootScope, $state, $http, Auth) {
+    Auth.handleAuthentication();
     $rootScope.$state = $state;
 
     $rootScope.$on('$stateChangeStart', function () {
@@ -214,8 +217,6 @@
         window.Pace.restart();
       }
     });
-
-    Auth.handleAuthentication();
   }
 
   angular.module('pixeladmin')
