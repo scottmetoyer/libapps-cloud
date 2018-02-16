@@ -50,7 +50,6 @@
         }).catch(function (err) { console.log(err) });
     }
 
-    console.log('load shit!');
     self.loadProjects();
   }
 

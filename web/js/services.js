@@ -24,15 +24,20 @@
         angularAuth0.authorize();
       };
 
-      service.handleAuthentication = function() {
-        console.log('auth check!');
+      service.handleAuthentication = function(callback) {
+        var self = this;
+        self.callback = callback;
+
         angularAuth0.parseHash(function(err, authResult) {
           if (authResult && authResult.accessToken && authResult.idToken) {
             service.setSession(authResult);
-            $state.go('/');
+
+            if (self.callback) {
+              self.callback();
+            }
           } else if (err) {
             $timeout(function(){
-              $state.go('/');
+              service.login();
             });
 
             console.log(err);
@@ -80,13 +85,13 @@
         return userProfile;
       };
     })
-    .service('unauthorizedInterceptor', function ($q, $location, $state) {
+    .service('unauthorizedInterceptor', function ($q, $location, $state, Auth) {
       var service = this;
 
       service.responseError = function (response) {
         console.log('we got a 401 back!');
         if (response.status == 401 || response.status == 403) {
-          $state.go('login');
+          Auth.login();
         }
 
         return $q.reject(response);
