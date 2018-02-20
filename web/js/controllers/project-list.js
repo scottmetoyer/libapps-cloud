@@ -3,13 +3,9 @@
   // Controllers / ProjectList
   //
 
-  function ProjectListCtrl($http, $state, $filter, bl, data, Auth) {
+  function ProjectListCtrl($http, $state, $filter, bl, data) {
     var self = this;
     self.projects = [];
-
-    self.testLogin = function () {
-      Auth.login();
-    }
 
     self.loadProjects = function () {
       data.getProjects()

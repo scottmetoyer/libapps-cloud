@@ -24,23 +24,30 @@
         angularAuth0.authorize();
       };
 
-      service.handleAuthentication = function(callback) {
+      service.handleAuthentication = function() {
         var self = this;
-        self.callback = callback;
 
+        // Check for an auth token in the query string first
         angularAuth0.parseHash(function(err, authResult) {
           if (authResult && authResult.accessToken && authResult.idToken) {
             service.setSession(authResult);
-
-            if (self.callback) {
-              self.callback();
-            }
+            $state.go('dashboard.view');
           } else if (err) {
+            // Send them to the Auth0 login page if there are exceptions
+            console.log(err);
+
             $timeout(function(){
               service.login();
             });
+          } else {
+            // Check for an auth token in session because there wasn't any in the query string
+            var accessToken = localStorage.getItem('access_token');
 
-            console.log(err);
+            if (accessToken && accessToken != '') {
+              return;
+            } else {
+              service.login();
+            }
           }
         });
       };
@@ -89,7 +96,6 @@
       var service = this;
 
       service.responseError = function (response) {
-        console.log('we got a 401 back!');
         if (response.status == 401 || response.status == 403) {
           Auth.login();
         }

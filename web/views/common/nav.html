@@ -10,42 +10,29 @@
     <li class="px-nav-item px-nav-dropdown active">
         <a href="#"><i class="px-nav-icon ion-ios-pulse-strong"></i><span class="px-nav-label">Projects</span></a>
 
-        <ul class="px-nav-dropdown-menu" style="">
+        <ul class="px-nav-dropdown-menu">
             <li class="px-nav-item" ui-sref-active="active">
-                <a ui-sref="pages.create-project"><i class="px-nav-icon ion-plus text-success"></i><span class="px-nav-label">New Project</span></a>
+                <a ui-sref="projects.create"><i class="px-nav-icon ion-plus text-success"></i><span class="px-nav-label">New Project</span></a>
             </li>
 
             <li class="px-nav-item px-nav-dropdown">
                 <a href="#"><i class="px-nav-icon ion-ios-book"></i><span class="px-nav-label">Project Atlas</span></a>
 
-                <ul class="px-nav-dropdown-menu" style="">
+                <ul class="px-nav-dropdown-menu">
                     <li class="px-nav-item" ui-sref-active="active">
-                        <a href ui-sref="pages.in-flight"><span class="px-nav-label">In-flight</span></a>
+                        <a href ui-sref="projects.in-flight"><span class="px-nav-label">In-flight</span></a>
                     </li>
                     <li class="px-nav-item" ui-sref-active="active">
-                        <a href ui-sref="pages.backlog"><span class="px-nav-label">Backlog</span></a>
+                        <a href ui-sref="projects.backlog"><span class="px-nav-label">Backlog</span></a>
                     </li>
                     <li class="px-nav-item" ui-sref-active="active">
-                        <a href ui-sref="pages.archive"><span class="px-nav-label">Archive</span></a>
+                        <a href ui-sref="projects.archive"><span class="px-nav-label">Archive</span></a>
                     </li>
                 </ul>
             </li>
 
             <li class="px-nav-item" ui-sref-active="active">
-                <a href ui-sref="pages.recurring-tasks"><i class="px-nav-icon ion-calendar"></i><span class="px-nav-label">Recurring Tasks</span></a>
-            </li>
-            <li class="px-nav-item px-nav-dropdown">
-                <a href="#"><i class="px-nav-icon ion-person-stalker"></i><span class="px-nav-label">Team</span></a>
-
-                <ul class="px-nav-dropdown-menu">
-                    <li class="px-nav-item"><a href=""><span class="px-nav-label">Barry</span></a></li>
-                    <li class="px-nav-item"><a href=""><span class="px-nav-label">Dan</span></a></li>
-                    <li class="px-nav-item"><a href=""><span class="px-nav-label">Dennis</span></a></li>
-                    <li class="px-nav-item"><a href=""><span class="px-nav-label">Joe</span></a></li>
-                    <li class="px-nav-item"><a href=""><span class="px-nav-label">Scott</span></a></li>
-                    <li class="px-nav-item"><a href=""><span class="px-nav-label">Sean</span></a></li>
-                    <li class="px-nav-item"><a href=""><span class="px-nav-label">Ramon</span></a></li>
-                </ul>
+                <a href ui-sref="recurring-tasks.list"><i class="px-nav-icon ion-calendar"></i><span class="px-nav-label">Recurring Tasks</span></a>
             </li>
         </ul>
     </li>
@@ -55,7 +42,7 @@
 
         <ul class="px-nav-dropdown-menu">
             <li class="px-nav-item" ui-sref-active="active">
-                <a ui-sref="pages.request"><i class="px-nav-icon ion-plus text-success"></i><span class="px-nav-label">New Request</span></a>
+                <a ui-sref="requests.create"><i class="px-nav-icon ion-plus text-success"></i><span class="px-nav-label">New Request</span></a>
             </li>
             <li class="px-nav-item" ui-sref-active="active">
                 <a href><i class="px-nav-icon ion-plane"></i><span class="px-nav-label">Travel</span></a>
@@ -64,7 +51,7 @@
                 <a href><i class="px-nav-icon ion-card"></i><span class="px-nav-label">Purchase</span></a>
             </li>
             <li class="px-nav-item" ui-sref-active="active">
-                <a href><i class="px-nav-icon ion-monitor"></i><span class="px-nav-label">Annual Equipment</span></a>
+                <a href ui-sref="requests.annual-equipment"><i class="px-nav-icon ion-monitor"></i><span class="px-nav-label">Annual Equipment</span></a>
             </li>
         </ul>
     </li>

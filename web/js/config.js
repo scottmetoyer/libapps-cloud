@@ -22,16 +22,25 @@
 
     // Routes
     $stateProvider
-      .state('login', {
-        url: '/',
-        templateUrl: 'views/auth/login.html'
-      })
-      .state('pages', {
+      // Local authentication manager routes
+      .state('dashboard', {
         abstract: true,
-        templateUrl: 'views/common/layout.html'
-      })
-      .state('pages.in-flight', {
         url: '',
+        templateUrl: 'views/common/layout.html',
+      })
+      .state('dashboard.view', {
+        url: '/',
+        templateUrl: 'views/dashboard.html'
+      })
+
+      // Project Atlas routes
+      .state('projects', {
+        abstract: true,
+        url: '/projects',
+        templateUrl: 'views/common/layout.html',
+      })
+      .state('projects.in-flight', {
+        url: '/in-flight',
         templateUrl: 'views/projects/in-flight-list.html',
         data: { pageTitle: 'In-flight projects' },
         resolve: {
@@ -48,12 +57,11 @@
           },
         }
       })
-      .state('pages.backlog', {
-        url: 'backlog',
+      .state('projects.backlog', {
+        url: '/backlog',
         templateUrl: 'views/projects/backlog-list.html',
         data: { pageTitle: 'Backlog projects' },
         resolve: {
-          // Load plugins here
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([
               {
@@ -67,100 +75,95 @@
           },
         },
       })
-      .state('pages.create-project', {
-        url: 'create-project',
+      .state('projects.create', {
+        url: '/create',
         templateUrl: 'views/projects/create.html',
         data: { pageTitle: 'Create a project' },
         resolve: {
-          // Load plugins here
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([]);
           },
         },
       })
-      .state('pages.view-project', {
-        url: 'view-project/:id',
+      .state('projects.view', {
+        url: '/view/:id',
         templateUrl: 'views/projects/view.html',
         data: { pageTitle: 'Project dashboard' },
         resolve: {
-          // Load plugins here
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([]);
           },
         },
       })
-      .state('pages.archive', {
-        url: 'archive',
+      .state('projects.archive', {
+        url: '/archive',
         templateUrl: 'views/projects/archive-list.html',
         data: { pageTitle: 'Archived projects' },
         resolve: {
-          // Load plugins here
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([]);
           },
         },
       })
-      .state('pages.edit-project', {
-        url: 'edit-project/:id',
+      .state('projects.edit', {
+        url: '/edit/:id',
         templateUrl: 'views/projects/edit.html',
         data: { pageTitle: 'Edit project' },
         resolve: {
-          // Load plugins here
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([]);
           },
         },
       })
-      .state('pages.recurring-tasks', {
-        url: 'recurring-tasks',
-        templateUrl: 'views/recurring-tasks.html',
+
+      .state('recurring-tasks', {
+        abstract: true,
+        url: '',
+        templateUrl: 'views/common/layout.html',
+      })
+      // Recurring Task routes
+      .state('recurring-tasks.list', {
+        url: '/recurring-tasks',
+        templateUrl: 'views/recurring-tasks/list.html',
         data: { pageTitle: 'Recurring tasks' },
         resolve: {
-          // Load plugins here
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([]);
           },
         },
       })
-      .state('pages.create-task', {
-        url: 'create-task',
-        templateUrl: 'views/create-recurring-task.html',
+      .state('recurring-tasks.create', {
+        url: '/create',
+        templateUrl: 'views/recurring-tasks/create.html',
         data: { pageTitle: 'Create a recurring task' },
         resolve: {
-          // Load plugins here
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([]);
           },
         },
       })
-      .state('pages.edit-task', {
-        url: 'edit-task/:id',
-        templateUrl: 'views/edit-recurring-task.html',
+      .state('recurring-tasks.edit', {
+        url: '/edit/:id',
+        templateUrl: 'views/recurring-tasks/edit.html',
         data: { pageTitle: 'Edit task' },
         resolve: {
-          // Load plugins here
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([]);
           },
         },
       })
-      .state('pages.request', {
-        url: 'request/create',
-        templateUrl: 'views/requests/create.html',
-        data: { pageTitle: 'New request' },
-        resolve: {
-          // Load plugins here
-          loadPlugin: function ($ocLazyLoad) {
-            return $ocLazyLoad.load([]);
-          },
-        },
+
+      // Request routes
+      .state('requests', {
+        abstract: true,
+        url: '/requests',
+        templateUrl: 'views/common/layout.html',
       })
-      .state('pages.create-annual-equipment-request', {
-        url: 'request/create/annual-equipment',
+      .state('requests.create-annual-equipment-request', {
+        url: '/annual-equipment/create',
         templateUrl: 'views/requests/annual-equipment/start.html',
         data: { pageTitle: 'New Annual Equipment purchase request' },
         resolve: {
-          // Load plugins here
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([
               {
@@ -173,12 +176,11 @@
           },
         },
       })
-      .state('pages.annual-equipment-request-submitted', {
-        url: 'request/create/annual-equipment/success',
+      .state('requests.annual-equipment-request-submitted', {
+        url: '/requests/annual-equipment/success',
         templateUrl: 'views/requests/annual-equipment/success.html',
         data: { pageTitle: 'Annual Equipment purchase request submitted' },
         resolve: {
-          // Load plugins here
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([]);
           },
@@ -207,16 +209,9 @@
     $httpProvider.interceptors.push('unauthorizedInterceptor');
   };
 
-  function run($rootScope, $state, $http, Auth) {
+  function run($rootScope, $state, $http, Auth, $transitions) {
     Auth.handleAuthentication();
     $rootScope.$state = $state;
-
-    $rootScope.$on('$stateChangeStart', function () {
-      // Restart page loader
-      if (window.Pace && typeof window.Pace.restart === 'function') {
-        window.Pace.restart();
-      }
-    });
   }
 
   angular.module('pixeladmin')
@@ -228,5 +223,5 @@
       '$ocLazyLoadProvider',
       'angularAuth0Provider',
       'jwtOptionsProvider', config])
-    .run(['$rootScope', '$state', '$http', 'Auth', run]);
+    .run(['$rootScope', '$state', '$http', 'Auth', '$transitions', run]);
 })();
