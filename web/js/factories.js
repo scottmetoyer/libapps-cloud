@@ -37,6 +37,14 @@
         return $http.get(urlBase + "/tasks/instances/" + year);
       }
 
+      dataFactory.saveRequest = function (request) {
+        if (request.id != null) {
+          return $http.put(urlBase + "/request/" + request.id, JSON.stringify(request));
+        } else {
+          return $http.post(urlBase + "/requests", JSON.stringify(request));
+        }
+      }
+
       return dataFactory;
     }])
 })();

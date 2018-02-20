@@ -5,7 +5,7 @@ var uuidv1 = require('uuid/v1');
 var utility = require('utility');
 
 module.exports.handler = (event, context, callback) => {
-  var projectsTableName = process.env.PROJECTS_TABLE;
+  var tableName = process.env.PROJECTS_TABLE;
   let id = (event.pathParameters !== null ? event.pathParameters.project : false);
 
   switch (event.httpMethod) {
@@ -53,7 +53,7 @@ module.exports.handler = (event, context, callback) => {
     params.executionStatus != null ? item.executionStatus = params.executionStatus : null;
 
     docClient.put({
-      "TableName": projectsTableName,
+      "TableName": tableName,
       "Item": item
     },
       function (err, data) {
@@ -63,7 +63,7 @@ module.exports.handler = (event, context, callback) => {
 
   function deleteProject(id) {
     docClient.deleteItem({
-      TableName: projectsTableName,
+      TableName: tableName,
       Key: {
         "id": {
           "S": id
@@ -77,7 +77,7 @@ module.exports.handler = (event, context, callback) => {
 
   function getProject(id) {
     docClient.get({
-      TableName: projectsTableName,
+      TableName: tableName,
       Key: {
         "id": id
       }
@@ -88,7 +88,7 @@ module.exports.handler = (event, context, callback) => {
   }
 
   function getProjects() {
-    var params = { TableName: projectsTableName };
+    var params = { TableName: tableName };
 
     if (event['pathParameters'] && event['pathParameters']['department']) {
       params.FilterExpression = '#department = :d',

@@ -159,6 +159,10 @@
         url: '/requests',
         templateUrl: 'views/common/layout.html',
       })
+      .state('requests.create', {
+        url: '/requests/create',
+        templateUrl: 'views/requests/create.html'
+      })
       .state('requests.create-annual-equipment-request', {
         url: '/annual-equipment/create',
         templateUrl: 'views/requests/annual-equipment/start.html',

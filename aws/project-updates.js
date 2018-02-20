@@ -5,7 +5,7 @@ var uuidv1 = require('uuid/v1');
 var utility = require('utility');
 
 module.exports.handler = (event, context, callback) => {
-  var projectUpdatesTableName = process.env.PROJECT_UPDATES_TABLE;
+  var tableName = process.env.PROJECT_UPDATES_TABLE;
   let project = event.pathParameters.project;
 
   switch (event.httpMethod) {
@@ -23,7 +23,7 @@ module.exports.handler = (event, context, callback) => {
 
   function getProjectUpdates(project) {
     var params = {
-      TableName: projectUpdatesTableName,
+      TableName: tableName,
       FilterExpression: '#projectId = :p',
       ExpressionAttributeValues: { ':p': project },
       ExpressionAttributeNames: { "#projectId": "projectId" }
@@ -48,7 +48,7 @@ module.exports.handler = (event, context, callback) => {
     item.user = params.user;
 
     docClient.put({
-      "TableName": projectUpdatesTableName,
+      "TableName": tableName,
       "Item": item
     }, function (err, data) {
       utility.sendResponse(err, data, callback);

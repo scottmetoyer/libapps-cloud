@@ -1,4 +1,4 @@
-(function() {
+(function () {
   // ===============================================================================
   // Controllers / Request
   //
@@ -7,26 +7,19 @@
     var self = this;
 
     // Initialize with sensible defaults
-    self.request = {};
+    self.request = {
+      type: 'Annual Equipment Request'
+    };
 
-    self.save = function(isValid) {
+    self.create = function (isValid) {
       if (isValid) {
-        self.statusUpdate.projectId = $stateParams.id;
-
-        data.saveStatusUpdate(self.statusUpdate)
-        .then(function(response) {
-          getStatusUpdates($stateParams.id);
-        }, function(response){
-          self.hasError = true;
-        });
-      }
-    }
-
-    self.create = function(isValid) {
-      if (isValid) {
-        saveProject(function(){
-          $location.path('/pages/create-project/' + self.project.id).search({ new: 'true' });
-        });
+        data.saveRequest(self.request)
+          .then(function (response) {
+            // Show the success wizard step
+            $state.go('requests.annual-equipment-request-submitted');
+          }, function (response) {
+            self.hasError = true;
+          });
       }
     }
   }
