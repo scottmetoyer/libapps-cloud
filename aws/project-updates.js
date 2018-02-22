@@ -13,12 +13,13 @@ module.exports.handler = (event, context, callback) => {
       getProjectUpdates(project);
       break;
 
+    case "PUT":
     case "POST":
       saveProjectUpdate(project);
       break;
 
     default:
-      utility.sendResponse({ "Error": "Unsupported HTTP method(" + event.httpMethod + ")" }, null, callback);
+      utility.sendResponse(501, { "Error": "Unsupported HTTP method(" + event.httpMethod + ")" }, callback);
   }
 
   function getProjectUpdates(project) {

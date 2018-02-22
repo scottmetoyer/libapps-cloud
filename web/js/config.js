@@ -206,7 +206,7 @@
       tokenGetter: function () {
         return localStorage.getItem('access_token');
       },
-      whiteListedDomains: ['localhost', 'sb1pdk15he.execute-api.us-west-1.amazonaws.com']
+      whiteListedDomains: ['localhost', 'j1wzq8z8w5.execute-api.us-west-1.amazonaws.com']
     });
 
     $httpProvider.interceptors.push('jwtInterceptor');

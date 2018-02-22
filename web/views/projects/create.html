@@ -12,6 +12,8 @@
         <div class="panel">
             <div ng-controller="ProjectCtrl as project">
                 <form name="createForm" ng-submit="project.createProject(createForm.$valid)" novalidate>
+                    <input type="hidden" ng-model="project.project.id" value=""/>
+
                     <div class="panel-heading">
                         <div class="panel-title">Please enter the project details</div>
                     </div>

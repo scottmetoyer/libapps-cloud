@@ -2,7 +2,7 @@
 
   angular.module('pixeladmin')
     .factory('data', ['$http', function ($http) {
-      var urlBase = 'https://sb1pdk15he.execute-api.us-west-1.amazonaws.com/dev';
+      var urlBase = 'https://j1wzq8z8w5.execute-api.us-west-1.amazonaws.com/dev';
       var dataFactory = {};
 
       dataFactory.getProjects = function (id) {
@@ -14,7 +14,7 @@
       }
 
       dataFactory.saveProject = function (project) {
-        if (project.id != null) {
+        if (project.id) {
           return $http.put(urlBase + "/project/" + project.id, JSON.stringify(project));
         } else {
           return $http.post(urlBase + "/projects", JSON.stringify(project));

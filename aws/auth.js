@@ -52,7 +52,7 @@ module.exports.handler = (event, context, callback) => {
             }
 
             // Valid and authorized request
-            return callback(null, generatePolicy(decoded.sub, 'Allow', event.methodArn));
+            return callback(null, generatePolicy(decoded.sub, 'Allow', '*'));
         });
     } catch (err) {
         console.log('Invalid token', err);

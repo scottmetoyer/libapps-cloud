@@ -93,7 +93,7 @@ module.exports.handler = (event, context, callback) => {
     if (event['pathParameters'] && event['pathParameters']['department']) {
       params.FilterExpression = '#department = :d',
         params.ExpressionAttributeValues = { ':d': event['pathParameters']['department'] },
-        params.ExpressionAttributeNames = { "#department": "department" }
+        params.ExpressionAttributeNames = { "#department": "department" };
     }
 
     docClient.scan(

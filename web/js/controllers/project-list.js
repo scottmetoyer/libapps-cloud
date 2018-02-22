@@ -13,15 +13,15 @@
           var items = response.data.Items;
 
           // Filter the list based on route
-          if ($state.current.name == 'pages.backlog') {
+          if ($state.current.name == 'projects.backlog') {
             self.projects = items.filter(function (project) {
               return (project.executionStatus == 'backlog');
             });
-          } else if ($state.current.name == 'pages.archive') {
+          } else if ($state.current.name == 'projects.archive') {
             self.projects = items.filter(function (project) {
               return (project.executionStatus == 'archive');
             });
-          } else {
+          } else if ($state.current.name == 'projects.in-flight') {
             self.projects = items.filter(function (project) {
               return (project.executionStatus == 'in-flight');
             });
@@ -37,7 +37,7 @@
                     list = $filter('orderBy')(list, "timestamp", true);
                     project.latestUpdate = list[0];
                   }
-                }, function (response) {
+                }, function (err) {
                   // Error loading status updates for this project
                   console.log(err);
                 });

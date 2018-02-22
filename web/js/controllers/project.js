@@ -38,7 +38,7 @@
     self.createProject = function(isValid) {
       if (isValid) {
         saveProject(function(){
-          $location.path('/pages/view-project/' + self.project.id).search({ new: 'true' });
+          $location.path('/projects/view/' + self.project.id).search({ new: 'true' });
         });
       }
     }
@@ -46,7 +46,7 @@
     self.updateProject = function(isValid) {
       if (isValid) {
         saveProject(function(){
-          $location.path('/pages/view-project/' + self.project.id).search({ updated: 'true' });
+          $location.path('/projects/view/' + self.project.id).search({ updated: 'true' });
         });
       }
     }
@@ -54,6 +54,7 @@
     function saveProject(callback) {
       data.saveProject(self.project)
       .then(function(response) {
+        console.log(response);
         callback();
       }, function(response){
         $anchorScroll();

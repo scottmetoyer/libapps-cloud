@@ -7,6 +7,7 @@ provider:
   environment:
     PROJECTS_TABLE: projects-${opt:stage, self:provider.stage}
     PROJECT_UPDATES_TABLE: project-updates-${opt:stage, self:provider.stage}
+    REQUESTS_TABLE: requests-${opt:stage, self:provider.stage}
     AUTH0_CLIENT_ID: ${file(./secrets.json):AUTH0_CLIENT_ID}
     AUTH0_CLIENT_SECRET: ${file(./secrets.json):AUTH0_CLIENT_SECRET}
 
@@ -22,6 +23,7 @@ provider:
       Resource:
         - { "Fn::GetAtt": ["ProjectsDynamoDbTable", "Arn"] }
         - { "Fn::GetAtt": ["ProjectUpdatesDynamoDbTable", "Arn"] }
+        - { "Fn::GetAtt": ["RequestsDynamoDbTable", "Arn"] }
 
 functions:
   auth:
@@ -54,16 +56,7 @@ functions:
     events:
       - http:
           path: /project/{project}/project-updates
-          method: get
-          cors: true
-          authorizer: auth
-          request:
-            parameters:
-              paths:
-                project: true
-      - http:
-          path: /project/{project}/project-updates
-          method: post
+          method: any
           cors: true
           authorizer: auth
           request:
@@ -97,7 +90,6 @@ resources:
   Resources:
     ProjectsDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:
           -
@@ -113,7 +105,6 @@ resources:
         TableName: ${self:provider.environment.PROJECTS_TABLE}
     ProjectUpdatesDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:
           -
@@ -129,7 +120,6 @@ resources:
         TableName: ${self:provider.environment.PROJECT_UPDATES_TABLE}
     RequestsDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:
           -
