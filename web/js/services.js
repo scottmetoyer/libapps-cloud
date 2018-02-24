@@ -16,9 +16,8 @@
         return status;
       }
     })
-    .service('Auth', function ($state, angularAuth0, $timeout) {
+    .service('Auth', function ($state, angularAuth0, jwtHelper, $timeout, $rootScope) {
       var service = this;
-      var userProfile;
 
       service.login = function () {
         angularAuth0.authorize();
@@ -31,6 +30,9 @@
         angularAuth0.parseHash(function (err, authResult) {
           if (authResult && authResult.accessToken && authResult.idToken) {
             service.setSession(authResult);
+            var user = jwtHelper.decodeToken(localStorage.getItem('id_token'));
+            $rootScope.$broadcast('user-login', user);
+
             $state.go('dashboard.view');
           } else if (err) {
             // Send them to the Auth0 login page if there are exceptions
@@ -71,16 +73,18 @@
         return new Date().getTime() < expiresAt;
       };
 
-      service.getProfile = function (cb) {
+      service.getProfile = function () {
         var accessToken = localStorage.getItem('access_token');
         if (!accessToken) {
           throw new Error('Access Token must exist to fetch profile');
         }
         angularAuth0.client.userInfo(accessToken, function (err, profile) {
+          if (err) {
+            console.log(err);
+          }
           if (profile) {
             service.setUserProfile(profile);
           }
-          cb(err, profile);
         });
       };
 

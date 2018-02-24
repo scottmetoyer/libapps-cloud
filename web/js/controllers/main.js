@@ -3,9 +3,18 @@
   // Controllers / Main
   //
 
-  function MainCtrl($rootScope, $state) {
+  function MainCtrl($scope, $state, Auth) {
     var main = this;
-    this.companyName = 'UCR Library';
+    main.companyName = 'UCR Library';
+    main.user = {};
+
+    main.logout = function() {
+      Auth.logout();
+    }
+
+    $scope.$on('user-login', function(event, args){
+      main.user = args;
+    });
   }
 
   angular.module('pixeladmin')

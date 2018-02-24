@@ -5,15 +5,16 @@
   </div>
 
   <div class="alert alert-success" ng-show="request.showUpdatedAlert == true">
-      <button type="button" class="close" data-dismiss="alert">×</button>
-      <strong>Request saved!</strong> The request has been updated.
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Request saved!</strong> The request has been updated.
   </div>
 
   <div class="page-header" ng-hide="request.hasError">
     <div class="row">
       <div class="col-md-6">
         <h1>
-          <span class="text-muted font-weight-light"><a href="#" ui-sref="requests.annual-equipment">Requests</a> / </span>View
+          <span class="text-muted font-weight-light">
+            <a href="#" ui-sref="requests.annual-equipment">Requests</a> / </span>View
         </h1>
       </div>
       <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right">
@@ -147,7 +148,7 @@
             </div>
             <div class="widget-timeline-time">{{ '1519452981894' | humandate }}</div>
           </div>
-          <div class="panel panel-warning panel-body-colorful">
+          <div class="panel panel-info panel-body-colorful">
             <div class="panel">
               <div class="panel-body">
                 <div class="widget-comments-item p-a-0">
