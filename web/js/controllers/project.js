@@ -1,4 +1,4 @@
-(function() {
+(function () {
   // ===============================================================================
   // Controllers / Project
   //
@@ -13,39 +13,39 @@
     self.project.executionStatus = 'backlog';
     self.showStatusUpdateForm = false;
 
-    self.saveStatusUpdate = function(isValid) {
+    self.saveStatusUpdate = function (isValid) {
       if (isValid) {
         self.statusUpdate.projectId = $stateParams.id;
 
         data.saveStatusUpdate(self.statusUpdate)
-        .then(function(response) {
-          getStatusUpdates($stateParams.id);
-        }, function(response){
-          self.hasError = true;
-        });
+          .then(function (response) {
+            getStatusUpdates($stateParams.id);
+          }, function (response) {
+            self.hasError = true;
+          });
       }
     }
 
-    self.cancelStatusUpdate = function() {
+    self.cancelStatusUpdate = function () {
       self.showStatusUpdateForm = false;
       self.statusUpdate = { 'user': 'Choose a team member...' };
     }
 
-    self.toggleStatusUpdateForm = function() {
+    self.toggleStatusUpdateForm = function () {
       self.showStatusUpdateForm = !self.showStatusUpdateForm;
     }
 
-    self.createProject = function(isValid) {
+    self.createProject = function (isValid) {
       if (isValid) {
-        saveProject(function(){
+        saveProject(function () {
           $location.path('/projects/view/' + self.project.id).search({ new: 'true' });
         });
       }
     }
 
-    self.updateProject = function(isValid) {
+    self.updateProject = function (isValid) {
       if (isValid) {
-        saveProject(function(){
+        saveProject(function () {
           $location.path('/projects/view/' + self.project.id).search({ updated: 'true' });
         });
       }
@@ -53,55 +53,55 @@
 
     function saveProject(callback) {
       data.saveProject(self.project)
-      .then(function(response) {
-        console.log(response);
-        callback();
-      }, function(response){
-        $anchorScroll();
-        self.hasError = true;
-      });
+        .then(function (response) {
+          console.log(response);
+          callback();
+        }, function (response) {
+          $anchorScroll();
+          self.hasError = true;
+        });
     }
 
     function getStatusUpdates(projectId) {
       data.getStatusUpdates(projectId)
-      .then(function(response) {
-        self.statusUpdateList = response.data;
+        .then(function (response) {
+          self.statusUpdateList = response.data;
 
-        // Close the update form if it is open
-        self.cancelStatusUpdate();
-      }, function(response){
-        $anchorScroll();
-        self.hasError = true;
-      });
+          // Close the update form if it is open
+          self.cancelStatusUpdate();
+        }, function (response) {
+          $anchorScroll();
+          self.hasError = true;
+        });
     }
 
     // Load up a project if we have passed a key in the state parameters
     if ($stateParams.id) {
       data.getProjects($stateParams.id)
-      .then(function(response) {
-        self.project = response.data.Item;
+        .then(function (response) {
+          self.project = response.data.Item;
 
-        if (self.project != null) {
-          self.project.status = bl.calculateStatus(self.project);
+          if (self.project != null) {
+            self.project.status = bl.calculateStatus(self.project);
 
-          // Toggle visibility on the new and updated project indicators
-          if ('new' in $location.search()) {
-            self.showCreatedAlert = true;
+            // Toggle visibility on the new and updated project indicators
+            if ('new' in $location.search()) {
+              self.showCreatedAlert = true;
+            }
+
+            if ('updated' in $location.search()) {
+              self.showUpdatedAlert = true;
+            }
+          } else {
+            self.hasError = true;
           }
 
-          if ('updated' in $location.search()) {
-            self.showUpdatedAlert = true;
-          }
-        } else {
+          // Load up the project status updates
+          getStatusUpdates($stateParams.id);
+        }, function (response) {
+          $anchorScroll();
           self.hasError = true;
-        }
-
-        // Load up the project status updates
-        getStatusUpdates($stateParams.id);
-      }, function(response){
-        $anchorScroll();
-        self.hasError = true;
-      });
+        });
     }
   }
 

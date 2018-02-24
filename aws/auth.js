@@ -42,6 +42,7 @@ module.exports.handler = (event, context, callback) => {
 
     // Decode base64 secret. ref: http://bit.ly/2hA6CrO
     // const secret = new Buffer.from(AUTH0_CLIENT_SECRET, 'base64');
+    // NOTE: Our JWT tokens are not Base64 encoded so we don't need to do this
 
     try {
         jwt.verify(tokenValue, AUTH0_CLIENT_SECRET, options, (verifyError, decoded) => {
