@@ -54,7 +54,6 @@
     function saveProject(callback) {
       data.saveProject(self.project)
         .then(function (response) {
-          console.log(response);
           callback();
         }, function (response) {
           $anchorScroll();

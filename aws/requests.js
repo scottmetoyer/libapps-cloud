@@ -6,7 +6,7 @@ var utility = require('utility');
 
 module.exports.handler = (event, context, callback) => {
   var tableName = process.env.REQUESTS_TABLE;
-  let id = (event.pathParameters !== null ? event.pathParameters.project : false);
+  let id = (event.pathParameters !== null ? event.pathParameters.request : false);
 
   switch (event.httpMethod) {
     case "GET":

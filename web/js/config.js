@@ -218,7 +218,7 @@
         },
       })
       .state('requests.annual-equipment-request-submitted', {
-        url: '/requests/annual-equipment/success',
+        url: '/annual-equipment/success',
         templateUrl: 'views/requests/annual-equipment/success.html',
         data: { pageTitle: 'Annual Equipment purchase request submitted' },
         resolve: {

@@ -4,12 +4,16 @@
     <strong>Something went wrong</strong> There was an error. Please check the AWS CloudWatch logs.
   </div>
 
+  <div class="alert alert-success" ng-show="request.showUpdatedAlert == true">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <strong>Request saved!</strong> The request has been updated.
+  </div>
+
   <div class="page-header" ng-hide="request.hasError">
     <div class="row">
       <div class="col-md-6">
         <h1>
-          <i class="page-header-icon ion-android-attach"></i>
-          <span class="text-muted font-weight-light">View Request</span>
+          <span class="text-muted font-weight-light"><a href="#" ui-sref="requests.annual-equipment">Requests</a> / </span>View
         </h1>
       </div>
       <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right">
@@ -20,7 +24,7 @@
   </div>
 
   <div class="row" ng-hide="request.hasError">
-    <div class="col-md-12">
+    <div class="col-md-8">
       <div class="panel panel-primary">
         <div class="panel-heading">
           <span class="panel-title">Annual Equipment Request</span>
@@ -35,7 +39,6 @@
                 </span>
                 <span class="wizard-step-caption">
                   Request Submitted
-                  <span class="wizard-step-description">Your request has been submitted</span>
                 </span>
               </li>
               <li data-target="#wizard-panel-step2" class="active">
@@ -44,8 +47,8 @@
                   <i class="fa fa-check"></i>
                 </span>
                 <span class="wizard-step-caption">
-                  Under AUL Review
-                  <span class="wizard-step-description">Your request is being reviewed by the AULs</span>
+                  Under Review
+                  <span class="wizard-step-description">Your request is being reviewed by leadership</span>
                 </span>
               </li>
               <li data-target="#wizard-panel-step3">
@@ -76,50 +79,51 @@
               <div class="col-md-12">
                 <fieldset class="form-group">
                   <label>Description</label>
-                  <input type="text" class="form-control" readonly>
+                  <input type="text" class="form-control" ng-model="request.request.description" readonly>
                 </fieldset>
               </div>
               <div class="col-md-3">
                 <fieldset class="form-group">
-                  <label>Quanity</label>
-                  <input type="text" class="form-control" readonly>
+                  <label>Quantity</label>
+                  <input type="text" class="form-control" ng-model="request.request.quantity" readonly>
                 </fieldset>
               </div>
               <div class="col-md-3">
-                <fieldset class="form-group">
-                  <label>Unit Cost</label>
-                  <input type="text" class="form-control" readonly>
-                </fieldset>
+                <label>Unit Cost</label>
+                <div class="form-group input-group">
+                  <span class="input-group-addon">$</span>
+                  <input type="text" class="form-control" ng-model="request.request.cost" readonly>
+                </div>
               </div>
               <div class="col-md-3">
                 <fieldset class="form-group">
                   <label>Vendor</label>
-                  <input type="text" class="form-control" readonly>
+                  <input type="text" class="form-control" ng-model="request.request.vendor" readonly>
                 </fieldset>
               </div>
               <div class="col-md-3">
                 <fieldset class="form-group">
                   <label>Link</label>
-                  <input type="text" class="form-control" readonly>
+                  <input type="text" class="form-control" ng-model="request.request.link" readonly>
                 </fieldset>
               </div>
               <div class="col-md-12">
                 <fieldset class="form-group">
                   <label>Justification</label>
-                  <textarea class="form-control" rows="4" readonly></textarea>
+                  <textarea class="form-control" rows="4" ng-model="request.request.justification" readonly></textarea>
                 </fieldset>
               </div>
               <div class="col-md-6">
                 <fieldset class="form-group">
                   <label>Department</label>
-                  <input type="text" class="form-control" readonly>
+                  <input type="text" class="form-control" ng-model="request.request.department" readonly>
                 </fieldset>
               </div>
 
               <div class="col-md-6">
                 <fieldset class="form-group">
                   <label>Location</label>
-                  <input type="text" class="form-control" readonly>
+                  <input type="text" class="form-control" ng-model="request.request.location" readonly>
                 </fieldset>
               </div>
             </div>
@@ -130,6 +134,36 @@
       </div>
     </div>
 
+    <div class="col-md-4">
+      <div class="widget-timeline">
+
+        <div class="widget-timeline-section font-weight-semibold">
+          Request History
+        </div>
+        <div class="widget-timeline-item">
+          <div class="widget-timeline-info">
+            <div class="widget-timeline-icon">
+              <i class="fa fa-check"></i>
+            </div>
+            <div class="widget-timeline-time">{{ '1519452981894' | humandate }}</div>
+          </div>
+          <div class="panel panel-warning panel-body-colorful">
+            <div class="panel">
+              <div class="panel-body">
+                <div class="widget-comments-item p-a-0">
+                  <div class="widget-comments-header">
+                    <a href="#" title="">Scott Metoyer</a> submmited the request
+                  </div>
+                  <div class="widget-comments-text">
+                    Request created and added to the AUL prioritization list.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
