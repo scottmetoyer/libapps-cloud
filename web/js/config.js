@@ -160,8 +160,45 @@
         templateUrl: 'views/common/layout.html',
       })
       .state('requests.create', {
-        url: '/requests/create',
+        url: '/create',
         templateUrl: 'views/requests/create.html'
+      })
+      .state('requests.view', {
+        url: '/view/:id',
+        templateUrl: 'views/requests/view.html',
+        data: { pageTitle: 'View request' },
+        resolve: {
+          loadPlugin: function ($ocLazyLoad) {
+            return $ocLazyLoad.load([]);
+          },
+        },
+      })
+      .state('requests.edit', {
+        url: '/edit/:id',
+        templateUrl: 'views/requests/edit.html',
+        data: { pageTitle: 'Edit request' },
+        resolve: {
+          loadPlugin: function ($ocLazyLoad) {
+            return $ocLazyLoad.load([]);
+          },
+        },
+      })
+      .state('requests.annual-equipment', {
+        url: '/list',
+        templateUrl: 'views/requests/list.html',
+        resolve: {
+          loadPlugin: function ($ocLazyLoad) {
+            return $ocLazyLoad.load([
+              {
+                name: 'datatables',
+                files: [
+                  'js/libs/jquery.dataTables.js',
+                  'js/libs/angular-datatables.js'
+                ]
+              },
+            ]);
+          },
+        }
       })
       .state('requests.create-annual-equipment-request', {
         url: '/annual-equipment/create',

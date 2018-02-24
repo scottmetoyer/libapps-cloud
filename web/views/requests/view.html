@@ -1,0 +1,136 @@
+<div ng-controller="RequestCtrl as request">
+  <div class="alert alert-danger" ng-show="request.hasError == true">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Something went wrong</strong> There was an error. Please check the AWS CloudWatch logs.
+  </div>
+
+  <div class="page-header" ng-hide="request.hasError">
+    <div class="row">
+      <div class="col-md-6">
+        <h1>
+          <i class="page-header-icon ion-android-attach"></i>
+          <span class="text-muted font-weight-light">View Request</span>
+        </h1>
+      </div>
+      <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right">
+        <a href ui-sref="requests.edit({ id: request.request.id })" class="btn btn-block">
+          <span class="btn-label-icon left ion-edit"></span>Edit this request</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" ng-hide="request.hasError">
+    <div class="col-md-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <span class="panel-title">Annual Equipment Request</span>
+        </div>
+        <div class="wizard panel-wizard" id="wizard-panel">
+          <div class="wizard-wrapper">
+            <ul class="wizard-steps" style="width: auto; left: 0px;">
+              <li data-target="#wizard-panel-step1" class="completed">
+                <span class="wizard-step-number">1</span>
+                <span class="wizard-step-complete">
+                  <i class="fa fa-check"></i>
+                </span>
+                <span class="wizard-step-caption">
+                  Request Submitted
+                  <span class="wizard-step-description">Your request has been submitted</span>
+                </span>
+              </li>
+              <li data-target="#wizard-panel-step2" class="active">
+                <span class="wizard-step-number">2</span>
+                <span class="wizard-step-complete">
+                  <i class="fa fa-check"></i>
+                </span>
+                <span class="wizard-step-caption">
+                  Under AUL Review
+                  <span class="wizard-step-description">Your request is being reviewed by the AULs</span>
+                </span>
+              </li>
+              <li data-target="#wizard-panel-step3">
+                <span class="wizard-step-number">3</span>
+                <span class="wizard-step-complete">
+                  <i class="fa fa-check"></i>
+                </span>
+                <span class="wizard-step-caption">
+                  Prioritized
+                  <span class="wizard-step-description">Your request has been approved and prioritized</span>
+                </span>
+              </li>
+              <li data-target="#wizard-panel-step4">
+                <span class="wizard-step-number">4</span>
+                <span class="wizard-step-complete">
+                  <i class="fa fa-check"></i>
+                </span>
+                <span class="wizard-step-caption">
+                  Ready for Purchase
+                  <span class="wizard-step-description">Your request has been forwarded to purchasing</span>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div class="wizard-content">
+            <div class="wizard-pane" id="wizard-panel-step1"></div>
+            <div class="wizard-pane active" id="wizard-panel-step2">
+              <div class="col-md-12">
+                <fieldset class="form-group">
+                  <label>Description</label>
+                  <input type="text" class="form-control" readonly>
+                </fieldset>
+              </div>
+              <div class="col-md-3">
+                <fieldset class="form-group">
+                  <label>Quanity</label>
+                  <input type="text" class="form-control" readonly>
+                </fieldset>
+              </div>
+              <div class="col-md-3">
+                <fieldset class="form-group">
+                  <label>Unit Cost</label>
+                  <input type="text" class="form-control" readonly>
+                </fieldset>
+              </div>
+              <div class="col-md-3">
+                <fieldset class="form-group">
+                  <label>Vendor</label>
+                  <input type="text" class="form-control" readonly>
+                </fieldset>
+              </div>
+              <div class="col-md-3">
+                <fieldset class="form-group">
+                  <label>Link</label>
+                  <input type="text" class="form-control" readonly>
+                </fieldset>
+              </div>
+              <div class="col-md-12">
+                <fieldset class="form-group">
+                  <label>Justification</label>
+                  <textarea class="form-control" rows="4" readonly></textarea>
+                </fieldset>
+              </div>
+              <div class="col-md-6">
+                <fieldset class="form-group">
+                  <label>Department</label>
+                  <input type="text" class="form-control" readonly>
+                </fieldset>
+              </div>
+
+              <div class="col-md-6">
+                <fieldset class="form-group">
+                  <label>Location</label>
+                  <input type="text" class="form-control" readonly>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <div class="wizard-pane" id="wizard-panel-step3"></div>
+          <div class="wizard-pane" id="wizard-panel-step4"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</div>

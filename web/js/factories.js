@@ -45,6 +45,14 @@
         }
       }
 
+      dataFactory.getRequests = function (id) {
+        if (id) {
+          return $http.get(urlBase + '/request/' + id);
+        } else {
+          return $http.get(urlBase + '/requests');
+        }
+      }
+
       return dataFactory;
     }])
 })();

@@ -39,11 +39,10 @@ module.exports.handler = (event, context, callback) => {
     item.timestamp = datetime;
 
     params.createdBy != null ? item.createdBy = params.createdBy : null;
-    params.isTechnology != null ? item.isTechnology == params.isTechnology : null;
     params.type != null ? item.type = params.type : null;
     params.description != null ? item.description = params.description : null;
     params.quantity != null ? item.quantity = params.quantity : null;
-    params.estimatedCost != null ? item.estimatedCost = params.estimatedCost : null;
+    params.cost != null ? item.cost = params.cost : null;
     params.vendor != null ? item.vendor = params.vendor : null;
     params.link != null ? item.link = params.link : null;
     params.justification != null ? item.justification = params.justification : null;

@@ -37,7 +37,7 @@
               </li>
             </ul>
           </div>
-          <form name="createRequestForm" ng-submit="request.create(createRequestForm.$valid)" novalidate>
+          <form name="createRequestForm" ng-submit="request.create(createRequestForm.$valid)" novalidate="novalidate">
             <div class="wizard-content">
               <div class="wizard-pane active" id="wizard-panel-step1">
                 <p class="text-muted p-b-1">Tell us about your request, including a brief description, how many are needed, how much it costs, and where
@@ -46,23 +46,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Brief description of the request</label>
-                      <input type="text" class="form-control">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label>Is this a technology request?</label>
-
-                      <label class="switcher switcher-blank switcher-success">
-                        <input type="checkbox"  name="isTechnology">
-                        <div class="switcher-indicator">
-                          <div class="switcher-yes">YES</div>
-                          <div class="switcher-no">NO</div>
-                        </div>
-                      </label>
-
+                      <input type="text" class="form-control" ng-model="request.request.description" required>
                     </div>
                   </div>
                 </div>
@@ -70,26 +54,26 @@
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>Quantity</label>
-                      <input type="text" class="form-control">
+                      <input type="number" ng-model="request.request.quantity" class="form-control">
                     </div>
                   </div>
                   <div class="col-md-3">
                     <label>Esimated cost (each)</label>
                     <div class="input-group form-group">
                       <span class="input-group-addon">$</span>
-                      <input type="text" class="form-control">
+                      <input type="number" ng-model="request.request.cost" class="form-control">
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>Vendor</label>
-                      <input type="text" class="form-control">
+                      <input type="text" ng-model="request.request.vendor" class="form-control">
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>Item website link</label>
-                      <input type="text" class="form-control">
+                      <input type="text" ng-model="request.request.link" class="form-control">
                     </div>
                   </div>
                 </div>
@@ -103,7 +87,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Justification for this request</label>
-                      <textarea class="form-control" rows="6"></textarea>
+                      <textarea class="form-control" ng-model="request.request.justification" rows="6"></textarea>
                     </div>
                   </div>
                 </div>
@@ -117,7 +101,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Department</label>
-                      <select class="form-control"></select>
+                      <select class="form-control" ng-model="request.request.department"></select>
                     </div>
                   </div>
                 </div>
@@ -125,7 +109,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Location / staff member</label>
-                      <input type="text" class="form-control"></input>
+                      <input type="text" class="form-control" ng-model="request.request.location"></input>
                     </div>
                   </div>
                 </div>

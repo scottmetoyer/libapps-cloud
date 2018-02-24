@@ -75,7 +75,7 @@
         });
     }
 
-    // Load up a project if we have passed a key in the state parameters
+    // Load up a project if we have passed an id in the state parameters
     if ($stateParams.id) {
       data.getProjects($stateParams.id)
         .then(function (response) {
