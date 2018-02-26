@@ -18,6 +18,7 @@
     <div class="row" ng-hide="request.hasError">
         <form name="requestForm" ng-submit="request.update(requestForm.$valid)" novalidate="novalidate">
             <input type="hidden" ng-model="request.request.id" />
+            <input type="hidden" ng-model="request.request.createdBy" />
             <div class="col-md-12">
                 <div class="panel">
                     <div class="panel-heading">
@@ -66,7 +67,7 @@
                         <div class="col-md-6">
                             <fieldset class="form-group">
                                 <label>Department</label>
-                                <input type="text" ng-model="request.request.department" class="form-control">
+                                <select ng-model="request.request.department" ng-options="x.description for x in request.costCenters track by x.code" class="form-control"></select>
                             </fieldset>
                         </div>
 

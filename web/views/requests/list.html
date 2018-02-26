@@ -13,7 +13,8 @@
   </div>
   <div class="page-wide-block p-a-4 bg-white font-size-15">
     <p>
-      Annual Equipment Requests that you have submitted for the current review cycle. Click the request description to view or edit the request.
+      Annual Equipment Requests that you have submitted for the current review cycle. Click the request description to view or
+      edit the request.
     </p>
   </div>
   <hr class="page-wide-block m-t-0">
@@ -22,7 +23,7 @@
       <p ng-show="requests.requests.length == 0">You have not submitted any requests yet.
         <a href ui-sref="requests.create-annual-equipment-request">Create a request here</a>.</p>
       <div class="table-primary" ng-show="requests.requests.length > 0">
-        <table class="table table-bordered">
+        <table class="table table-bordered bg-white">
           <thead>
             <tr>
               <th>Description</th>
@@ -38,15 +39,16 @@
                 <a href ui-sref="requests.view({ id: r.id })">{{ r.description }}</a>
               </td>
               <td>{{ r.quantity }}</td>
-              <td>{{ r.cost }}</td>
-              <td>{{ r.department }}</td>
+              <td>{{ r.cost | currency:"$" }}</td>
+              <td>{{ r.department.description }}</td>
               <td>{{ r.location }}</td>
             </tr>
           </tbody>
         </table>
-
+        <div class="table-footer bg-white text-xs-right">
+          <span class="text-muted">Total Request</span>&nbsp;&nbsp;<strong>$50</strong>
+        </div>
       </div>
-
     </div>
   </div>
 

@@ -17,6 +17,13 @@ tr.placeholder {
   cursor: pointer;
 }
 
+.widget-timeline-info {
+  position: absolute;
+  left: 0;
+  width: 84px;
+  text-align: center;
+}
+
 .text-strike{
   text-decoration: line-through;
 }
@@ -63,3 +70,6 @@ html[dir="rtl"] .page-signin-header .btn {
 
 #page-signin-forgot-form { display: none; }
 
+.bg-white {
+  background-color: #fff;
+}

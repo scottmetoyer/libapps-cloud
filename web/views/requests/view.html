@@ -33,27 +33,18 @@
         <div class="wizard panel-wizard" id="wizard-panel">
           <div class="wizard-wrapper">
             <ul class="wizard-steps" style="width: auto; left: 0px;">
-              <li data-target="#wizard-panel-step1" class="completed">
+              <li data-target="#wizard-panel-step1" class="active panel-success panel-body-colorful">
                 <span class="wizard-step-number">1</span>
                 <span class="wizard-step-complete">
                   <i class="fa fa-check"></i>
                 </span>
                 <span class="wizard-step-caption">
-                  Request Submitted
+                 Under Review
+                 <span class="wizard-step-description">Your request is being reviewed by Library leadership</span>
                 </span>
               </li>
-              <li data-target="#wizard-panel-step2" class="active">
+              <li data-target="#wizard-panel-step2">
                 <span class="wizard-step-number">2</span>
-                <span class="wizard-step-complete">
-                  <i class="fa fa-check"></i>
-                </span>
-                <span class="wizard-step-caption">
-                  Under Review
-                  <span class="wizard-step-description">Your request is being reviewed by leadership</span>
-                </span>
-              </li>
-              <li data-target="#wizard-panel-step3">
-                <span class="wizard-step-number">3</span>
                 <span class="wizard-step-complete">
                   <i class="fa fa-check"></i>
                 </span>
@@ -62,8 +53,8 @@
                   <span class="wizard-step-description">Your request has been approved and prioritized</span>
                 </span>
               </li>
-              <li data-target="#wizard-panel-step4">
-                <span class="wizard-step-number">4</span>
+              <li data-target="#wizard-panel-step3">
+                <span class="wizard-step-number">3</span>
                 <span class="wizard-step-complete">
                   <i class="fa fa-check"></i>
                 </span>
@@ -75,8 +66,7 @@
             </ul>
           </div>
           <div class="wizard-content">
-            <div class="wizard-pane" id="wizard-panel-step1"></div>
-            <div class="wizard-pane active" id="wizard-panel-step2">
+            <div class="wizard-pane active" id="wizard-panel-step1">
               <div class="col-md-12">
                 <fieldset class="form-group">
                   <label>Description</label>
@@ -117,7 +107,7 @@
               <div class="col-md-6">
                 <fieldset class="form-group">
                   <label>Department</label>
-                  <input type="text" class="form-control" ng-model="request.request.department" readonly>
+                  <input type="text" class="form-control" value="{{ request.request.department.description }}" readonly>
                 </fieldset>
               </div>
 
@@ -129,8 +119,8 @@
               </div>
             </div>
           </div>
+          <div class="wizard-pane" id="wizard-panel-step2"></div>
           <div class="wizard-pane" id="wizard-panel-step3"></div>
-          <div class="wizard-pane" id="wizard-panel-step4"></div>
         </div>
       </div>
     </div>
@@ -146,14 +136,14 @@
             <div class="widget-timeline-icon">
               <i class="fa fa-check"></i>
             </div>
-            <div class="widget-timeline-time">{{ '1519452981894' | humandate }}</div>
+            <div class="widget-timeline-time">{{ request.request.timestamp | humandate }}</div>
           </div>
           <div class="panel panel-info panel-body-colorful">
             <div class="panel">
               <div class="panel-body">
                 <div class="widget-comments-item p-a-0">
                   <div class="widget-comments-header">
-                    <a href="#" title="">Scott Metoyer</a> submmited the request
+                    <a href="#" title="">{{ request.request.createdBy }}</a> submmited the request
                   </div>
                   <div class="widget-comments-text">
                     Request created and added to the AUL prioritization list.

@@ -30,9 +30,7 @@
         angularAuth0.parseHash(function (err, authResult) {
           if (authResult && authResult.accessToken && authResult.idToken) {
             service.setSession(authResult);
-            var user = jwtHelper.decodeToken(localStorage.getItem('id_token'));
-            $rootScope.$broadcast('user-login', user);
-
+            $rootScope.$broadcast('user-login', service.getUser());
             $state.go('dashboard.view');
           } else if (err) {
             // Send them to the Auth0 login page if there are exceptions
@@ -95,6 +93,12 @@
       service.getCachedProfile = function () {
         return userProfile;
       };
+
+      service.getUser = function () {
+        if (localStorage.getItem('id_token')) {
+          return jwtHelper.decodeToken(localStorage.getItem('id_token'));
+        }
+      }
     })
     .service('unauthorizedInterceptor', function ($q, $location, $state, Auth) {
       var service = this;

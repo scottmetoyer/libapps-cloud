@@ -1,7 +1,7 @@
 <div ng-controller="RequestCtrl as request">
   <div class="page-header m-b-0">
     <h1>
-      <span class="text-muted font-weight-light">Request / </span>Submit a Request</h1>
+      <span class="text-muted font-weight-light"><a href="#" ui-sref="requests.annual-equipment">Requests</a> / </span>Submit a Request</h1>
   </div>
   <hr class="page-wide-block m-t-0">
   <div class="row">
@@ -101,7 +101,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Department</label>
-                      <select class="form-control" ng-model="request.request.department"></select>
+                      <select class="form-control" ng-model="request.request.department" ng-options="x.description for x in request.costCenters"></select>
                     </div>
                   </div>
                 </div>

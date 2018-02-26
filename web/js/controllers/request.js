@@ -3,14 +3,15 @@
   // Controllers / Request
   //
 
-  function RequestCtrl($http, $stateParams, $anchorScroll, $location, $state, bl, data) {
+  function RequestCtrl($http, $stateParams, $anchorScroll, $location, $state,$scope, bl, data, Auth) {
     var self = this;
     var showUpdatedAlert = false;
+    self.costCenters = data.getCostCenters();
 
     // Initialize with sensible defaults
     self.request = {
       type: 'Annual Equipment Request',
-      createdby: ''  // TODO: Set the logged in username to a 'created by' field here
+      createdBy: Auth.getUser().name
     };
 
     self.create = function (isValid) {

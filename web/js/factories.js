@@ -53,6 +53,35 @@
         }
       }
 
+      dataFactory.getCostCenters = function() {
+        var costCenters = [
+          { description: 'Access Services',	code: 'ALSLA' },
+          { description: 'Acquisitions Accounting',	code: 'ALACQ' },
+          { description: 'Acquisitions Unit',	code: 'ALAUA' },
+          { description: 'Circulation Reserves',	code: 'ALCCR' },
+          { description: 'Collection Maintenance',	code: 'ALCM' },
+          { description: 'Collection Services',	code: 'ALCDD' },
+          { description: 'Communications',	code: 'LCOM' },
+          { description: 'Cyberinfrastructure',	code: 'ALLS' },
+          { description: 'Digital Initiatives',	code: 'ALDIP' },
+          { description: 'Facilities',	code: 'ALLR' },
+          { description: 'Interlibrary Loan',	code: 'ALGI' },
+          { description: 'Library Administration',	code: 'ALAD' },
+          { description: 'Library Security Services',	code: 'ALSS' },
+          { description: 'Medical Library Programs',	code: 'ALMLS' },
+          { description: 'Metadata and Technical Services',	code: 'ALTS' },
+          { description: 'Music Library',	code: 'ALMU' },
+          { description: 'Preservation Services',	code: 'ALPA' },
+          { description: 'Records, Authority, Metadata',	code: 'ALRAM' },
+          { description: 'Research Services',	code: 'ALISD' },
+          { description: 'Special Collections & University Archives',	code: 'ALCS' },
+          { description: 'Special Materials and Language',	code: 'ALSML' },
+          { description: 'Teaching & Learning',	code: 'ALRR' }
+        ];
+
+        return costCenters;
+      }
+
       return dataFactory;
     }])
 })();

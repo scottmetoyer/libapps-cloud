@@ -3,7 +3,7 @@
   // Controllers / RequestList
   //
 
-  function RequestListCtrl($http, $state, $filter, bl, data) {
+  function RequestListCtrl($http, $state, $filter, bl, data, Auth) {
     var self = this;
     self.requests = [];
 
@@ -12,7 +12,13 @@
         .then(function (response) {
           var items = response.data.Items;
           self.requests = items;
-          // Filter the list based on logged in username
+
+          // Filter the list based on the current user
+          var user = Auth.getUser().name;
+          self.requests = items.filter(function (request) {
+            return (request.createdBy == user);
+          });
+
         }).catch(function (err) { console.log(err) });
     }
 

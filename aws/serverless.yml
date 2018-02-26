@@ -8,6 +8,7 @@ provider:
     PROJECTS_TABLE: projects-${opt:stage, self:provider.stage}
     PROJECT_UPDATES_TABLE: project-updates-${opt:stage, self:provider.stage}
     REQUESTS_TABLE: requests-${opt:stage, self:provider.stage}
+    COST_CENTERS_TABLE: cost-centers-${opt:stage, self:provider.stage}
     AUTH0_CLIENT_ID: ${file(./secrets.json):AUTH0_CLIENT_ID}
     AUTH0_CLIENT_SECRET: ${file(./secrets.json):AUTH0_CLIENT_SECRET}
 
@@ -24,11 +25,34 @@ provider:
         - { "Fn::GetAtt": ["ProjectsDynamoDbTable", "Arn"] }
         - { "Fn::GetAtt": ["ProjectUpdatesDynamoDbTable", "Arn"] }
         - { "Fn::GetAtt": ["RequestsDynamoDbTable", "Arn"] }
+        - { "Fn::GetAtt": ["CostCentersDynamoDbTable", "Arn"] }
 
 functions:
   auth:
     handler: auth.handler
     cors: true
+  cost-centers:
+    handler: cost-centers.handler
+    events:
+      - http:
+          path: /cost-centers
+          method: get
+          cors: true
+          authorizer: auth
+      - http:
+          path: /cost-centers
+          method: post
+          cors: true
+          authorizer: auth
+      - http:
+          path: /cost-center/{costCenter}
+          method: any
+          cors: true
+          authorizer: auth
+          request:
+            parameters:
+              paths:
+                costCenter: true
   projects:
     handler: projects.handler
     events:
@@ -88,6 +112,21 @@ functions:
 
 resources:
   Resources:
+    CostCentersDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        TableName: ${self:provider.environment.COST_CENTERS_TABLE}
     ProjectsDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       Properties:
