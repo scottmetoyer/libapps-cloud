@@ -30,11 +30,11 @@
       }
 
       dataFactory.getRecurringTasks = function () {
-        return $http.get(urlBase + "/tasks")
+        // return $http.get(urlBase + "/recurring-tasks")
       }
 
       dataFactory.getRecurringTaskInstances = function (year) {
-        return $http.get(urlBase + "/tasks/instances/" + year);
+        // return $http.get(urlBase + "/recurring-tasks/instances/" + year);
       }
 
       dataFactory.saveRequest = function (request) {

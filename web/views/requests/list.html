@@ -46,7 +46,7 @@
           </tbody>
         </table>
         <div class="table-footer bg-white text-xs-right">
-          <span class="text-muted">Total Request</span>&nbsp;&nbsp;<strong>$50</strong>
+          <span class="text-muted">Total Request</span>&nbsp;&nbsp;<strong>{{ requests.getTotal() |  currency:"$" }}</strong>
         </div>
       </div>
     </div>

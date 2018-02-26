@@ -234,7 +234,8 @@
       domain: 'scott-metoyer.auth0.com',
       responseType: 'token id_token',
       audience: 'https://ucr-library-custom-authorizer.ucr.edu',
-      redirectUri: 'http://ucr-library-libapps-cloud.s3-website-us-west-1.amazonaws.com',
+      redirectUri: 'http://libapps-cloud.test',
+      // redirectUri: 'http://ucr-library-libapps-cloud.s3-website-us-west-1.amazonaws.com',
       scope: 'openid profile access'
     });
 

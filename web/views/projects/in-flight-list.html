@@ -5,7 +5,7 @@
       <h1><span class="text-muted font-weight-light">Projects / </span>In-flight</h1>
     </div>
     <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right">
-        <a href ui-sref="pages.create-project" class="btn btn-primary"><span class="btn-label-icon left ion-plus-round"></span>Create a project</a>
+        <a href ui-sref="projects.create" class="btn btn-primary"><span class="btn-label-icon left ion-plus-round"></span>Create a project</a>
       </div>
   </div>
 </div>
@@ -17,7 +17,7 @@
 <hr class="page-wide-block m-t-0">
 <div class="row">
   <div class="col-md-12">
-      <p ng-show="projects.projects.length == 0">There are no projects in-flight. Kick some off from the <a href ui-sref="pages.backlog">backlog</a>.</p>
+      <p ng-show="projects.projects.length == 0">There are no projects in-flight. Kick some off from the <a href ui-sref="projects.backlog">backlog</a>.</p>
       <div class="table-light">
           <table class="table table-bordered table-striped" id="projects" ng-show="projects.projects.length > 0">
               <thead>
@@ -31,7 +31,7 @@
               </thead>
               <tbody>
                 <tr ng-repeat="p in projects.projects">
-                  <td><a href ui-sref="pages.view-project({ id: p.id })">{{ p.name }}</a></td>
+                  <td><a href ui-sref="projects.view({ id: p.id })">{{ p.name }}</a></td>
                   <td><i class="ion-record {{ p.status.class }}"></i>&nbsp;{{ p.status.description }}</td>
                   <td>{{ p.lead }}</td>
                   <td>{{ p.owner }}</td>

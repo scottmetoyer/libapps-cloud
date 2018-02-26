@@ -5,7 +5,7 @@
           <h1><span class="text-muted font-weight-light">Recurring Tasks / </span>{{ tasks.year }} Timeline</h1>
         </div>
         <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right">
-            <a href ui-sref="pages.create-task" class="btn btn-primary"><span class="btn-label-icon left ion-plus-round"></span>Add a task</a>
+            <a href ui-sref="recurring-tasks.create" class="btn btn-primary"><span class="btn-label-icon left ion-plus-round"></span>Add a task</a>
           </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
                 <div class="btn-group btn-group-xs">
                   <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-cog"></i></button>
                   <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href ui-sref="pages.edit-task({ id: task.id })">Edit task</a></li>
+                    <li><a href ui-sref="recurring-tasks.edit({ id: task.id })">Edit task</a></li>
                     <li><a href="#">Archive task</a></li>
                   </ul>
                 </div>
