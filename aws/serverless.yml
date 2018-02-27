@@ -87,6 +87,14 @@ functions:
             parameters:
               paths:
                 project: true
+  request-priority:
+    handler: request-priority.handler
+    events:
+      - http:
+          path: /request-priority
+          method: put
+          cors: true
+          authorizer: auth
   requests:
     handler: requests.handler
     events:

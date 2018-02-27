@@ -11,7 +11,8 @@
     // Initialize with sensible defaults
     self.request = {
       type: 'Annual Equipment Request',
-      createdBy: Auth.getUser().name
+      createdBy: Auth.getUser().name,
+      priority: 0
     };
 
     self.create = function (isValid) {

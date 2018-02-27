@@ -14,7 +14,7 @@
   <div class="page-wide-block p-a-4 bg-white font-size-15">
     <p>
       Annual Equipment Requests that you have submitted for the current review cycle. Click the request description to view or
-      edit the request.
+      edit the request. Drag and drop rows to change the priority of your requests.
     </p>
   </div>
   <hr class="page-wide-block m-t-0">
@@ -22,18 +22,19 @@
     <div class="col-md-12">
       <p ng-show="requests.requests.length == 0">You have not submitted any requests yet.
         <a href ui-sref="requests.create-annual-equipment-request">Create a request here</a>.</p>
+
       <div class="table-primary" ng-show="requests.requests.length > 0">
-        <table class="table table-bordered bg-white">
+        <table class="table table-bordered bg-white" id="requests">
           <thead>
             <tr>
-              <th>Description</th>
-              <th>Quantity</th>
-              <th>Unit Cost</th>
-              <th>Department</th>
-              <th>Location / staff</th>
+              <th style="width: 30%">Description</th>
+              <th style="width: 10%">Quantity</th>
+              <th style="width: 10%">Unit Cost</th>
+              <th style="width: 25%">Department</th>
+              <th style="width: 25%">Location / staff</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody ui-sortable="requests.sortableOptions" ng-model="requests.requests">
             <tr ng-repeat="r in requests.requests">
               <td>
                 <a href ui-sref="requests.view({ id: r.id })">{{ r.description }}</a>
@@ -46,7 +47,8 @@
           </tbody>
         </table>
         <div class="table-footer bg-white text-xs-right">
-          <span class="text-muted">Total Request</span>&nbsp;&nbsp;<strong>{{ requests.getTotal() |  currency:"$" }}</strong>
+          <span class="text-muted">Total Request</span>&nbsp;&nbsp;
+          <strong>{{ requests.getTotal() | currency:"$" }}</strong>
         </div>
       </div>
     </div>
@@ -54,4 +56,3 @@
 
   <script type="text/javascript">
   </script>
-</div>

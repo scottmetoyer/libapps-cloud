@@ -53,6 +53,10 @@
         }
       }
 
+      dataFactory.saveRequestPriorities = function(requests) {
+        return $http.put(urlBase + '/request-priority', JSON.stringify(requests));
+      }
+
       dataFactory.getCostCenters = function() {
         var costCenters = [
           { description: 'Access Services',	code: 'ALSLA' },

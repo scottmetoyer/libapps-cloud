@@ -191,10 +191,9 @@
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([
               {
-                name: 'datatables',
+                name: 'ui.sortable',
                 files: [
-                  'js/libs/jquery.dataTables.js',
-                  'js/libs/angular-datatables.js'
+                  'js/libs/sortable.min.js'
                 ]
               },
             ]);

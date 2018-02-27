@@ -48,6 +48,7 @@ module.exports.handler = (event, context, callback) => {
     params.justification != null ? item.justification = params.justification : null;
     params.department != null ? item.department = params.department : null;
     params.location != null ? item.location = params.location : null;
+    params.priority != null ? item.priority = params.priority : null;
 
     docClient.put({
       "TableName": tableName,

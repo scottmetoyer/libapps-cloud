@@ -19,6 +19,8 @@
         <form name="requestForm" ng-submit="request.update(requestForm.$valid)" novalidate="novalidate">
             <input type="hidden" ng-model="request.request.id" />
             <input type="hidden" ng-model="request.request.createdBy" />
+            <input type="hidden" ng-model="request.request.priority" />
+
             <div class="col-md-12">
                 <div class="panel">
                     <div class="panel-heading">

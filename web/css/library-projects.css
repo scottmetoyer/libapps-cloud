@@ -1,75 +1,81 @@
 tr.placeholder {
-  height: 20px;
-  border: 0;
+    height: 20px;
+    border: 0;
 }
 
 .panel .widget-comments-item {
-  padding-right: 20px;
-  padding-left: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
 }
 
 .widget-comments-item {
-  position: relative;
-  padding: 12px 15px 12px 0px;
+    position: relative;
+    padding: 12px 15px 12px 0px;
 }
 
 .widget-timeline-icon {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .widget-timeline-info {
-  position: absolute;
-  left: 0;
-  width: 84px;
-  text-align: center;
+    position: absolute;
+    left: 0;
+    width: 84px;
+    text-align: center;
 }
 
-.text-strike{
-  text-decoration: line-through;
+.text-strike {
+    text-decoration: line-through;
 }
 
 .page-signin-header {
-  box-shadow: 0 2px 2px rgba(0,0,0,.05), 0 1px 0 rgba(0,0,0,.05);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .05), 0 1px 0 rgba(0, 0, 0, .05);
 }
 
 .page-signin-header .btn {
-  position: absolute;
-  top: 12px;
-  right: 15px;
+    position: absolute;
+    top: 12px;
+    right: 15px;
 }
 
 html[dir="rtl"] .page-signin-header .btn {
-  right: auto;
-  left: 15px;
+    right: auto;
+    left: 15px;
 }
 
 .page-signin-container {
-  width: auto;
-  margin: 30px 10px;
+    width: auto;
+    margin: 30px 10px;
 }
 
 .page-signin-container form {
-  border: 0;
-  box-shadow: 0 2px 2px rgba(0,0,0,.05), 0 1px 0 rgba(0,0,0,.05);
+    border: 0;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .05), 0 1px 0 rgba(0, 0, 0, .05);
 }
 
 @media (min-width: 544px) {
-  .page-signin-container {
-    width: 350px;
-    margin: 60px auto;
-  }
+    .page-signin-container {
+        width: 350px;
+        margin: 60px auto;
+    }
 }
 
 .page-signin-social-btn {
-  width: 40px;
-  padding: 0;
-  line-height: 40px;
-  text-align: center;
-  border: none !important;
+    width: 40px;
+    padding: 0;
+    line-height: 40px;
+    text-align: center;
+    border: none !important;
 }
 
-#page-signin-forgot-form { display: none; }
+#page-signin-forgot-form {
+    display: none;
+}
 
 .bg-white {
-  background-color: #fff;
+    background-color: #fff;
+}
+
+.ui-sortable-helper {
+    display: table;
 }
