@@ -10,7 +10,8 @@
     $urlRouterProvider,
     $ocLazyLoadProvider,
     angularAuth0Provider,
-    jwtOptionsProvider) {
+    jwtOptionsProvider,
+    __env) {
 
     // Default url
     $urlRouterProvider.otherwise("/");
@@ -234,8 +235,7 @@
       domain: 'scott-metoyer.auth0.com',
       responseType: 'token id_token',
       audience: 'https://ucr-library-custom-authorizer.ucr.edu',
-      redirectUri: 'http://libapps-cloud.test',
-      // redirectUri: 'http://ucr-library-libapps-cloud.s3-website-us-west-1.amazonaws.com',
+      redirectUri: __env.applicationUrl,
       scope: 'openid profile access'
     });
 
@@ -244,7 +244,7 @@
       tokenGetter: function () {
         return localStorage.getItem('access_token');
       },
-      whiteListedDomains: ['localhost', 'j1wzq8z8w5.execute-api.us-west-1.amazonaws.com']
+      whiteListedDomains: ['localhost', __env.whitelistUrl]
     });
 
     $httpProvider.interceptors.push('jwtInterceptor');
@@ -264,6 +264,7 @@
       '$urlRouterProvider',
       '$ocLazyLoadProvider',
       'angularAuth0Provider',
-      'jwtOptionsProvider', config])
+      'jwtOptionsProvider',
+      '__env', config])
     .run(['$rootScope', '$state', '$http', 'Auth', '$transitions', run]);
 })();

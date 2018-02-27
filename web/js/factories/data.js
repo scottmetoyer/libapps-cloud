@@ -1,8 +1,8 @@
 (function () {
 
   angular.module('pixeladmin')
-    .factory('data', ['$http', function ($http) {
-      var urlBase = 'https://j1wzq8z8w5.execute-api.us-west-1.amazonaws.com/dev';
+    .factory('data', ['$http', '__env', function ($http, __env) {
+      var urlBase = __env.apiUrl;
       var dataFactory = {};
 
       dataFactory.getProjects = function (id) {

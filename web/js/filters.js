@@ -1,4 +1,7 @@
 (function () {
+  // ===============================================================================
+  // Custom filters
+  //
 
   angular.module('pixeladmin')
     .filter('humandate', function () {
