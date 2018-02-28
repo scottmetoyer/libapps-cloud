@@ -25,7 +25,6 @@
           delayOnHover: false,
           duration: 5000
         });
-        Auth.logout();
     }
 
     $scope.$on('user-login', function (event, args) {

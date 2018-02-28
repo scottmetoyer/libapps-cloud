@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken');
 
 const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID;
-const AUTH0_CLIENT_SECRET = process.env.AUTH0_CLIENT_SECRET;
+const AUTH0_SIGNING_SECRET = process.env.AUTH0_SIGNING_SECRET;
 
 // Policy helper
 const generatePolicy = (principalId, effect, resource) => {
@@ -45,7 +45,7 @@ module.exports.handler = (event, context, callback) => {
     // NOTE: Our JWT tokens are not Base64 encoded so we don't need to do this
 
     try {
-        jwt.verify(tokenValue, AUTH0_CLIENT_SECRET, options, (verifyError, decoded) => {
+        jwt.verify(tokenValue, AUTH0_SIGNING_SECRET, options, (verifyError, decoded) => {
             if (verifyError) {
                 console.log('verifyError', verifyError);
                 console.log(`Token invalid. ${verifyError}`);
