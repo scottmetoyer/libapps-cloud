@@ -79,3 +79,10 @@ html[dir="rtl"] .page-signin-header .btn {
 .ui-sortable-helper {
     display: table;
 }
+
+.label-ribbon.right {
+    right: 0px;
+    padding-right: 12px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
