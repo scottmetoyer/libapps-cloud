@@ -1,4 +1,4 @@
-(function() {
+(function () {
   // ===============================================================================
   // Controllers / Main
   //
@@ -7,17 +7,30 @@
     var main = this;
     main.companyName = 'UCR Library';
     main.user = Auth.getUser();
+    main.showAlert = false;
 
-    main.logout = function() {
+    main.logout = function () {
       Auth.logout();
 
       // Redirect to login page
       Auth.login();
     }
 
-    $scope.$on('user-login', function(event, args){
+    main.resetPassword = function () {
+      // Auth.resetPassword();
+      $.growl.notice(
+        {
+          title: "Password reset request",
+          message: "An email has been sent with further instructions. Please check your inbox.",
+          delayOnHover: false,
+          duration: 5000
+        });
+    }
+
+    $scope.$on('user-login', function (event, args) {
       main.user = args;
     });
+
   }
 
   angular.module('pixeladmin')

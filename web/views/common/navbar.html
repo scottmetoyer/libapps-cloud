@@ -4,7 +4,9 @@
   <a class="navbar-brand" ui-sref="dashboard.view">{{ main.companyName }} LibApps Cloud</a>
 </div>
 
-<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"><i class="navbar-toggle-icon"></i></button>
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+  <i class="navbar-toggle-icon"></i>
+</button>
 
 <div class="collapse navbar-collapse" id="navbar-collapse">
   <ul class="nav navbar-nav">
@@ -19,7 +21,12 @@
 
       </a>
       <ul class="dropdown-menu">
-        <li><a href ng-click="main.logout()">Log out</a></li>
+        <li>
+          <a href ng-click="main.resetPassword()">Reset password</a>
+        </li>
+        <li>
+          <a href ng-click="main.logout()">Log out</a>
+        </li>
       </ul>
     </li>
   </ul>
