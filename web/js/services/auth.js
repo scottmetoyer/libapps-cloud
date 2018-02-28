@@ -84,6 +84,19 @@
           return jwtHelper.decodeToken(localStorage.getItem('id_token'));
         }
       }
+
+      service.resetPassword = function () {
+        angularAuth0.changePassword({
+          connection: 'Username-Password-Authentication',
+          email: service.getUser().name
+        }, function (err, resp) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(resp);
+          }
+        })
+      }
     })
     .service('unauthorizedInterceptor', function ($q, $location, $state, Auth) {
       var service = this;

@@ -17,7 +17,7 @@
     }
 
     main.resetPassword = function () {
-      // Auth.resetPassword();
+      Auth.resetPassword();
       $.growl.notice(
         {
           title: "Password reset request",
@@ -25,6 +25,7 @@
           delayOnHover: false,
           duration: 5000
         });
+        Auth.logout();
     }
 
     $scope.$on('user-login', function (event, args) {
