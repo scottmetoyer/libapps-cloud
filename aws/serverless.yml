@@ -39,6 +39,14 @@ functions:
   auth:
     handler: auth.handler
     cors: true
+  heartbeat:
+    handler: auth.heartbeat
+    events:
+      - http:
+          path: /heartbeat
+          method: get
+          cors: true
+          authorizer: auth
   cost-centers:
     handler: cost-centers.handler
     events:

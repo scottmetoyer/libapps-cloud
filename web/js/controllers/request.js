@@ -60,6 +60,9 @@
           self.hasError = true;
         });
     }
+
+    // Check the heartbeat to make sure we're still logged in
+    data.heartbeat();
   }
 
   angular.module('pixeladmin')

@@ -1,6 +1,6 @@
 'use strict';
 const jwt = require('jsonwebtoken');
-
+var utility = require('utility');
 const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID;
 const AUTH0_SIGNING_SECRET = process.env.AUTH0_SIGNING_SECRET;
 
@@ -23,6 +23,10 @@ const generatePolicy = (principalId, effect, resource) => {
 
     return authResponse;
 };
+
+module.exports.heartbeat = (event, context, callback) => {
+    return utility.sendResponse(null, 'lubdub', callback);
+}
 
 module.exports.handler = (event, context, callback) => {
     if (!event.authorizationToken) {

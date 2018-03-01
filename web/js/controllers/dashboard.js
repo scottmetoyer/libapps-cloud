@@ -3,8 +3,7 @@
   // Controllers / Login
   //
 
-  function DashboardCtrl($state, Auth) {
-    // Auth.handleAuthentication();
+  function DashboardCtrl($state, Auth, data) {
   }
 
   angular.module('pixeladmin')

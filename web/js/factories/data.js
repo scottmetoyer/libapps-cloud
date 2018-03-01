@@ -5,6 +5,11 @@
       var urlBase = __env.apiUrl;
       var dataFactory = {};
 
+      // Check to make sure we can still get to our data services
+      dataFactory.heartbeat = function() {
+        $http.get(__env.apiUrl + '/heartbeat');
+      }
+
       dataFactory.getProjects = function (id) {
         if (id) {
           return $http.get(urlBase + '/project/' + id);
