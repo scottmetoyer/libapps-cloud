@@ -230,10 +230,10 @@
 
     // Configure Auth0
     angularAuth0Provider.init({
-      clientID: 'q4H2Kz0W4CgtwGBDjiGIfZHFqXYDvQuT',
-      domain: 'ucr-library.auth0.com',
+      clientID: __env.auth0ClientId,
+      domain: __env.auth0Domain,
       responseType: 'token id_token',
-      audience: 'https://ucr-library-libapps-cloud.ucr.edu',
+      audience: __env.auth0Audience,
       redirectUri: __env.applicationUrl,
       scope: 'openid profile access'
     });
