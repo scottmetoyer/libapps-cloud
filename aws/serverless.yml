@@ -105,12 +105,12 @@ functions:
             parameters:
               paths:
                 project: true
-  request-priority:
-    handler: request-priority.handler
+  purchase-priority:
+    handler: purchase-priority.handler
     events:
       - http:
-          path: /request-priority
-          method: put
+          path: /purchase-priority
+          method: any
           cors: true
           authorizer: auth
   recurring-task-instances:
