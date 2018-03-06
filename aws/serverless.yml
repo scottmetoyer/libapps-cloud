@@ -17,6 +17,7 @@ provider:
     PROJECT_UPDATES_TABLE: project-updates-${opt:stage, self:provider.stage}
     REQUESTS_TABLE: requests-${opt:stage, self:provider.stage}
     COST_CENTERS_TABLE: cost-centers-${opt:stage, self:provider.stage}
+    TASKS_TABLE: recurring-tasks-${opt:stage, self:provider.stage}
     AUTH0_CLIENT_ID: ${file(./secrets.json):AUTH0_CLIENT_ID}
     AUTH0_SIGNING_SECRET: ${file(./secrets.json):AUTH0_SIGNING_SECRET}
 
@@ -34,6 +35,7 @@ provider:
         - { "Fn::GetAtt": ["ProjectUpdatesDynamoDbTable", "Arn"] }
         - { "Fn::GetAtt": ["RequestsDynamoDbTable", "Arn"] }
         - { "Fn::GetAtt": ["CostCentersDynamoDbTable", "Arn"] }
+        - { "Fn::GetAtt": ["RecurringTasksDynamoDbTable", "Arn"] }
 
 functions:
   auth:
@@ -111,6 +113,40 @@ functions:
           method: put
           cors: true
           authorizer: auth
+  recurring-task-instances:
+    handler: recurring-task-instances.handler
+    events:
+      - http:
+          path: /recurring-tasks/instances/{year}
+          method: get
+          cors: true
+          authorizer: auth
+          request:
+            parameters:
+              paths:
+                year: true
+  recurring-tasks:
+    handler: recurring-tasks.handler
+    events:
+      - http:
+          path: /recurring-tasks
+          method: get
+          cors: true
+          authorizer: auth
+      - http:
+          path: /recurring-tasks
+          method: post
+          cors: true
+          authorizer: auth
+      - http:
+          path: /recurring-task/{task}
+          method: any
+          cors: true
+          authorizer: auth
+          request:
+            parameters:
+              paths:
+                task: true
   requests:
     handler: requests.handler
     events:
@@ -196,6 +232,21 @@ resources:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
         TableName: ${self:provider.environment.REQUESTS_TABLE}
+    RecurringTasksDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        TableName: ${self:provider.environment.TASKS_TABLE}
     AuthFailureGatewayResponse:
       Type: 'AWS::ApiGateway::GatewayResponse'
       Properties:
