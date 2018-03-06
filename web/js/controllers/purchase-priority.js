@@ -4,56 +4,60 @@
     //
   
     function PurchasePriorityCtrl($http, $scope, $state, $filter, $anchorScroll, $location, bl, data) {
-      var self = this;
-      self.month = new Date().getMonth() + 1;
-      self.year = new Date().getFullYear();
-      self.months = [];
-      self.tasks = [];
-      self.instances = [];
-  
-      // Custom filter for showing tasks of a certain month
-      // TODO: Figure out how to get this moved into filter.js
-      $scope.byMonth = function(month) {
-        return function(task) {
-          return task.schedule[month].selected == true;
-        }
-      }
-  
-      function loadTasks() {
-        // Build the month list
-        for (var i = 1; i <= 12; i++) {
-          var monthName = moment().month(i - 1).format('MMMM');
-          var month = { id: i, name: monthName };
-          self.months.push(month);
-        }
-  
-        data.getRecurringTasks()
-        .then(function(response) {
-          self.tasks = response.data.Items;
-        });
-  
-        // Fetch the task instance data
-        data.getRecurringTaskInstances(self.year)
-        .then(function(response) {
-          self.instances = response.data.Items;
-        });
+        var self = this;
+        self.requests = [];
+        self.approved = [];
+        self.denied = [];
+        self.selected;
 
-         // Toggle visibility on the new and updated project indicators
-         if ('new' in $location.search()) {
-          self.showCreatedAlert = true;
+        self.getTotal = function () {
+          var total = 0;
+          for (var i = 0; i < self.requests.length; i++) {
+            var request = self.requests[i];
+            total += (request.cost * request.quantity);
+          }
+          return total;
         }
 
-        if ('updated' in $location.search()) {
-          self.showUpdatedAlert = true;
+        self.setSelected = function(id) {
+            self.selected = id;
+            console.log(self.selected);
         }
-      }
-  
-      // Kick off the initial load
-      loadTasks();
-  
-      // Scroll to the current month tasks
-      $location.hash('anchor' + self.month);
-      $anchorScroll();
+    
+        self.sortableOptions = {
+          stop: function (e, ui) {
+            data.saveRequestPriorities(self.requests);
+          },
+          helper: function(e, tr)
+          {
+            var $originals = tr.children();
+            var $helper = tr.clone();
+            $helper.children().each(function(index)
+            {
+              // Set helper cell sizes to match the original sizes
+              $(this).outerWidth($originals.eq(index).outerWidth());
+            });
+            return $helper;
+          }
+        };
+    
+        self.loadRequests = function () {
+          data.getRequests()
+            .then(function (response) {
+              var items = response.data.Items;
+              self.requests = items;
+    
+              // Filter the list based on the current user
+              var user = Auth.getUser().name;
+              self.requests = items.filter(function (request) {
+                return (request.createdBy == user);
+              });
+              self.requests = $filter('orderBy')(self.requests, 'priority');
+    
+            }).catch(function (err) { console.log(err) });
+        }
+    
+        self.loadRequests();
     }
   
     angular.module('pixeladmin')

@@ -86,3 +86,14 @@ html[dir="rtl"] .page-signin-header .btn {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
 }
+
+.widget-notifications-controls {
+    float: right;
+    margin-top: -30px;
+}
+
+.selected {
+    background: #fffaf3;
+    border-color: #c9ba9b;
+    color: #8d7955;
+}

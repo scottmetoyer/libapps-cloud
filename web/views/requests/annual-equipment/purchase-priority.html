@@ -71,7 +71,7 @@
                             <div class="font-size-17">
                                 <strong>$4567</strong>
                             </div>
-                            <div class="font-size-11">DEPARTMENT TOTAL PRIORITIZED</div>
+                            <div class="font-size-11">DEPARTMENT TOTAL APPROVED</div>
                         </div>
                         <div class="box-cell p-y-1 b-r-1">
                             <div class="font-size-17">
@@ -92,60 +92,28 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="panel">
+            <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="panel-title">Submitted Requests</div>
                 </div>
-
-                <div class="widget-notifications-item">
-                    <div class="widget-notifications-title text-danger">SYSTEM</div>
-                    <div class="widget-notifications-description">
-                        <strong>Error 500</strong>: Syntax error in index.php at line
-                        <strong>461</strong>.</div>
-                    <div class="widget-notifications-date">12h ago</div>
-                    <div class="widget-notifications-icon fa fa-hdd-o bg-danger"></div>
-                </div>
-
-                <div class="widget-notifications-item">
-                    <div class="widget-notifications-title text-info">STORE</div>
-                    <div class="widget-notifications-description">You have
-                        <strong>9</strong> new orders.</div>
-                    <div class="widget-notifications-date">12h ago</div>
-                    <div class="widget-notifications-icon fa fa-truck bg-info"></div>
-                </div>
-
-                <div class="widget-notifications-item">
-                    <div class="widget-notifications-title text-default">CRON DAEMON</div>
-                    <div class="widget-notifications-description">Job
-                        <strong>"Clean DB"</strong> has been completed.</div>
-                    <div class="widget-notifications-date">12h ago</div>
-                    <div class="widget-notifications-icon fa fa-clock-o bg-default"></div>
-                </div>
-
-                <div class="widget-notifications-item">
-                    <div class="widget-notifications-title text-success">SYSTEM</div>
-                    <div class="widget-notifications-description">Server
-                        <strong>up</strong>.</div>
-                    <div class="widget-notifications-date">12h ago</div>
-                    <div class="widget-notifications-icon fa fa-hdd-o bg-success"></div>
-                </div>
-
-                <div class="widget-notifications-item">
-                    <div class="widget-notifications-title text-warning">SYSTEM</div>
-                    <div class="widget-notifications-description">
-                        <strong>Warning</strong>: Processor load
-                        <strong>92%</strong>.</div>
-                    <div class="widget-notifications-date">12h ago</div>
-                    <div class="widget-notifications-icon fa fa-hdd-o bg-warning"></div>
-                </div>
-
-                <a href="#" class="widget-more-link">MORE NOTIFICATIONS</a>
+                <span ui-sortable="requests.sortableOptions" ng-model="priority.requests">
+                    <div class="widget-notifications-item" ng-repeat="r in priority.requests" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected}">
+                        <div class="widget-notifications-title text-default"><a href="">{{ r.description }}</a></div>
+                        <div class="widget-notifications-description">
+                            <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost | currency }} per unit</div>
+                        <div class="widget-notifications-date">{{ r.createdBy }}</div>
+                        <div class="widget-notifications-controls">
+                            <button class="btn btn-xs btn-success">Approve</button>
+                            <button class="btn btn-xs btn-danger">Deny</button>
+                        </div>
+                    </div>
+                </span>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="panel">
+            <div class="panel panel-success">
                 <div class="panel-heading">
-                    <div class="panel-title">Prioritized Requests</div>
+                    <div class="panel-title">Approved Requests</div>
                 </div>
 
                 <div class="widget-notifications-item">
@@ -189,8 +157,54 @@
                     <div class="widget-notifications-date">12h ago</div>
                     <div class="widget-notifications-icon fa fa-hdd-o bg-warning"></div>
                 </div>
+            </div>
 
-                <a href="#" class="widget-more-link">MORE NOTIFICATIONS</a>
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <div class="panel-title">Denied Requests</div>
+                </div>
+
+                <div class="widget-notifications-item">
+                    <div class="widget-notifications-title text-danger">SYSTEM</div>
+                    <div class="widget-notifications-description">
+                        <strong>Error 500</strong>: Syntax error in index.php at line
+                        <strong>461</strong>.</div>
+                    <div class="widget-notifications-date">12h ago</div>
+                    <div class="widget-notifications-icon fa fa-hdd-o bg-danger"></div>
+                </div>
+
+                <div class="widget-notifications-item">
+                    <div class="widget-notifications-title text-info">STORE</div>
+                    <div class="widget-notifications-description">You have
+                        <strong>9</strong> new orders.</div>
+                    <div class="widget-notifications-date">12h ago</div>
+                    <div class="widget-notifications-icon fa fa-truck bg-info"></div>
+                </div>
+
+                <div class="widget-notifications-item">
+                    <div class="widget-notifications-title text-default">CRON DAEMON</div>
+                    <div class="widget-notifications-description">Job
+                        <strong>"Clean DB"</strong> has been completed.</div>
+                    <div class="widget-notifications-date">12h ago</div>
+                    <div class="widget-notifications-icon fa fa-clock-o bg-default"></div>
+                </div>
+
+                <div class="widget-notifications-item">
+                    <div class="widget-notifications-title text-success">SYSTEM</div>
+                    <div class="widget-notifications-description">Server
+                        <strong>up</strong>.</div>
+                    <div class="widget-notifications-date">12h ago</div>
+                    <div class="widget-notifications-icon fa fa-hdd-o bg-success"></div>
+                </div>
+
+                <div class="widget-notifications-item">
+                    <div class="widget-notifications-title text-warning">SYSTEM</div>
+                    <div class="widget-notifications-description">
+                        <strong>Warning</strong>: Processor load
+                        <strong>92%</strong>.</div>
+                    <div class="widget-notifications-date">12h ago</div>
+                    <div class="widget-notifications-icon fa fa-hdd-o bg-warning"></div>
+                </div>
             </div>
         </div>
     </div>
