@@ -200,6 +200,23 @@
           },
         }
       })
+      .state('requests.aul-priority-annual-equipment-request', {
+        url: '/annual-equipment/aul-priority',
+        templateUrl: 'views/requests/annual-equipment/aul-priority.html',
+        data: { pageTitle: 'Annual Equipment AUL priority' },
+        resolve: {
+          loadPlugin: function ($ocLazyLoad) {
+            return $ocLazyLoad.load([
+              {
+                name: 'ui.sortable',
+                files: [
+                  'js/libs/sortable.min.js'
+                ]
+              },
+            ]);
+          },
+        },
+      })
       .state('requests.create-annual-equipment-request', {
         url: '/annual-equipment/create',
         templateUrl: 'views/requests/annual-equipment/start.html',
