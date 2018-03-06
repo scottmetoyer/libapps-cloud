@@ -1,0 +1,200 @@
+<div ng-controller="PurchasePriorityCtrl as priority">
+    <div class="alert alert-success" ng-show="priority.showCreatedAlert == true">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Recurring task created!</strong> The recurring task has been created.
+    </div>
+    <div class="alert alert-success" ng-show="priority.showUpdatedAlert == true">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Recurring task saved!</strong> The recurring task has been updated.
+    </div>
+    <div class="alert alert-danger" ng-show="priority.hasError == true">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Something went wrong</strong> There was an error. Please check the AWS CloudWatch logs.
+    </div>
+    <div class="page-header m-b-3">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>
+                    <span class="text-muted font-weight-light">Annual Equipment Request/ </span>Purchase Priority</h1>
+            </div>
+            <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right">
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel box">
+                <div class="box-row">
+                    <div class="box-cell p-x-3 p-y-1 bg-info">
+                        <div class="pull-xs-left font-weight-semibold font-size-12">ALAD REQUEST TOTALS</div>
+                        <div class="pull-xs-right font-size-12">
+                        </div>
+                    </div>
+                </div>
+                <div class="box-row">
+                    <div class="box-container text-xs-center">
+                        <div class="box-cell p-y-1 b-r-1">
+                            <div class="font-size-17">
+                                <strong>$4567</strong>
+                            </div>
+                            <div class="font-size-11">DEPARTMENT TOTAL REQUEST</div>
+                        </div>
+                        <div class="box-cell p-y-1 b-r-1">
+                            <div class="font-size-17">
+                                <strong>$5600</strong>
+                            </div>
+                            <div class="font-size-11">USER TOTAL REQUEST</div>
+                        </div>
+                        <div class="box-cell p-y-1">
+                            <div class="font-size-17">
+                                <strong>$56</strong>
+                            </div>
+                            <div class="font-size-11">LOCATION TOTAL REQUEST</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel box">
+                <div class="box-row">
+                    <div class="box-cell p-x-3 p-y-1 bg-success">
+                        <div class="pull-xs-left font-weight-semibold font-size-12">ALAD BUDGET TOTALS</div>
+                        <div class="pull-xs-right font-size-12">
+                        </div>
+                    </div>
+                </div>
+                <div class="box-row">
+                    <div class="box-container text-xs-center">
+                        <div class="box-cell p-y-1 b-r-1">
+                            <div class="font-size-17">
+                                <strong>$4567</strong>
+                            </div>
+                            <div class="font-size-11">DEPARTMENT TOTAL PRIORITIZED</div>
+                        </div>
+                        <div class="box-cell p-y-1 b-r-1">
+                            <div class="font-size-17">
+                                <strong>$5600</strong>
+                            </div>
+                            <div class="font-size-11">DEPARTMENT TOTAL BUDGET</div>
+                        </div>
+                        <div class="box-cell p-y-1">
+                            <div class="font-size-17">
+                                <strong>$56</strong>
+                            </div>
+                            <div class="font-size-11">DEPARTMENT BALANCE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="panel-title">Submitted Requests</div>
+                </div>
+
+                <div class="widget-notifications-item">
+                    <div class="widget-notifications-title text-danger">SYSTEM</div>
+                    <div class="widget-notifications-description">
+                        <strong>Error 500</strong>: Syntax error in index.php at line
+                        <strong>461</strong>.</div>
+                    <div class="widget-notifications-date">12h ago</div>
+                    <div class="widget-notifications-icon fa fa-hdd-o bg-danger"></div>
+                </div>
+
+                <div class="widget-notifications-item">
+                    <div class="widget-notifications-title text-info">STORE</div>
+                    <div class="widget-notifications-description">You have
+                        <strong>9</strong> new orders.</div>
+                    <div class="widget-notifications-date">12h ago</div>
+                    <div class="widget-notifications-icon fa fa-truck bg-info"></div>
+                </div>
+
+                <div class="widget-notifications-item">
+                    <div class="widget-notifications-title text-default">CRON DAEMON</div>
+                    <div class="widget-notifications-description">Job
+                        <strong>"Clean DB"</strong> has been completed.</div>
+                    <div class="widget-notifications-date">12h ago</div>
+                    <div class="widget-notifications-icon fa fa-clock-o bg-default"></div>
+                </div>
+
+                <div class="widget-notifications-item">
+                    <div class="widget-notifications-title text-success">SYSTEM</div>
+                    <div class="widget-notifications-description">Server
+                        <strong>up</strong>.</div>
+                    <div class="widget-notifications-date">12h ago</div>
+                    <div class="widget-notifications-icon fa fa-hdd-o bg-success"></div>
+                </div>
+
+                <div class="widget-notifications-item">
+                    <div class="widget-notifications-title text-warning">SYSTEM</div>
+                    <div class="widget-notifications-description">
+                        <strong>Warning</strong>: Processor load
+                        <strong>92%</strong>.</div>
+                    <div class="widget-notifications-date">12h ago</div>
+                    <div class="widget-notifications-icon fa fa-hdd-o bg-warning"></div>
+                </div>
+
+                <a href="#" class="widget-more-link">MORE NOTIFICATIONS</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="panel-title">Prioritized Requests</div>
+                </div>
+
+                <div class="widget-notifications-item">
+                    <div class="widget-notifications-title text-danger">SYSTEM</div>
+                    <div class="widget-notifications-description">
+                        <strong>Error 500</strong>: Syntax error in index.php at line
+                        <strong>461</strong>.</div>
+                    <div class="widget-notifications-date">12h ago</div>
+                    <div class="widget-notifications-icon fa fa-hdd-o bg-danger"></div>
+                </div>
+
+                <div class="widget-notifications-item">
+                    <div class="widget-notifications-title text-info">STORE</div>
+                    <div class="widget-notifications-description">You have
+                        <strong>9</strong> new orders.</div>
+                    <div class="widget-notifications-date">12h ago</div>
+                    <div class="widget-notifications-icon fa fa-truck bg-info"></div>
+                </div>
+
+                <div class="widget-notifications-item">
+                    <div class="widget-notifications-title text-default">CRON DAEMON</div>
+                    <div class="widget-notifications-description">Job
+                        <strong>"Clean DB"</strong> has been completed.</div>
+                    <div class="widget-notifications-date">12h ago</div>
+                    <div class="widget-notifications-icon fa fa-clock-o bg-default"></div>
+                </div>
+
+                <div class="widget-notifications-item">
+                    <div class="widget-notifications-title text-success">SYSTEM</div>
+                    <div class="widget-notifications-description">Server
+                        <strong>up</strong>.</div>
+                    <div class="widget-notifications-date">12h ago</div>
+                    <div class="widget-notifications-icon fa fa-hdd-o bg-success"></div>
+                </div>
+
+                <div class="widget-notifications-item">
+                    <div class="widget-notifications-title text-warning">SYSTEM</div>
+                    <div class="widget-notifications-description">
+                        <strong>Warning</strong>: Processor load
+                        <strong>92%</strong>.</div>
+                    <div class="widget-notifications-date">12h ago</div>
+                    <div class="widget-notifications-icon fa fa-hdd-o bg-warning"></div>
+                </div>
+
+                <a href="#" class="widget-more-link">MORE NOTIFICATIONS</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    </script>
+</div>

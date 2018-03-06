@@ -1,4 +1,16 @@
-<div ng-controller="RecurringTasksCtrl as tasks">
+<div ng-controller="RecurringTaskListCtrl as tasks">
+  <div class="alert alert-success" ng-show="project.showCreatedAlert == true">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <strong>Recurring task created!</strong> The recurring task has been created.
+  </div>
+  <div class="alert alert-success" ng-show="project.showUpdatedAlert == true">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <strong>Recurring task saved!</strong> The recurring task has been updated.
+  </div>
+  <div class="alert alert-danger" ng-show="project.hasError == true">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <strong>Something went wrong</strong> There was an error. Please check the AWS CloudWatch logs.
+  </div>
   <div class="page-header m-b-0">
       <div class="row">
         <div class="col-md-6">

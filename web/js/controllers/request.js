@@ -3,7 +3,7 @@
   // Controllers / Request
   //
 
-  function RequestCtrl($http, $stateParams, $anchorScroll, $location, $state,$scope, bl, data, Auth) {
+  function RequestCtrl($http, $stateParams, $anchorScroll, $location, $state, $scope, bl, data, Auth) {
     var self = this;
     var showUpdatedAlert = false;
     self.costCenters = data.getCostCenters();

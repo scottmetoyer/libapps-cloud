@@ -21,8 +21,7 @@
     self.init = function(instance) {
       self.instance = instance;
 
-      // Load up the instance from the server
-
+      // Get the instance from the server
     }
   }
 

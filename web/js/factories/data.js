@@ -34,12 +34,24 @@
         return $http.post(urlBase + "/project/" + status.projectId + "/project-updates", JSON.stringify(status))
       }
 
-      dataFactory.getRecurringTasks = function () {
-        // return $http.get(urlBase + "/recurring-tasks")
+      dataFactory.getRecurringTasks = function (id) {
+        if (id) {
+          return $http.get(urlBase + "/recurring-task/" + id)
+        } else {
+          return $http.get(urlBase + "/recurring-tasks")
+        }
+      }
+
+      dataFactory.saveRecurringTask = function (task) {
+        if (task.id) {
+          return $http.put(urlBase + "/recurring-task/" + task.id, JSON.stringify(task));
+        } else {
+          return $http.post(urlBase + "/recurring-tasks", JSON.stringify(task));
+        }
       }
 
       dataFactory.getRecurringTaskInstances = function (year) {
-        // return $http.get(urlBase + "/recurring-tasks/instances/" + year);
+        return $http.get(urlBase + "/recurring-tasks/instances/" + year);
       }
 
       dataFactory.saveRequest = function (request) {

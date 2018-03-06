@@ -10,8 +10,9 @@
 <div class="row">
     <div class="col-md-12">
         <div class="panel">
-            <div ng-controller="TaskCtrl as task">
+            <div ng-controller="RecurringTaskCtrl as task">
                 <form name="createForm" ng-submit="task.createTask(createForm.$valid)" novalidate>
+                    <input type="hidden" ng-model="task.task.id" value=""/>
                     <div class="panel-heading">
                         <div class="panel-title">Please enter the task details</div>
                     </div>

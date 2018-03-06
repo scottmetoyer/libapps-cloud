@@ -117,14 +117,14 @@
         },
       })
 
+      // Recurring Task routes
       .state('recurring-tasks', {
         abstract: true,
-        url: '',
+        url: '/recurring-tasks',
         templateUrl: 'views/common/layout.html',
       })
-      // Recurring Task routes
       .state('recurring-tasks.list', {
-        url: '/recurring-tasks',
+        url: '/list',
         templateUrl: 'views/recurring-tasks/list.html',
         data: { pageTitle: 'Recurring tasks' },
         resolve: {
@@ -200,10 +200,10 @@
           },
         }
       })
-      .state('requests.aul-priority-annual-equipment-request', {
-        url: '/annual-equipment/aul-priority',
-        templateUrl: 'views/requests/annual-equipment/aul-priority.html',
-        data: { pageTitle: 'Annual Equipment AUL priority' },
+      .state('requests.annual-equipment-priority', {
+        url: '/annual-equipment/purchase-priority',
+        templateUrl: 'views/requests/annual-equipment/purchase-priority.html',
+        data: { pageTitle: 'Annual Equipment Request purchase priority' },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([
