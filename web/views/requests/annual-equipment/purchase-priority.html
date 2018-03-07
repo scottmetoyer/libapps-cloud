@@ -32,7 +32,7 @@
                         <span class="font-size-12">Allocations, funding sources, and balances
                         </span>
                     </div>
-                    <div class="box-cell col-sm-8">
+                    <div class="box-cell col-sm-8" ng-class="{ 'form-loading' : !priority.ready }">
                         <div class="box-container">
                             <div class="box-row">
                                 <div class="box-container">
@@ -83,7 +83,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div class="panel panel-info">
+            <div class="panel panel-info" ng-class="{ 'form-loading' : !priority.ready }">
                 <div class="panel-heading">
                     <div class="panel-title">Submitted Requests</div>
                 </div>
@@ -105,7 +105,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="panel panel-success">
+            <div class="panel panel-success" ng-class="{ 'form-loading' : !priority.ready }">
                 <div class="panel-heading">
                     <div class="panel-title">Prioritized Requests</div>
                 </div>
@@ -129,7 +129,7 @@
                 </span>
             </div>
 
-            <div class="panel panel-danger">
+            <div class="panel panel-danger" ng-class="{ 'form-loading' : !priority.ready }">
                 <div class="panel-heading">
                     <div class="panel-title">Denied Requests</div>
                 </div>

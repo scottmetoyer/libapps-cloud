@@ -5,6 +5,7 @@
   
     function PurchasePriorityCtrl($http, $scope, $state, $filter, $anchorScroll, $location, bl, data, Auth) {
         var self = this;
+        self.ready = false;
         self.requests = [];
         self.prioritized = [];
         self.denied = [];
@@ -89,6 +90,8 @@
               self.requests = $filter('orderBy')(self.requests, ['createdBy', 'priority']);
               self.calculateTotalRequestedCost();
               self.calculateTotalPrioritizedCost();
+
+              self.ready = true;
             }).catch(function (err) { console.log(err) });
         }
     
