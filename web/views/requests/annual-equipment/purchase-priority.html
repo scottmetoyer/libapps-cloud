@@ -24,13 +24,12 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-
             <div class="panel box">
                 <div class="box-row">
-                    <div class="box-cell col-sm-4 p-a-3 valign-middle bg-info">
-                        <span class="font-size-16 font-weight-bold">Cost Center</span>
+                    <div class="box-cell col-sm-3 p-a-3 valign-middle bg-info">
+                        <span class="font-size-16 font-weight-bold">Budget Details</span>
                         <br>
-                        <span class="font-size-12">Department Name
+                        <span class="font-size-12">Allocations, funding sources, and balances
                         </span>
                     </div>
                     <div class="box-cell col-sm-8">
@@ -40,13 +39,17 @@
                                     <div class="box-cell p-x-3 p-y-1 b-r-1 b-b-1">
                                         <span class="text-muted">Total Requested</span>
                                         <br>
-                                        <span class="font-size-16">$2450</span>
+                                        <span class="font-size-16">
+                                            <strong>$2450</strong>
+                                        </span>
                                     </div>
                                     <div class="box-cell p-x-3 p-y-1 b-b-1">
                                         <span class="text-muted">Allocated</span>
                                         <br>
                                         <span class="font-size-16">
-                                            <span class="">$3000</span>
+                                            <span class="">
+                                                <strong>$3000</strong>
+                                            </span>
                                     </div>
                                 </div>
                             </div>
@@ -56,13 +59,17 @@
                                         <div class="box-cell p-x-3 p-y-1 b-r-1">
                                             <span class="text-muted">Total Approved</span>
                                             <br>
-                                            <span class="font-size-16">$1250</span>
+                                            <span class="font-size-16">
+                                                <strong>$1250</strong>
+                                            </span>
                                         </div>
                                         <div class="box-cell p-x-3 p-y-1 ">
                                             <span class="text-muted">Balance</span>
                                             <br>
                                             <span class="font-size-16">
-                                                <span class="text-success">$450</span>
+                                                <span class="text-success">
+                                                    <strong>$450</strong>
+                                                </span>
                                         </div>
                                     </div>
                                 </div>
@@ -80,122 +87,77 @@
                 <div class="panel-heading">
                     <div class="panel-title">Submitted Requests</div>
                 </div>
-                <span ui-sortable="requests.sortableOptions" ng-model="priority.requests">
-                    <div class="widget-notifications-item" ng-repeat="r in priority.requests" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected}">
-                        <div class="widget-notifications-title text-default">
-                            <a href="">{{ r.description }}</a>
-                        </div>
-                        <div class="widget-notifications-description">
-                            <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost | currency
-                            }} per unit</div>
-                        <div class="widget-notifications-date">{{ r.createdBy }}</div>
-                        <div class="widget-notifications-controls">
-                            <button class="btn btn-xs btn-success">Pre-Approve</button>
-                            <button class="btn btn-xs btn-danger">Deny</button>
-                        </div>
+                <div class="widget-notifications-item" ng-show="priority.requests.length == 0">
+                </div>
+                <div class="widget-notifications-item" ng-repeat="r in priority.requests" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected}">
+                    <div class="widget-notifications-title text-info">
+                        <a target="_blank" href ui-sref="requests.view({ id: r.id })" uib-tooltip="{{ r.justification }}" tooltip-placement="right">{{ r.description }}</a>
                     </div>
-                </span>
+                    <div class="widget-notifications-description">
+                        <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost | currency
+                        }} per unit</div>
+                    <div class="widget-notifications-date">{{ r.createdBy }} requested for {{ r.location }}</div>
+                    <div class="widget-notifications-controls">
+                        <button class="btn btn-xs btn-success" ng-click="priority.toPrioritized($index)">Prioritize</button>
+                        <button class="btn btn-xs btn-danger" ng-click="priority.toDenied($index)">Deny</button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <div class="panel-title">Pre-Approved Requests</div>
+                    <div class="panel-title">Prioritized Requests</div>
                 </div>
-
-                <div class="widget-notifications-item">
-                    <div class="widget-notifications-title text-danger">SYSTEM</div>
-                    <div class="widget-notifications-description">
-                        <strong>Error 500</strong>: Syntax error in index.php at line
-                        <strong>461</strong>.</div>
-                    <div class="widget-notifications-date">12h ago</div>
-                    <div class="widget-notifications-icon fa fa-hdd-o bg-danger"></div>
+                <div class="widget-notifications-item" ng-show="priority.prioritized.length == 0">
                 </div>
-
-                <div class="widget-notifications-item">
-                    <div class="widget-notifications-title text-info">STORE</div>
-                    <div class="widget-notifications-description">You have
-                        <strong>9</strong> new orders.</div>
-                    <div class="widget-notifications-date">12h ago</div>
-                    <div class="widget-notifications-icon fa fa-truck bg-info"></div>
-                </div>
-
-                <div class="widget-notifications-item">
-                    <div class="widget-notifications-title text-default">CRON DAEMON</div>
-                    <div class="widget-notifications-description">Job
-                        <strong>"Clean DB"</strong> has been completed.</div>
-                    <div class="widget-notifications-date">12h ago</div>
-                    <div class="widget-notifications-icon fa fa-clock-o bg-default"></div>
-                </div>
-
-                <div class="widget-notifications-item">
-                    <div class="widget-notifications-title text-success">SYSTEM</div>
-                    <div class="widget-notifications-description">Server
-                        <strong>up</strong>.</div>
-                    <div class="widget-notifications-date">12h ago</div>
-                    <div class="widget-notifications-icon fa fa-hdd-o bg-success"></div>
-                </div>
-
-                <div class="widget-notifications-item">
-                    <div class="widget-notifications-title text-warning">SYSTEM</div>
-                    <div class="widget-notifications-description">
-                        <strong>Warning</strong>: Processor load
-                        <strong>92%</strong>.</div>
-                    <div class="widget-notifications-date">12h ago</div>
-                    <div class="widget-notifications-icon fa fa-hdd-o bg-warning"></div>
-                </div>
+                <span ui-sortable="requests.sortableOptions" ng-model="priority.prioritized">
+                    <div class="widget-notifications-item" ng-repeat="r in priority.prioritized" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected }">
+                        <div class="widget-notifications-title text-info">
+                            <a target="_blank" href ui-sref="requests.view({ id: r.id })" uib-tooltip="{{ r.justification }}" tooltip-placement="right">{{ r.description }}</a>
+                        </div>
+                        <div class="widget-notifications-description">
+                            <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost | currency
+                            }} per unit</div>
+                        <div class="widget-notifications-date">{{ r.createdBy }} requested for {{ r.location }}</div>
+                        <div class="widget-notifications-controls">
+                            <button class="btn btn-xs btn-default" ng-click="priority.toSubmitted($index, priority.prioritized)">
+                                <i class="ion-arrow-return-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </span>
             </div>
 
             <div class="panel panel-danger">
                 <div class="panel-heading">
                     <div class="panel-title">Denied Requests</div>
                 </div>
-
-                <div class="widget-notifications-item">
-                    <div class="widget-notifications-title text-danger">SYSTEM</div>
-                    <div class="widget-notifications-description">
-                        <strong>Error 500</strong>: Syntax error in index.php at line
-                        <strong>461</strong>.</div>
-                    <div class="widget-notifications-date">12h ago</div>
-                    <div class="widget-notifications-icon fa fa-hdd-o bg-danger"></div>
-                </div>
-
-                <div class="widget-notifications-item">
-                    <div class="widget-notifications-title text-info">STORE</div>
-                    <div class="widget-notifications-description">You have
-                        <strong>9</strong> new orders.</div>
-                    <div class="widget-notifications-date">12h ago</div>
-                    <div class="widget-notifications-icon fa fa-truck bg-info"></div>
-                </div>
-
-                <div class="widget-notifications-item">
-                    <div class="widget-notifications-title text-default">CRON DAEMON</div>
-                    <div class="widget-notifications-description">Job
-                        <strong>"Clean DB"</strong> has been completed.</div>
-                    <div class="widget-notifications-date">12h ago</div>
-                    <div class="widget-notifications-icon fa fa-clock-o bg-default"></div>
-                </div>
-
-                <div class="widget-notifications-item">
-                    <div class="widget-notifications-title text-success">SYSTEM</div>
-                    <div class="widget-notifications-description">Server
-                        <strong>up</strong>.</div>
-                    <div class="widget-notifications-date">12h ago</div>
-                    <div class="widget-notifications-icon fa fa-hdd-o bg-success"></div>
-                </div>
-
-                <div class="widget-notifications-item">
-                    <div class="widget-notifications-title text-warning">SYSTEM</div>
-                    <div class="widget-notifications-description">
-                        <strong>Warning</strong>: Processor load
-                        <strong>92%</strong>.</div>
-                    <div class="widget-notifications-date">12h ago</div>
-                    <div class="widget-notifications-icon fa fa-hdd-o bg-warning"></div>
+                <div>
+                    <div class="widget-notifications-item" ng-show="priority.denied.length == 0">
+                    </div>
+                    <span ui-sortable="requests.sortableOptions" ng-model="priority.denied">
+                        <div class="widget-notifications-item" ng-repeat="r in priority.denied" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected}">
+                            <div class="widget-notifications-title text-info">
+                                <a href="">{{ r.description }}</a>
+                            </div>
+                            <div class="widget-notifications-description">
+                                <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost |
+                                currency }} per unit</div>
+                            <div class="widget-notifications-date">{{ r.createdBy }}</div>
+                            <div class="widget-notifications-controls">
+                                <button class="btn btn-xs btn-default" ng-click="priority.toSubmitted($index, priority.denied)">
+                                    <i class="ion-arrow-return-left"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </span>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <script type="text/javascript">
-    </script>
+<script type="text/javascript">
+</script>
 </div>

@@ -3,10 +3,10 @@
     // Controllers / PurchasePriorityCtrl
     //
   
-    function PurchasePriorityCtrl($http, $scope, $state, $filter, $anchorScroll, $location, bl, data) {
+    function PurchasePriorityCtrl($http, $scope, $state, $filter, $anchorScroll, $location, bl, data, Auth) {
         var self = this;
         self.requests = [];
-        self.approved = [];
+        self.prioritized = [];
         self.denied = [];
         self.selected;
 
@@ -21,12 +21,26 @@
 
         self.setSelected = function(id) {
             self.selected = id;
-            console.log(self.selected);
+        }
+
+        self.toPrioritized = function(index) {
+          var item = self.requests.splice(index, 1);
+          self.prioritized.push(item[0]);
+        }
+
+        self.toDenied = function(index) {
+          var item = self.requests.splice(index, 1);
+          self.denied.push(item[0]);
+        }
+
+        self.toSubmitted = function(index, source) {
+          var item = source.splice(index, 1);
+          self.requests.push(item[0]);
         }
     
         self.sortableOptions = {
           stop: function (e, ui) {
-            data.saveRequestPriorities(self.requests);
+            // data.saveRequestPriorities(self.requests);
           },
           helper: function(e, tr)
           {
@@ -53,7 +67,6 @@
                 return (request.createdBy == user);
               });
               self.requests = $filter('orderBy')(self.requests, 'priority');
-    
             }).catch(function (err) { console.log(err) });
         }
     
