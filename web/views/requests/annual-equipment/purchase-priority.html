@@ -23,73 +23,57 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
+
             <div class="panel box">
                 <div class="box-row">
-                    <div class="box-cell p-x-3 p-y-1 bg-info">
-                        <div class="pull-xs-left font-weight-semibold font-size-12">ALAD REQUEST TOTALS</div>
-                        <div class="pull-xs-right font-size-12">
-                        </div>
+                    <div class="box-cell col-sm-4 p-a-3 valign-middle bg-info">
+                        <span class="font-size-16 font-weight-bold">Cost Center</span>
+                        <br>
+                        <span class="font-size-12">Department Name
+                        </span>
                     </div>
-                </div>
-                <div class="box-row">
-                    <div class="box-container text-xs-center">
-                        <div class="box-cell p-y-1 b-r-1">
-                            <div class="font-size-17">
-                                <strong>$4567</strong>
+                    <div class="box-cell col-sm-8">
+                        <div class="box-container">
+                            <div class="box-row">
+                                <div class="box-container">
+                                    <div class="box-cell p-x-3 p-y-1 b-r-1 b-b-1">
+                                        <span class="text-muted">Total Requested</span>
+                                        <br>
+                                        <span class="font-size-16">$2450</span>
+                                    </div>
+                                    <div class="box-cell p-x-3 p-y-1 b-b-1">
+                                        <span class="text-muted">Allocated</span>
+                                        <br>
+                                        <span class="font-size-16">
+                                            <span class="">$3000</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="font-size-11">DEPARTMENT TOTAL REQUEST</div>
-                        </div>
-                        <div class="box-cell p-y-1 b-r-1">
-                            <div class="font-size-17">
-                                <strong>$5600</strong>
+                            <div class="box-row">
+                                <div class="box-cell">
+                                    <div class="box-container">
+                                        <div class="box-cell p-x-3 p-y-1 b-r-1">
+                                            <span class="text-muted">Total Approved</span>
+                                            <br>
+                                            <span class="font-size-16">$1250</span>
+                                        </div>
+                                        <div class="box-cell p-x-3 p-y-1 ">
+                                            <span class="text-muted">Balance</span>
+                                            <br>
+                                            <span class="font-size-16">
+                                                <span class="text-success">$450</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="font-size-11">USER TOTAL REQUEST</div>
-                        </div>
-                        <div class="box-cell p-y-1">
-                            <div class="font-size-17">
-                                <strong>$56</strong>
-                            </div>
-                            <div class="font-size-11">LOCATION TOTAL REQUEST</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel box">
-                <div class="box-row">
-                    <div class="box-cell p-x-3 p-y-1 bg-success">
-                        <div class="pull-xs-left font-weight-semibold font-size-12">ALAD BUDGET TOTALS</div>
-                        <div class="pull-xs-right font-size-12">
-                        </div>
-                    </div>
-                </div>
-                <div class="box-row">
-                    <div class="box-container text-xs-center">
-                        <div class="box-cell p-y-1 b-r-1">
-                            <div class="font-size-17">
-                                <strong>$4567</strong>
-                            </div>
-                            <div class="font-size-11">DEPARTMENT TOTAL APPROVED</div>
-                        </div>
-                        <div class="box-cell p-y-1 b-r-1">
-                            <div class="font-size-17">
-                                <strong>$5600</strong>
-                            </div>
-                            <div class="font-size-11">DEPARTMENT TOTAL BUDGET</div>
-                        </div>
-                        <div class="box-cell p-y-1">
-                            <div class="font-size-17">
-                                <strong>$56</strong>
-                            </div>
-                            <div class="font-size-11">DEPARTMENT BALANCE</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-info">
@@ -98,12 +82,15 @@
                 </div>
                 <span ui-sortable="requests.sortableOptions" ng-model="priority.requests">
                     <div class="widget-notifications-item" ng-repeat="r in priority.requests" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected}">
-                        <div class="widget-notifications-title text-default"><a href="">{{ r.description }}</a></div>
+                        <div class="widget-notifications-title text-default">
+                            <a href="">{{ r.description }}</a>
+                        </div>
                         <div class="widget-notifications-description">
-                            <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost | currency }} per unit</div>
+                            <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost | currency
+                            }} per unit</div>
                         <div class="widget-notifications-date">{{ r.createdBy }}</div>
                         <div class="widget-notifications-controls">
-                            <button class="btn btn-xs btn-success">Approve</button>
+                            <button class="btn btn-xs btn-success">Pre-Approve</button>
                             <button class="btn btn-xs btn-danger">Deny</button>
                         </div>
                     </div>
@@ -113,7 +100,7 @@
         <div class="col-md-6">
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <div class="panel-title">Approved Requests</div>
+                    <div class="panel-title">Pre-Approved Requests</div>
                 </div>
 
                 <div class="widget-notifications-item">
