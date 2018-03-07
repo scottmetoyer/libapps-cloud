@@ -53,6 +53,7 @@
         self.toPrioritized = function(index) {
           var item = self.requests.splice(index, 1);
           self.prioritized.push(item[0]);
+          self.calculateTotalPrioritizedCost();
         }
 
         self.toDenied = function(index) {
@@ -63,6 +64,7 @@
         self.toSubmitted = function(index, source) {
           var item = source.splice(index, 1);
           self.requests.push(item[0]);
+          self.calculateTotalPrioritizedCost();
         }
     
         self.sortableOptions = {
