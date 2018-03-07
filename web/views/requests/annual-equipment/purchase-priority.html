@@ -40,7 +40,7 @@
                                         <span class="text-muted">Total Requested</span>
                                         <br>
                                         <span class="font-size-16">
-                                            <strong>$2450</strong>
+                                            <strong>{{ priority.totalRequestedCost | currency }}</strong>
                                         </span>
                                     </div>
                                     <div class="box-cell p-x-3 p-y-1 b-b-1">
@@ -48,7 +48,7 @@
                                         <br>
                                         <span class="font-size-16">
                                             <span class="">
-                                                <strong>$3000</strong>
+                                                <strong>{{ priority.allocatedBudget | currency }}</strong>
                                             </span>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                             <span class="text-muted">Total Prioritized</span>
                                             <br>
                                             <span class="font-size-16">
-                                                <strong>$1250</strong>
+                                                <strong>{{ priority.totalPrioritizedCost | currency }}</strong>
                                             </span>
                                         </div>
                                         <div class="box-cell p-x-3 p-y-1 ">
@@ -68,7 +68,7 @@
                                             <br>
                                             <span class="font-size-16">
                                                 <span class="text-success">
-                                                    <strong>$450</strong>
+                                                    <strong>{{ priority.balance | currency }}</strong>
                                                 </span>
                                         </div>
                                     </div>

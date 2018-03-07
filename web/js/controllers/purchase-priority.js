@@ -10,6 +10,11 @@
         self.denied = [];
         self.selected;
 
+        self.allocatedBudget = 200000;
+        self.totalRequestedCost = 0;
+        self.totalPrioritizedCost = 0;
+        self.balance = 0;
+
         self.getTotal = function () {
           var total = 0;
           for (var i = 0; i < self.requests.length; i++) {
@@ -17,6 +22,27 @@
             total += (request.cost * request.quantity);
           }
           return total;
+        }
+
+        self.calculateTotalPrioritizedCost = function() {
+          var total = 0;
+
+          self.prioritized.forEach(function(e) {
+            total += (e.cost * e.quantity);
+          });
+
+          self.totalPrioritizedCost = total;
+          self.balance = self.allocatedBudget - self.totalPrioritizedCost;
+        }
+
+        self.calculateTotalRequestedCost = function() {
+          var total = 0;
+
+          self.requests.forEach(function(e) {
+            total += (e.cost * e.quantity);
+          });
+
+          self.totalRequestedCost = total;
         }
 
         self.setSelected = function(id) {
@@ -60,13 +86,9 @@
             .then(function (response) {
               var items = response.data.Items;
               self.requests = items;
-    
-              // Filter the list based on the current user
-              var user = Auth.getUser().name;
-              self.requests = items.filter(function (request) {
-                return (request.createdBy == user);
-              });
-              self.requests = $filter('orderBy')(self.requests, 'priority');
+              self.requests = $filter('orderBy')(self.requests, ['createdBy', 'priority']);
+              self.calculateTotalRequestedCost();
+              self.calculateTotalPrioritizedCost();
             }).catch(function (err) { console.log(err) });
         }
     
