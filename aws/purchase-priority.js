@@ -16,7 +16,13 @@ module.exports.handler = (event, context, callback) => {
   }
 
   function saveRequestPriorities() {
-    var requests = JSON.parse(event.body);
+    var body = JSON.parse(event.body);
+    var requests = body.requests;
+    var type = body.type;
+
+    if (!type) {
+      type == "requester";
+    }
 
     for(var i = 0; i < requests.length; i++) {
       var request = requests[i];
@@ -26,7 +32,7 @@ module.exports.handler = (event, context, callback) => {
         "Key": {
           "id": request.id
         },
-        UpdateExpression: "set priority = :p",
+        UpdateExpression: "set " + type + "_priority = :p",
         ExpressionAttributeValues: {
           ":p": i
         },
