@@ -50,6 +50,8 @@ module.exports.handler = (event, context, callback) => {
     params.location != null ? item.location = params.location : null;
     params.requester_priority != null ? item.requester_priority = params.requester_priority : null;
     params.aul_priority != null ? item.aul_priority = params.aul_priority : null;
+    params.jira_case != null ? item.jira_case = params.jira_case : null;
+    params.tags != null ? item.tags = params.tags : null;
 
     docClient.put({
       "TableName": tableName,
