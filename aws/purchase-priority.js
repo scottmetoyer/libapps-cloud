@@ -24,23 +24,26 @@ module.exports.handler = (event, context, callback) => {
       type == "requester";
     }
 
-    for(var i = 0; i < requests.length; i++) {
-      var request = requests[i];
+    if (requests.length > 0) {
+      // TODO: This sends the response after the first update. We should wait until we've handled all the updates.
+      for (var i = 0; i < requests.length; i++) {
+        var request = requests[i];
 
-      docClient.update({
-        "TableName": tableName,
-        "Key": {
-          "id": request.id
+        docClient.update({
+          "TableName": tableName,
+          "Key": {
+            "id": request.id
+          },
+          UpdateExpression: "set " + type + "Priority = :p",
+          ExpressionAttributeValues: {
+            ":p": i + 1
+          },
+          ReturnValues: "UPDATED_NEW"
         },
-        UpdateExpression: "set " + type + "Priority = :p",
-        ExpressionAttributeValues: {
-          ":p": i + 1
-        },
-        ReturnValues: "UPDATED_NEW"
-      },
-        function (err, data) {
-          utility.sendResponse(err, data, callback);
-        });
+          function (err, data) {
+            utility.sendResponse(err, data, callback);
+          });
+      }
     }
   }
 };
