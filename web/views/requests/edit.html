@@ -19,8 +19,8 @@
         <form name="requestForm" ng-submit="request.update(requestForm.$valid)" novalidate="novalidate">
             <input type="hidden" ng-model="request.request.id" />
             <input type="hidden" ng-model="request.request.createdBy" />
-            <input type="hidden" ng-model="request.request.priority" />
-
+            <input type="hidden" ng-model="request.request.requester_priority" />
+            <input type="hidden" ng-model="request.request.aul_priority" />
             <div class="col-md-12">
                 <div class="panel">
                     <div class="panel-heading">
@@ -72,11 +72,16 @@
                                 <select ng-model="request.request.department" ng-options="x.description for x in request.costCenters track by x.code" class="form-control"></select>
                             </fieldset>
                         </div>
-
                         <div class="col-md-6">
                             <fieldset class="form-group">
                                 <label>Location / staff member</label>
                                 <input type="text" ng-model="request.request.location" class="form-control">
+                            </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                            <fieldset class="form-group">
+                                <label>Tags</label>
+                                
                             </fieldset>
                         </div>
                     </div>

@@ -18,7 +18,7 @@
 
     self.sortableOptions = {
       stop: function (e, ui) {
-        data.saveRequestPriorities(self.requests);
+        data.saveRequesterPurchasePriorities(self.requests);
       },
       helper: function(e, tr)
       {
@@ -44,7 +44,7 @@
           self.requests = items.filter(function (request) {
             return (request.createdBy == user);
           });
-          self.requests = $filter('orderBy')(self.requests, 'priority');
+          self.requests = $filter('orderBy')(self.requests, 'requester_priority');
 
         }).catch(function (err) { console.log(err) });
     }

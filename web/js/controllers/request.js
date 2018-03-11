@@ -12,7 +12,7 @@
     self.request = {
       type: 'Annual Equipment Request',
       createdBy: Auth.getUser().name,
-      priority: 0
+      requester_priority: 0
     };
 
     self.create = function (isValid) {

@@ -70,8 +70,8 @@
         }
       }
 
-      dataFactory.saveRequestPriorities = function(requests) {
-        return $http.put(urlBase + '/request-priority', JSON.stringify(requests));
+      dataFactory.saveRequesterPurchasePriorities = function(requests) {
+        return $http.put(urlBase + '/purchase-priority', JSON.stringify(requests));
       }
 
       dataFactory.getCostCenters = function() {
