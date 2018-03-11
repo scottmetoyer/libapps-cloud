@@ -113,6 +113,14 @@ functions:
           method: any
           cors: true
           authorizer: auth
+  request-statuse:
+    handler: request-status.handler
+    events:
+      - http:
+          path: /request-status
+          method: put
+          cors: true
+          authorizer: auth
   recurring-task-instances:
     handler: recurring-task-instances.handler
     events:

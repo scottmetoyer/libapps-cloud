@@ -53,23 +53,40 @@
         self.toPrioritized = function(index) {
           var item = self.requests.splice(index, 1);
           self.prioritized.push(item[0]);
+          self.prioritized = $filter('orderBy')(self.prioritized, ['aulPriority']);
           self.calculateTotalPrioritizedCost();
+
+          // Set the request status
+          data.setRequestStatus(item[0], 'prioritized');
+
+          // Persist the prioritization order
+          data.saveRequestPriorities(self.prioritized, 'aul');
         }
 
         self.toDenied = function(index) {
           var item = self.requests.splice(index, 1);
           self.denied.push(item[0]);
+
+          // Set the request status
+          data.setRequestStatus(item[0], 'denied');
         }
 
         self.toSubmitted = function(index, source) {
           var item = source.splice(index, 1);
           self.requests.push(item[0]);
+          self.requests = $filter('orderBy')(self.requests, ['createdBy', 'requesterPriority']);
           self.calculateTotalPrioritizedCost();
+
+          // Set the request status
+          data.setRequestStatus(item[0], 'new');
+
+          // Persist the prioritized list
+          data.saveRequestPriorities(self.prioritized, 'aul');
         }
 
         self.sortableOptions = {
           stop: function (e, ui) {
-            data.saveRequestPriorities(self.requests, 'aul');
+            data.saveRequestPriorities(self.prioritized, 'aul');
           },
           helper: function(e, tr)
           {
@@ -84,12 +101,30 @@
           }
         };
 
+        self.aulPrioritizedFilter = function(request) {
+          return request.status != 'new';
+        }
+
+        self.unPrioritizedFilter = function(request) {
+          return request.status == 'new';
+        }
+
         self.loadRequests = function () {
           data.getRequests()
             .then(function (response) {
               var items = response.data.Items;
               self.requests = items;
               self.requests = $filter('orderBy')(self.requests, ['createdBy', 'requesterPriority']);
+
+              // Move prioritized requests to the prioritized list
+              self.prioritized = $filter('filter')(self.requests, self.aulPrioritizedFilter);
+              self.prioritized = $filter('orderBy')(self.prioritized, ['aulPriority']);
+
+              // Move denied requests to the denied list
+
+              // Remove dispositioned requests from the submitted list
+              self.requests = $filter('filter')(self.requests, self.unPrioritizedFilter);
+
               self.calculateTotalRequestedCost();
               self.calculateTotalPrioritizedCost();
 

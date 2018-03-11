@@ -34,7 +34,7 @@ module.exports.handler = (event, context, callback) => {
         },
         UpdateExpression: "set " + type + "Priority = :p",
         ExpressionAttributeValues: {
-          ":p": i
+          ":p": i + 1
         },
         ReturnValues: "UPDATED_NEW"
       },

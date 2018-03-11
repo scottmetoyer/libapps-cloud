@@ -96,7 +96,7 @@
                     <div class="widget-notifications-description">
                         <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost | currency
                         }} per unit</div>
-                    <div class="widget-notifications-date">{{ r.createdBy }} requested for {{ r.location }}</div>
+                    <div class="widget-notifications-date">{{ r.createdBy }} requested for {{ r.department.code }} ({{ r.location }})</div>
                     <div class="widget-notifications-controls">
                         <button class="btn btn-xs btn-success" ng-click="priority.toPrioritized($index)">Prioritize</button>
                         <button class="btn btn-xs btn-danger" ng-click="priority.toDenied($index)">Deny</button>
@@ -119,7 +119,7 @@
                         <div class="widget-notifications-description">
                             <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost | currency
                             }} per unit</div>
-                        <div class="widget-notifications-date">{{ r.createdBy }} requested for {{ r.location }}</div>
+                        <div class="widget-notifications-date">{{ r.createdBy }} requested for {{ r.department.code }} ({{ r.location }})</div>
                         <div class="widget-notifications-controls">
                             <button class="btn btn-xs btn-default" ng-click="priority.toSubmitted($index, priority.prioritized)">
                                 <i class="ion-arrow-return-left"></i>
@@ -143,7 +143,7 @@
                         <div class="widget-notifications-description">
                             <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost | currency
                             }} per unit</div>
-                        <div class="widget-notifications-date">{{ r.createdBy }}</div>
+                        <div class="widget-notifications-date">{{ r.createdBy }} requested for {{ r.department.code }} ({{ r.location }})</div>
                         <div class="widget-notifications-controls">
                             <button class="btn btn-xs btn-default" ng-click="priority.toSubmitted($index, priority.denied)">
                                 <i class="ion-arrow-return-left"></i>

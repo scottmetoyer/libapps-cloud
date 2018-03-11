@@ -70,6 +70,11 @@
         }
       }
 
+      dataFactory.setRequestStatus = function(request, status) {
+        request.status = status;
+        return $http.put(urlBase + '/request-status', JSON.stringify(request));
+      }
+
       dataFactory.saveRequestPriorities = function(requests, type) {
         var data = {
           type: type,

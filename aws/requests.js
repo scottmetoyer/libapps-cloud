@@ -52,6 +52,7 @@ module.exports.handler = (event, context, callback) => {
     params.aulPriority ? item.aulPriority = params.aulPriority : null;
     params.jiraCase ? item.jiraCase = params.jiraCase : null;
     params.tags ? item.tags = params.tags : null;
+    params.status ? item.status = params.status : null;
 
     docClient.put({
       "TableName": tableName,

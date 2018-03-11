@@ -12,7 +12,8 @@
     self.request = {
       type: 'Annual Equipment Request',
       createdBy: Auth.getUser().name,
-      requesterPriority: 0
+      requesterPriority: 0,
+      status: 'new'
     };
 
     self.create = function (isValid) {
@@ -32,6 +33,7 @@
     }
 
     var saveRequest = function(callback) {
+      console.log(self.request);
       data.saveRequest(self.request)
       .then(function (response) {
         callback();
