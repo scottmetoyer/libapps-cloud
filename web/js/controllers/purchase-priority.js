@@ -2,7 +2,7 @@
     // ===============================================================================
     // Controllers / PurchasePriorityCtrl
     //
-  
+
     function PurchasePriorityCtrl($http, $scope, $state, $filter, $anchorScroll, $location, bl, data, Auth) {
         var self = this;
         self.ready = false;
@@ -66,10 +66,10 @@
           self.requests.push(item[0]);
           self.calculateTotalPrioritizedCost();
         }
-    
+
         self.sortableOptions = {
           stop: function (e, ui) {
-            // data.saveRequestPriorities(self.requests);
+            data.saveRequestPriorities(self.requests, 'aul');
           },
           helper: function(e, tr)
           {
@@ -83,23 +83,27 @@
             return $helper;
           }
         };
-    
+
         self.loadRequests = function () {
           data.getRequests()
             .then(function (response) {
               var items = response.data.Items;
               self.requests = items;
+<<<<<<< Updated upstream
               self.requests = $filter('orderBy')(self.requests, ['createdBy', 'requester_priority']);
+=======
+              self.requests = $filter('orderBy')(self.requests, ['createdBy', 'aul_priority']);
+>>>>>>> Stashed changes
               self.calculateTotalRequestedCost();
               self.calculateTotalPrioritizedCost();
 
               self.ready = true;
             }).catch(function (err) { console.log(err) });
         }
-    
+
         self.loadRequests();
     }
-  
+
     angular.module('pixeladmin')
       .controller('PurchasePriorityCtrl', PurchasePriorityCtrl);
   })();

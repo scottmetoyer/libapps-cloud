@@ -136,22 +136,20 @@
                 <div>
                     <div class="widget-notifications-item" ng-show="priority.denied.length == 0">
                     </div>
-                    <span ui-sortable="requests.sortableOptions" ng-model="priority.denied">
-                        <div class="widget-notifications-item" ng-repeat="r in priority.denied" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected}">
-                            <div class="widget-notifications-title text-info">
-                                <a href="">{{ r.description }}</a>
-                            </div>
-                            <div class="widget-notifications-description">
-                                <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost |
-                                currency }} per unit</div>
-                            <div class="widget-notifications-date">{{ r.createdBy }}</div>
-                            <div class="widget-notifications-controls">
-                                <button class="btn btn-xs btn-default" ng-click="priority.toSubmitted($index, priority.denied)">
-                                    <i class="ion-arrow-return-left"></i>
-                                </button>
-                            </div>
+                    <div class="widget-notifications-item" ng-repeat="r in priority.denied" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected}">
+                        <div class="widget-notifications-title text-info">
+                            <a href="">{{ r.description }}</a>
                         </div>
-                    </span>
+                        <div class="widget-notifications-description">
+                            <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost | currency
+                            }} per unit</div>
+                        <div class="widget-notifications-date">{{ r.createdBy }}</div>
+                        <div class="widget-notifications-controls">
+                            <button class="btn btn-xs btn-default" ng-click="priority.toSubmitted($index, priority.denied)">
+                                <i class="ion-arrow-return-left"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

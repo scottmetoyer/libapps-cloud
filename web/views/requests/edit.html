@@ -66,22 +66,39 @@
                                 <textarea class="form-control" ng-model="request.request.justification" rows="4"></textarea>
                             </fieldset>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <fieldset class="form-group">
                                 <label>Department</label>
                                 <select ng-model="request.request.department" ng-options="x.description for x in request.costCenters track by x.code" class="form-control"></select>
                             </fieldset>
                         </div>
+<<<<<<< Updated upstream
                         <div class="col-md-6">
+=======
+                        <div class="col-md-4">
+>>>>>>> Stashed changes
                             <fieldset class="form-group">
                                 <label>Location / staff member</label>
                                 <input type="text" ng-model="request.request.location" class="form-control">
                             </fieldset>
                         </div>
+<<<<<<< Updated upstream
                         <div class="col-md-12">
                             <fieldset class="form-group">
                                 <label>Tags</label>
                                 
+=======
+                        <div class="col-md-4">
+                            <fieldset class="form-group">
+                                <label>JIRA Case</label>
+                                <input type="text" ng-model="request.request.jira_case" class="form-control">
+                            </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                            <fieldset class="form-group">
+                                <label>Tags</label>
+                                <input type="text" ng-model="request.request.tags" class="form-control" data-role="tagsinput">
+>>>>>>> Stashed changes
                             </fieldset>
                         </div>
                     </div>
