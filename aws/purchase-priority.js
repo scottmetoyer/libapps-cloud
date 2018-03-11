@@ -32,7 +32,7 @@ module.exports.handler = (event, context, callback) => {
         "Key": {
           "id": request.id
         },
-        UpdateExpression: "set " + type + "_priority = :p",
+        UpdateExpression: "set " + type + "Priority = :p",
         ExpressionAttributeValues: {
           ":p": i
         },

@@ -44,7 +44,7 @@
           self.requests = items.filter(function (request) {
             return (request.createdBy == user);
           });
-          self.requests = $filter('orderBy')(self.requests, 'requester_priority');
+          self.requests = $filter('orderBy')(self.requests, 'requesterPriority');
 
         }).catch(function (err) { console.log(err) });
     }

@@ -89,7 +89,7 @@
             .then(function (response) {
               var items = response.data.Items;
               self.requests = items;
-              self.requests = $filter('orderBy')(self.requests, ['createdBy', 'requester_priority']);
+              self.requests = $filter('orderBy')(self.requests, ['createdBy', 'requesterPriority']);
               self.calculateTotalRequestedCost();
               self.calculateTotalPrioritizedCost();
 

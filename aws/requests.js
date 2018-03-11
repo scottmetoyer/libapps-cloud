@@ -38,20 +38,20 @@ module.exports.handler = (event, context, callback) => {
     id ? item.id = id : item.id = uuidv1();
     item.timestamp = datetime;
 
-    params.createdBy != null ? item.createdBy = params.createdBy : null;
-    params.type != null ? item.type = params.type : null;
-    params.description != null ? item.description = params.description : null;
-    params.quantity != null ? item.quantity = params.quantity : null;
-    params.cost != null ? item.cost = params.cost : null;
-    params.vendor != null ? item.vendor = params.vendor : null;
-    params.link != null ? item.link = params.link : null;
-    params.justification != null ? item.justification = params.justification : null;
-    params.department != null ? item.department = params.department : null;
-    params.location != null ? item.location = params.location : null;
-    params.requester_priority != null ? item.requester_priority = params.requester_priority : null;
-    params.aul_priority != null ? item.aul_priority = params.aul_priority : null;
-    params.jira_case != null ? item.jira_case = params.jira_case : null;
-    params.tags != null ? item.tags = params.tags : null;
+    params.createdBy ? item.createdBy = params.createdBy : null;
+    params.type ? item.type = params.type : null;
+    params.description ? item.description = params.description : null;
+    params.quantity ? item.quantity = params.quantity : null;
+    params.cost ? item.cost = params.cost : null;
+    params.vendor ? item.vendor = params.vendor : null;
+    params.link ? item.link = params.link : null;
+    params.justification ? item.justification = params.justification : null;
+    params.department ? item.department = params.department : null;
+    params.location ? item.location = params.location : null;
+    params.requesterPriority ? item.requesterPriority = params.requesterPriority : null;
+    params.aulPriority ? item.aulPriority = params.aulPriority : null;
+    params.jiraCase ? item.jiraCase = params.jiraCase : null;
+    params.tags ? item.tags = params.tags : null;
 
     docClient.put({
       "TableName": tableName,

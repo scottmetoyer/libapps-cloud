@@ -28,6 +28,10 @@
     <div class="col-md-8">
       <div class="panel panel-primary">
         <div class="panel-heading">
+          <div class="panel-heading-controls" ng-show="request.request.jiraCase && request.request.jiraCase != ''">
+            <a target="_blank" href="https://libcyber.atlassian.net/browse/{{ request.request.jiraCase }}" class="btn btn-xs btn-default btn-outline-colorless">
+              <i class="fa fa-external-link"></i>&nbsp;Jira</a>
+          </div>
           <span class="panel-title">Annual Equipment Request</span>
         </div>
         <div class="wizard panel-wizard" id="wizard-panel">
@@ -39,8 +43,8 @@
                   <i class="fa fa-check"></i>
                 </span>
                 <span class="wizard-step-caption">
-                 Under Review
-                 <span class="wizard-step-description">Your request is being reviewed by Library leadership</span>
+                  Under Review
+                  <span class="wizard-step-description">Your request is being reviewed by Library leadership</span>
                 </span>
               </li>
               <li data-target="#wizard-panel-step2">
@@ -116,6 +120,13 @@
                   <label>Location</label>
                   <input type="text" class="form-control" ng-model="request.request.location" readonly>
                 </fieldset>
+              </div>
+
+              <div class="col-md-12" ng-if="request.request.tags.length > 0">
+                  <fieldset class="form-group">
+                      <label>Tags</label><br>
+                  <span class="label label-primary tag" ng-repeat="tag in request.request.tags track by $index">{{ tag.text }}</span>
+                    </fieldset>
               </div>
             </div>
           </div>

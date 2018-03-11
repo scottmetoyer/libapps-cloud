@@ -19,8 +19,8 @@
         <form name="requestForm" ng-submit="request.update(requestForm.$valid)" novalidate="novalidate">
             <input type="hidden" ng-model="request.request.id" />
             <input type="hidden" ng-model="request.request.createdBy" />
-            <input type="hidden" ng-model="request.request.requester_priority" />
-            <input type="hidden" ng-model="request.request.aul_priority" />
+            <input type="hidden" ng-model="request.request.requesterPriority" />
+            <input type="hidden" ng-model="request.request.aulPriority" />
             <div class="col-md-12">
                 <div class="panel">
                     <div class="panel-heading">
@@ -80,8 +80,8 @@
                         </div>
                         <div class="col-md-4">
                             <fieldset class="form-group">
-                                <label>JIRA Case</label>
-                                <input type="text" ng-model="request.request.jira_case" class="form-control">
+                                <label>JIRA Issue</label>
+                                <input type="text" ng-model="request.request.jiraCase" class="form-control">
                             </fieldset>
                         </div>
                         <div class="col-md-12">
