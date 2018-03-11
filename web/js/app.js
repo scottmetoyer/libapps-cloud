@@ -17,6 +17,7 @@
     'oc.lazyLoad',
     'ui.bootstrap',
     'ngMessages',
+    'ngTagsInput',
 
     // Common modules
     'perfect_scrollbar',

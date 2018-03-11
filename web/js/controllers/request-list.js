@@ -18,7 +18,7 @@
 
     self.sortableOptions = {
       stop: function (e, ui) {
-        data.saveRequesterPurchasePriorities(self.requests, 'requester');
+        data.saveRequestPriorities(self.requests, 'requester');
       },
       helper: function(e, tr)
       {

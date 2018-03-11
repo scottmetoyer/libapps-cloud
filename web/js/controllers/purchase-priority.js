@@ -89,11 +89,7 @@
             .then(function (response) {
               var items = response.data.Items;
               self.requests = items;
-<<<<<<< Updated upstream
               self.requests = $filter('orderBy')(self.requests, ['createdBy', 'requester_priority']);
-=======
-              self.requests = $filter('orderBy')(self.requests, ['createdBy', 'aul_priority']);
->>>>>>> Stashed changes
               self.calculateTotalRequestedCost();
               self.calculateTotalPrioritizedCost();
 

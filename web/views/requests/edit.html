@@ -69,25 +69,15 @@
                         <div class="col-md-4">
                             <fieldset class="form-group">
                                 <label>Department</label>
-                                <select ng-model="request.request.department" ng-options="x.description for x in request.costCenters track by x.code" class="form-control"></select>
+                                <select ng-model="request.request.department" ng-options="x.description for x in request.costCenters track by x.code" class="form-control custom-select"></select>
                             </fieldset>
                         </div>
-<<<<<<< Updated upstream
-                        <div class="col-md-6">
-=======
                         <div class="col-md-4">
->>>>>>> Stashed changes
                             <fieldset class="form-group">
                                 <label>Location / staff member</label>
                                 <input type="text" ng-model="request.request.location" class="form-control">
                             </fieldset>
                         </div>
-<<<<<<< Updated upstream
-                        <div class="col-md-12">
-                            <fieldset class="form-group">
-                                <label>Tags</label>
-                                
-=======
                         <div class="col-md-4">
                             <fieldset class="form-group">
                                 <label>JIRA Case</label>
@@ -97,8 +87,8 @@
                         <div class="col-md-12">
                             <fieldset class="form-group">
                                 <label>Tags</label>
-                                <input type="text" ng-model="request.request.tags" class="form-control" data-role="tagsinput">
->>>>>>> Stashed changes
+                                <tags-input class="bootstrap" ng-model="request.request.tags" replace-spaces-with-dashes="false">
+                                </tags-input>
                             </fieldset>
                         </div>
                     </div>
@@ -111,3 +101,6 @@
         </form>
     </div>
 </div>
+
+<script>
+</script>

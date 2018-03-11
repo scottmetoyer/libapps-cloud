@@ -180,7 +180,14 @@
         data: { pageTitle: 'Edit request' },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
-            return $ocLazyLoad.load([]);
+            return $ocLazyLoad.load([
+              {
+                name: 'bootstrap-tags',
+                files: [
+                  'js/libs/bootstrap-tagsinput.js'
+                ]
+              },
+            ]);
           },
         },
       })
