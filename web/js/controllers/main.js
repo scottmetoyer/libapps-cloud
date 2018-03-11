@@ -8,6 +8,7 @@
     main.companyName = 'UCR Library';
     main.user = Auth.getUser();
     main.showAlert = false;
+    main.isAul = false;
 
     main.logout = function () {
       Auth.logout();
@@ -29,7 +30,6 @@
 
     $scope.$on('user-login', function (event, args) {
       main.user = args;
-      console.log(main.user['https://library.ucr.edu/roles']);
     });
 
   }

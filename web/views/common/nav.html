@@ -90,7 +90,7 @@
         </ul>
     </li>
 
-    <li class="px-nav-item" ui-sref-active="active">
+    <li class="px-nav-item" ui-sref-active="active" ng-show="main.user['https://library.ucr.edu/roles'].includes('aul')">
         <a href ui-sref="requests.annual-equipment-priority">
             <i class="px-nav-icon ion-thumbsup"></i>
             <span class="px-nav-label">Purchase Prioritization</span>
