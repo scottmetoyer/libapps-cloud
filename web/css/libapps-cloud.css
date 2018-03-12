@@ -182,3 +182,8 @@ tags-input .tags .tag-item .remove-button {
 .label.tag {
     margin-right: 4px;
 }
+
+button.tag {
+    margin-right: 6px;
+    margin-top: 6px;
+}

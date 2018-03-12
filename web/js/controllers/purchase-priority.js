@@ -9,6 +9,7 @@
     self.requests = [];
     self.prioritized = [];
     self.denied = [];
+    self.prioritizedTags = [];
     self.selected;
 
     self.allocatedBudget = 200000;
@@ -27,9 +28,16 @@
 
     self.calculateTotalPrioritizedCost = function () {
       var total = 0;
+      self.prioritizedTags = [];
 
       self.prioritized.forEach(function (e) {
         total += (e.cost * e.quantity);
+
+        e.tags.forEach(function (t) {
+          if (self.prioritizedTags.filter(tag => (tag.text == t.text)).length == 0) {
+            self.prioritizedTags.push(t);
+          }
+        })
       });
 
       self.totalPrioritizedCost = total;

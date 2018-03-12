@@ -123,10 +123,11 @@
               </div>
 
               <div class="col-md-12" ng-if="request.request.tags.length > 0">
-                  <fieldset class="form-group">
-                      <label>Tags</label><br>
+                <fieldset class="form-group">
+                  <label>Tags</label>
+                  <br>
                   <span class="label label-primary tag" ng-repeat="tag in request.request.tags track by $index">{{ tag.text }}</span>
-                    </fieldset>
+                </fieldset>
               </div>
             </div>
           </div>
