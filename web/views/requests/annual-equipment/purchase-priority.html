@@ -36,7 +36,7 @@
                         <span class="text-muted">Total Prioritized Tags</span>
                         <br>
                         <button type="button" class="btn btn-primary btn-xs tag" ng-repeat="tag in priority.prioritizedTags track by $index">
-                            <span class="btn-label right">{{ 0| currency }}</span>{{ tag.text }}
+                            <span class="btn-label right">{{ tag.total | currency }}</span>{{ tag.text }}
                         </button>
                     </div>
                     <div class="box-cell col-sm-6" ng-class="{ 'form-loading' : !priority.ready }">

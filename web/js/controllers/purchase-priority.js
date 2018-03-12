@@ -34,12 +34,18 @@
         total += (e.cost * e.quantity);
 
         e.tags.forEach(function (t) {
-          if (self.prioritizedTags.filter(tag => (tag.text == t.text)).length == 0) {
+          var tag = self.prioritizedTags.find(tag => (tag.text == t.text));
+
+          if (!tag) {
+            t.total = (e.cost * e.quantity);
             self.prioritizedTags.push(t);
+          } else {
+            tag.total += (e.cost * e.quantity);
           }
         })
       });
 
+      self.prioritizedTags = $filter('orderBy')(self.prioritizedTags, ['text']);
       self.totalPrioritizedCost = total;
       self.balance = self.allocatedBudget - self.totalPrioritizedCost;
     }
@@ -125,6 +131,7 @@
           var items = response.data.Items;
           self.requests = items;
           self.requests = $filter('orderBy')(self.requests, ['createdBy', 'requesterPriority']);
+          self.calculateTotalRequestedCost();
 
           // Move prioritized and denied requests to the their respective lists
           self.prioritized = $filter('filter')(self.requests, self.aulPrioritizedFilter);
@@ -134,7 +141,6 @@
           // Remove dispositioned requests from the submitted list
           self.requests = $filter('filter')(self.requests, self.unPrioritizedFilter);
 
-          self.calculateTotalRequestedCost();
           self.calculateTotalPrioritizedCost();
 
           self.ready = true;
