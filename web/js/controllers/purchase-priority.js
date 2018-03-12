@@ -33,16 +33,18 @@
       self.prioritized.forEach(function (e) {
         total += (e.cost * e.quantity);
 
-        e.tags.forEach(function (t) {
-          var tag = self.prioritizedTags.find(tag => (tag.text == t.text));
+        if (e.tags) {
+          e.tags.forEach(function (t) {
+            var tag = self.prioritizedTags.find(tag => (tag.text == t.text));
 
-          if (!tag) {
-            t.total = (e.cost * e.quantity);
-            self.prioritizedTags.push(t);
-          } else {
-            tag.total += (e.cost * e.quantity);
-          }
-        })
+            if (!tag) {
+              t.total = (e.cost * e.quantity);
+              self.prioritizedTags.push(t);
+            } else {
+              tag.total += (e.cost * e.quantity);
+            }
+          })
+        }
       });
 
       self.prioritizedTags = $filter('orderBy')(self.prioritizedTags, ['text']);

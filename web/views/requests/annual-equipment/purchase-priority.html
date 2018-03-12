@@ -98,12 +98,12 @@
                 </div>
                 <div class="widget-notifications-item" ng-repeat="r in priority.requests" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected}">
                     <div class="widget-notifications-title text-info">
-                        <a target="_blank" href ui-sref="requests.edit({ id: r.id })" uib-tooltip="{{ r.justification }}" tooltip-placement="right">{{ r.description }}</a>
+                        <a target="_blank" href ui-sref="requests.edit({ id: r.id })" uib-tooltip="{{ r.justification }}" tooltip-placement="top">{{ r.description }}</a>
                     </div>
                     <div class="widget-notifications-description">
                         <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost | currency
                         }} per unit</div>
-                    <div class="widget-notifications-date">{{ r.createdBy }} requested for {{ r.department.code }} ({{ r.location }})</div>
+                    <div class="widget-notifications-date">{{ r.createdBy.replace('@ucr.edu', '') }} requested for {{ r.department.code }} ({{ r.location }})</div>
                     <div class="widget-notifications-controls">
                         <button class="btn btn-xs btn-success" ng-click="priority.toPrioritized($index)">Prioritize</button>
                         <button class="btn btn-xs btn-danger" ng-click="priority.toDenied($index)">Deny</button>
@@ -121,7 +121,7 @@
                 <span ui-sortable="priority.sortableOptions" ng-model="priority.prioritized">
                     <div class="widget-notifications-item" ng-repeat="r in priority.prioritized" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected }">
                         <div class="widget-notifications-title text-info">
-                            <a target="_blank" href ui-sref="requests.edit({ id: r.id })" uib-tooltip="{{ r.justification }}" tooltip-placement="right">{{ r.description }}</a>
+                            <a target="_blank" href ui-sref="requests.edit({ id: r.id })" uib-tooltip="{{ r.justification }}" tooltip-placement="top">{{ r.description }}</a>
                         </div>
                         <div class="widget-notifications-description">
                             <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost | currency
@@ -145,7 +145,7 @@
                     </div>
                     <div class="widget-notifications-item" ng-repeat="r in priority.denied" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected}">
                         <div class="widget-notifications-title text-info">
-                            <a target="_blank" href ui-sref="requests.edit({ id: r.id })" uib-tooltip="{{ r.justification }}" tooltip-placement="right">{{ r.description }}</a>
+                            <a target="_blank" href ui-sref="requests.edit({ id: r.id })" uib-tooltip="{{ r.justification }}" tooltip-placement="top">{{ r.description }}</a>
                         </div>
                         <div class="widget-notifications-description">
                             <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost | currency
