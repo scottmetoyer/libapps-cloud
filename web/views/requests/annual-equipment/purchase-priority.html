@@ -98,7 +98,7 @@
                 </div>
                 <div class="widget-notifications-item" ng-repeat="r in priority.requests" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected}">
                     <div class="widget-notifications-title text-info">
-                        <a target="_blank" href ui-sref="requests.view({ id: r.id })" uib-tooltip="{{ r.justification }}" tooltip-placement="right">{{ r.description }}</a>
+                        <a target="_blank" href ui-sref="requests.edit({ id: r.id })" uib-tooltip="{{ r.justification }}" tooltip-placement="right">{{ r.description }}</a>
                     </div>
                     <div class="widget-notifications-description">
                         <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost | currency
@@ -121,7 +121,7 @@
                 <span ui-sortable="priority.sortableOptions" ng-model="priority.prioritized">
                     <div class="widget-notifications-item" ng-repeat="r in priority.prioritized" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected }">
                         <div class="widget-notifications-title text-info">
-                            <a target="_blank" href ui-sref="requests.view({ id: r.id })" uib-tooltip="{{ r.justification }}" tooltip-placement="right">{{ r.description }}</a>
+                            <a target="_blank" href ui-sref="requests.edit({ id: r.id })" uib-tooltip="{{ r.justification }}" tooltip-placement="right">{{ r.description }}</a>
                         </div>
                         <div class="widget-notifications-description">
                             <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost | currency
@@ -145,7 +145,7 @@
                     </div>
                     <div class="widget-notifications-item" ng-repeat="r in priority.denied" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected}">
                         <div class="widget-notifications-title text-info">
-                            <a href="">{{ r.description }}</a>
+                            <a target="_blank" href ui-sref="requests.edit({ id: r.id })" uib-tooltip="{{ r.justification }}" tooltip-placement="right">{{ r.description }}</a>
                         </div>
                         <div class="widget-notifications-description">
                             <strong>{{ r.cost * r.quantity | currency }}</strong> - {{ r.quantity }} requested @ {{ r.cost | currency
