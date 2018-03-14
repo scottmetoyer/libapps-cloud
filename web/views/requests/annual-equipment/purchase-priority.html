@@ -92,7 +92,10 @@
         <div class="col-md-6">
             <div class="panel panel-info" ng-class="{ 'form-loading' : !priority.ready }">
                 <div class="panel-heading">
-                    <div class="panel-title">Submitted Requests</div>
+                    <span class="panel-title">Submitted Requests</span>
+                    <div class="panel-heading-controls">
+                        <span class="panel-heading-text">{{ priority.requests.length}} requests</span>
+                    </div>
                 </div>
                 <div class="widget-comments-item" ng-show="priority.requests.length == 0"></div>
                 <div class="widget-comments-item request" ng-repeat="r in priority.requests" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected}">
@@ -125,7 +128,10 @@
         <div class="col-md-6">
             <div class="panel panel-success" ng-class="{ 'form-loading' : !priority.ready }">
                 <div class="panel-heading">
-                    <div class="panel-title">Prioritized Requests</div>
+                    <span class="panel-title">Prioritized Requests</span>
+                    <div class="panel-heading-controls">
+                        <span class="panel-heading-text">{{ priority.prioritized.length}} requests</span>
+                    </div>
                 </div>
                 <div class="widget-comments-item" ng-show="priority.prioritized.length == 0"></div>
                 <span ui-sortable="priority.sortableOptions" ng-model="priority.prioritized">
@@ -160,7 +166,10 @@
 
             <div class="panel panel-danger" ng-class="{ 'form-loading' : !priority.ready }">
                 <div class="panel-heading">
-                    <div class="panel-title">Needs Review</div>
+                    <span class="panel-title">Needs Review</span>
+                    <div class="panel-heading-controls">
+                        <span class="panel-heading-text">{{ priority.denied.length}} requests</span>
+                    </div>
                 </div>
                 <div>
                     <div class="widget-comments-item" ng-show="priority.denied.length == 0"></div>
