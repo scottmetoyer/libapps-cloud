@@ -53,6 +53,7 @@ module.exports.handler = (event, context, callback) => {
     params.jiraCase ? item.jiraCase = params.jiraCase : null;
     params.tags ? item.tags = params.tags : null;
     params.status ? item.status = params.status : null;
+    params.comments ? item.comments = params.comments : null;
 
     docClient.put({
       "TableName": tableName,
