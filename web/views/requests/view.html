@@ -138,33 +138,32 @@
     </div>
 
     <div class="col-md-4">
-      <div class="widget-timeline">
+      <div class="panel">
+        <div class="panel-heading">
+          <span class="panel-title">Comments</span>
+        </div>
 
-        <div class="widget-timeline-section font-weight-semibold">
-          Request History
-        </div>
-        <div class="widget-timeline-item">
-          <div class="widget-timeline-info">
-            <div class="widget-timeline-icon">
-              <i class="fa fa-check"></i>
-            </div>
-            <div class="widget-timeline-time">{{ request.request.timestamp | humandate }}</div>
+        <div class="widget-comments-item comment" ng-repeat="comment in request.request.comments">
+          <img ng-src="{{ comment.avatar }}" alt="" class="widget-comments-avatar">
+          <div class="widget-comments-header">
+            <a href="#" title="">{{ comment.user }}</a> commented
           </div>
-          <div class="panel panel-info panel-body-colorful">
-            <div class="panel">
-              <div class="panel-body">
-                <div class="widget-comments-item p-a-0">
-                  <div class="widget-comments-header">
-                    <a href="#" title="">{{ request.request.createdBy }}</a> submmited the request
-                  </div>
-                  <div class="widget-comments-text">
-                    Request created and added to the AUL prioritization list.
-                  </div>
-                </div>
-              </div>
+          <div class="widget-comments-text">
+            {{ comment.text }}
+          </div>
+          <div class="widget-comments-footer">
+            {{ comment.timestamp | humandate }}
+            <div class="pull-right">
             </div>
           </div>
         </div>
+
+        <form name="commentForm" class="widget-tree-comments-item" ng-submit="request.saveComment(commentForm.$valid)" novalidate>
+          <img src="{{ main.user.picture }}" alt="" class="widget-tree-comments-avatar">
+          <textarea rows="3" class="form-control widget-tree-comments-input" ng-model="request.comment.text" placeholder="Write your comment..." required></textarea>
+          <button class="btn btn-primary btn-sm">Post</button>&nbsp;
+        </form>
+
       </div>
     </div>
   </div>

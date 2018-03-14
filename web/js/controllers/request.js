@@ -7,6 +7,11 @@
     var self = this;
     var showUpdatedAlert = false;
     self.costCenters = data.getCostCenters();
+    self.comment = {
+      text: '',
+      avatar: Auth.getUser().picture,
+      user: Auth.getUser().name
+    };
 
     // Initialize with sensible defaults
     self.request = {
@@ -32,8 +37,22 @@
       }
     }
 
+    self.saveComment = function(isValid) {
+      if (isValid) {
+        if (!self.request.comments) {
+          self.request.comments = [];
+        }
+  
+        self.comment.timestamp = Date.now();
+        self.request.comments.push(angular.copy(self.comment));
+  
+        saveRequest(function(){
+          self.comment.text = '';
+        });
+      }
+    }
+
     var saveRequest = function(callback) {
-      console.log(self.request);
       data.saveRequest(self.request)
       .then(function (response) {
         callback();

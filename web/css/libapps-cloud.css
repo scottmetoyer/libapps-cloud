@@ -204,6 +204,11 @@ button.tag {
     font-size: 11px;
 }
 
+.panel .widget-comments-item.comment {
+    padding-left: 67px;
+    padding: 12px 15px 12px 62px;
+}
+
 .request .widget-comments-avatar {
     text-align: center;
     vertical-align: middle;
@@ -213,4 +218,10 @@ button.tag {
     height: 100%;
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.widget-tree-comments-item {
+    position: relative;
+    margin-left: 41px;
+    padding: 14px 15px;
 }
