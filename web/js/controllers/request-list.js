@@ -11,7 +11,10 @@
       var total = 0;
       for (var i = 0; i < self.requests.length; i++) {
         var request = self.requests[i];
-        total += (request.cost * request.quantity);
+
+        if (request.cost && request.quantity) {
+          total += (request.cost * request.quantity);
+        }
       }
       return total;
     }

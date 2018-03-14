@@ -21,7 +21,10 @@
       var total = 0;
       for (var i = 0; i < self.requests.length; i++) {
         var request = self.requests[i];
-        total += (request.cost * request.quantity);
+
+        if (request.cost && request.quantity) {
+          request.cost && request.quantity ? total += (request.cost * request.quantity) : null;
+        }
       }
       return total;
     }
@@ -31,17 +34,19 @@
       self.prioritizedTags = [];
 
       self.prioritized.forEach(function (e) {
-        total += (e.cost * e.quantity);
+        e.cost && e.quantity ? total += (e.cost * e.quantity) : null;
 
         if (e.tags) {
           e.tags.forEach(function (t) {
             var tag = self.prioritizedTags.find(tag => (tag.text == t.text));
 
-            if (!tag) {
-              t.total = (e.cost * e.quantity);
-              self.prioritizedTags.push(t);
-            } else {
-              tag.total += (e.cost * e.quantity);
+            if (e.cost && e.quantity) {
+              if (!tag) {
+                t.total = (e.cost * e.quantity);
+                self.prioritizedTags.push(t);
+              } else {
+                tag.total += (e.cost * e.quantity);
+              }
             }
           })
         }
@@ -56,7 +61,7 @@
       var total = 0;
 
       self.requests.forEach(function (e) {
-        total += (e.cost * e.quantity);
+        e.cost && e.quantity ? total += (e.cost * e.quantity) : null;
       });
 
       self.totalRequestedCost = total;

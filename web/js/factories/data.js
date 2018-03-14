@@ -62,11 +62,11 @@
         }
       }
 
-      dataFactory.getRequests = function (id) {
+      dataFactory.getRequests = function (id, type) {
         if (id) {
           return $http.get(urlBase + '/request/' + id);
         } else {
-          return $http.get(urlBase + '/requests');
+          return $http.get(urlBase + '/requests?type=' + type);
         }
       }
 
