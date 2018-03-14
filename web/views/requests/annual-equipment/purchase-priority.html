@@ -105,7 +105,7 @@
 
                     <div class="widget-comments-header">
                         <strong>
-                            <a target="_blank" href ui-sref="requests.edit({ id: r.id })">{{ r.description }}</a>
+                            <a target="_blank" href ui-sref="requests.view({ id: r.id })">{{ r.description }}</a>
                         </strong>
                     </div>
 
@@ -136,13 +136,15 @@
                 <div class="widget-comments-item" ng-show="priority.prioritized.length == 0"></div>
                 <span ui-sortable="priority.sortableOptions" ng-model="priority.prioritized">
                     <div class="widget-comments-item request" ng-repeat="r in priority.prioritized" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected }">
-                        <div class="widget-comments-avatar">
-                            {{ $index + 1 }}
+                        <div class="widget-comments-avatar font-size-16">
+                            <span>{{ $index + 1 }}
+                                <br>
+                                <span class="text-warning">{{ r.requesterPriority > 0 ? r.requesterPriority : 1 }}</span>&nbsp;
                         </div>
 
                         <div class="widget-comments-header">
                             <strong>
-                                <a target="_blank" href ui-sref="requests.edit({ id: r.id })">{{ r.description }}</a>
+                                <a target="_blank" href ui-sref="requests.view({ id: r.id })">{{ r.description }}</a>
                             </strong>
                         </div>
 
@@ -161,7 +163,7 @@
                             </div>
                         </div>
                     </div>
-                </span>
+                    </span>
             </div>
 
             <div class="panel panel-danger" ng-class="{ 'form-loading' : !priority.ready }">
@@ -174,13 +176,15 @@
                 <div>
                     <div class="widget-comments-item" ng-show="priority.denied.length == 0"></div>
                     <div class="widget-comments-item request" ng-repeat="r in priority.denied" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected}">
-                        <div class="widget-comments-avatar">
-                            {{ $index + 1 }}
+                        <div class="widget-comments-avatar font-size-16">
+                            <span>{{ $index + 1 }}
+                                <br>
+                                <span class="text-warning">{{ r.requesterPriority > 0 ? r.requesterPriority : 1 }}</span>&nbsp;
                         </div>
 
                         <div class="widget-comments-header">
                             <strong>
-                                <a target="_blank" href ui-sref="requests.edit({ id: r.id })">{{ r.description }}</a>
+                                <a target="_blank" href ui-sref="requests.view({ id: r.id })">{{ r.description }}</a>
                             </strong>
                         </div>
 
