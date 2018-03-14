@@ -92,10 +92,10 @@ module.exports.handler = (event, context, callback) => {
   function getRequests() {
     var params = { TableName: tableName };
 
-    if (event['pathParameters'] && event['pathParameters']['type']) {
+    if (event['queryStringParameters'] && event['queryStringParameters']['type']) {
       params.FilterExpression = '#type = :t',
-        params.ExpressionAttributeValues = { ':t': event['pathParameters']['type'] },
-        params.ExpressionAttributeNames = { "#type": "type" }
+      params.ExpressionAttributeValues = { ':t': event['queryStringParameters']['type'] },
+      params.ExpressionAttributeNames = { "#type": "type" }
     }
 
     docClient.scan(

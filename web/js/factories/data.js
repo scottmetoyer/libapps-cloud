@@ -66,7 +66,7 @@
         if (id) {
           return $http.get(urlBase + '/request/' + id);
         } else {
-          return $http.get(urlBase + '/requests?type=' + type);
+          return $http.get(urlBase + '/requests?type=' + (type ? type : ''));
         }
       }
 
