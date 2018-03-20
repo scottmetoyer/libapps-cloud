@@ -105,7 +105,9 @@
               <div class="col-md-12">
                 <fieldset class="form-group">
                   <label>Justification</label>
-                  <textarea class="form-control" rows="4" ng-model="request.request.justification" readonly></textarea>
+                  <div class="form-control" readonly>
+                    {{ request.request.justification }}
+                  </div>
                 </fieldset>
               </div>
               <div class="col-md-6">
@@ -143,7 +145,7 @@
           <span class="panel-title">Comments</span>
         </div>
 
-        <div class="widget-comments-item comment" ng-repeat="comment in request.request.comments">
+        <div class="widget-comments-item comment" ng-repeat="comment in request.request.comments track by $index">
           <img ng-src="{{ comment.avatar }}" alt="" class="widget-comments-avatar">
           <div class="widget-comments-header">
             <a href="#" title="">{{ comment.user }}</a> commented
