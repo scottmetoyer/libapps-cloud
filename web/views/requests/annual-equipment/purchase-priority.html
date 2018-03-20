@@ -135,7 +135,8 @@
                 </div>
                 <div class="widget-comments-item" ng-show="priority.prioritized.length == 0"></div>
                 <span ui-sortable="priority.sortableOptions" ng-model="priority.prioritized">
-                    <div class="widget-comments-item request" ng-repeat="r in priority.prioritized" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected }">
+                    <div class="widget-comments-item request" ng-repeat="r in priority.prioritized" ng-click="priority.setSelected(r.id)" 
+                        ng-class="{ selected: r.id === priority.selected, 'over-budget': r.id == priority.overBudgetTrigger }">
                         <div class="widget-comments-avatar font-size-16">
                             <span>{{ $index + 1 }}
                                 <br>

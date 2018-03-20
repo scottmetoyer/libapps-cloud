@@ -225,3 +225,7 @@ button.tag {
     margin-left: 41px;
     padding: 14px 15px;
 }
+
+.over-budget {
+    border-top: solid 2px red !important;
+}

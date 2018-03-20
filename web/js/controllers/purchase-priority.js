@@ -11,8 +11,9 @@
     self.denied = [];
     self.prioritizedTags = [];
     self.selected;
+    self.overBudgetTrigger;
 
-    self.allocatedBudget = 200000;
+    self.allocatedBudget = 530;
     self.totalRequestedCost = 0;
     self.totalPrioritizedCost = 0;
     self.balance = 0;
@@ -32,9 +33,15 @@
     self.calculateTotalPrioritizedCost = function () {
       var total = 0;
       self.prioritizedTags = [];
+      self.overBudgetTrigger = '';
 
       self.prioritized.forEach(function (e) {
         e.cost && e.quantity ? total += (e.cost * e.quantity) : null;
+
+        if (total > self.allocatedBudget && self.overBudgetTrigger === '') {
+          self.overBudgetTrigger = e.id;
+          console.log(self.overBudgetTrigger);
+        }
 
         if (e.tags) {
           e.tags.forEach(function (t) {
@@ -108,6 +115,7 @@
     self.sortableOptions = {
       stop: function (e, ui) {
         data.saveRequestPriorities(self.prioritized, 'aul');
+        self.calculateTotalPrioritizedCost();
       },
       helper: function (e, tr) {
         var $originals = tr.children();
