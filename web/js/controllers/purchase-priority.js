@@ -13,7 +13,7 @@
     self.selected;
     self.overBudgetTrigger;
 
-    self.allocatedBudget = 530;
+    self.allocatedBudget = 200000;
     self.totalRequestedCost = 0;
     self.totalPrioritizedCost = 0;
     self.balance = 0;
