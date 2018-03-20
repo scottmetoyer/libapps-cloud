@@ -14,8 +14,9 @@
     self.overBudgetTrigger;
 
     self.allocatedBudget = 200000;
-    self.totalRequestedCost = 0;
-    self.totalPrioritizedCost = 0;
+    self.totalRequestedAmount = 0;
+    self.totalPrioritizedAmount = 0;
+    self.totalNeedsReviewAmount = 0;
     self.balance = 0;
 
     self.getTotal = function () {
@@ -28,9 +29,20 @@
         }
       }
       return total;
-    }
+    };
 
-    self.calculateTotalPrioritizedCost = function () {
+    self.calculateTotalNeedsReviewAmount = function() {
+      var total = 0;
+console.log('hi');
+
+      self.denied.forEach(function (e) {
+        e.cost && e.quantity ? total += (e.cost * e.quantity) : null;
+      });
+
+      self.totalNeedsReviewAmount = total;
+    };
+
+    self.calculateTotalPrioritizedAmount = function () {
       var total = 0;
       self.prioritizedTags = [];
       self.overBudgetTrigger = '';
@@ -40,7 +52,6 @@
 
         if (total > self.allocatedBudget && self.overBudgetTrigger === '') {
           self.overBudgetTrigger = e.id;
-          console.log(self.overBudgetTrigger);
         }
 
         if (e.tags) {
@@ -60,62 +71,61 @@
       });
 
       self.prioritizedTags = $filter('orderBy')(self.prioritizedTags, ['text']);
-      self.totalPrioritizedCost = total;
-      self.balance = self.allocatedBudget - self.totalPrioritizedCost;
-    }
+      self.totalPrioritizedAmount = total;
+      self.balance = self.allocatedBudget - self.totalPrioritizedAmount;
+    };
 
-    self.calculateTotalRequestedCost = function () {
+    self.calculateTotalRequestedAmount = function () {
       var total = 0;
 
       self.requests.forEach(function (e) {
         e.cost && e.quantity ? total += (e.cost * e.quantity) : null;
       });
 
-      self.totalRequestedCost = total;
-    }
+      self.totalRequestedAmount = total;
+    };
 
     self.setSelected = function (id) {
       self.selected = id;
-    }
+    };
 
     self.toPrioritized = function (index) {
       var item = self.requests.splice(index, 1);
       self.prioritized.push(item[0]);
       self.prioritized = $filter('orderBy')(self.prioritized, ['aulPriority']);
-      self.calculateTotalPrioritizedCost();
+      self.calculateTotalPrioritizedAmount();
 
       // Set the request status
       data.setRequestStatus(item[0], 'prioritized');
 
       // Persist the prioritization order
       data.saveRequestPriorities(self.prioritized, 'aul');
-    }
+    };
 
     self.toDenied = function (index) {
       var item = self.requests.splice(index, 1);
       self.denied.push(item[0]);
+      self.calculateTotalNeedsReviewAmount();
 
       // Set the request status
       data.setRequestStatus(item[0], 'denied');
-    }
+    };
 
     self.toSubmitted = function (index, source) {
       var item = source.splice(index, 1);
       self.requests.push(item[0]);
       self.requests = $filter('orderBy')(self.requests, ['createdBy', 'requesterPriority']);
-      self.calculateTotalPrioritizedCost();
-
+      self.calculateTotalPrioritizedAmount();
+      self.calculateTotalNeedsReviewAmount();
+      
       // Set the request status
       data.setRequestStatus(item[0], 'new');
-
-      // Persist the prioritized list
-      // data.saveRequestPriorities(self.prioritized, 'aul');
-    }
+    };
 
     self.sortableOptions = {
       stop: function (e, ui) {
         data.saveRequestPriorities(self.prioritized, 'aul');
-        self.calculateTotalPrioritizedCost();
+        self.calculateTotalPrioritizedAmount();
       },
       helper: function (e, tr) {
         var $originals = tr.children();
@@ -130,15 +140,15 @@
 
     self.aulPrioritizedFilter = function (request) {
       return request.status == 'prioritized';
-    }
+    };
 
     self.aulDeniedFilter = function (request) {
       return request.status == 'denied';
-    }
+    };
 
     self.unPrioritizedFilter = function (request) {
       return request.status == 'new';
-    }
+    };
 
     self.loadRequests = function () {
       data.getRequests(null, 'Annual Equipment Request')
@@ -146,7 +156,7 @@
           var items = response.data.Items;
           self.requests = items;
           self.requests = $filter('orderBy')(self.requests, ['createdBy', 'requesterPriority']);
-          self.calculateTotalRequestedCost();
+          self.calculateTotalRequestedAmount();
 
           // Move prioritized and denied requests to the their respective lists
           self.prioritized = $filter('filter')(self.requests, self.aulPrioritizedFilter);
@@ -156,11 +166,12 @@
           // Remove dispositioned requests from the submitted list
           self.requests = $filter('filter')(self.requests, self.unPrioritizedFilter);
 
-          self.calculateTotalPrioritizedCost();
+          self.calculateTotalPrioritizedAmount();
+          self.calculateTotalNeedsReviewAmount();
 
           self.ready = true;
         }).catch(function (err) { console.log(err) });
-    }
+    };
 
     self.loadRequests();
   }

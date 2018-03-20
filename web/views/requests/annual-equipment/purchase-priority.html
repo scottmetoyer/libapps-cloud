@@ -47,7 +47,7 @@
                                         <span class="text-muted">Total Requested</span>
                                         <br>
                                         <span class="font-size-16">
-                                            <strong>{{ priority.totalRequestedCost | currency }}</strong>
+                                            <strong>{{ priority.totalRequestedAmount | currency }}</strong>
                                         </span>
                                     </div>
                                     <div class="box-cell p-x-3 p-y-1 b-b-1">
@@ -67,7 +67,7 @@
                                             <span class="text-muted">Total Prioritized</span>
                                             <br>
                                             <span class="font-size-16">
-                                                <strong>{{ priority.totalPrioritizedCost | currency }}</strong>
+                                                <strong>{{ priority.totalPrioritizedAmount | currency }}</strong>
                                             </span>
                                         </div>
                                         <div class="box-cell p-x-3 p-y-1 ">
@@ -171,7 +171,7 @@
                 <div class="panel-heading">
                     <span class="panel-title">Needs Review</span>
                     <div class="panel-heading-controls">
-                        <span class="panel-heading-text">{{ priority.denied.length}} requests</span>
+                        <span class="panel-heading-text">{{ priority.denied.length}} requests - {{ priority.totalNeedsReviewAmount | currency }}</span>
                     </div>
                 </div>
                 <div>
