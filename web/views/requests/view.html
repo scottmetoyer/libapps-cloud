@@ -131,7 +131,13 @@
                   <span class="label label-primary tag" ng-repeat="tag in request.request.tags track by $index">{{ tag.text }}</span>
                 </fieldset>
               </div>
+
+
             </div>
+
+          </div>
+          <div class="panel-footer text-muted text-right">
+            Submitted by {{ request.request.createdBy.replace('@ucr.edu', '') }} {{ request.request.timestamp | humandate}}
           </div>
           <div class="wizard-pane" id="wizard-panel-step2"></div>
           <div class="wizard-pane" id="wizard-panel-step3"></div>
