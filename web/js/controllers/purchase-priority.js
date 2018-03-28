@@ -19,10 +19,7 @@
     self.totalNeedsReviewAmount = 0;
     self.balance = 0;
 
-    self.requestTypes = [
-      "Annual Equipment Request",
-      "Student Tech Fee Request"
-    ];
+    self.requestTypes = bl.getRequestTypes();
     self.requestType = self.requestTypes[0];
 
     self.getTotal = function () {

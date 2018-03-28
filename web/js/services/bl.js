@@ -15,5 +15,14 @@
 
         return status;
       }
+
+      this.getRequestTypes = function() {
+        var types = [
+          "Annual Equipment Request",
+          "Student Tech Fee Request"
+        ];
+
+        return types;
+      }
     })
 })();

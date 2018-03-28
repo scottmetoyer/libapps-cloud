@@ -5,7 +5,10 @@
 
   function RequestListCtrl($http, $state, $filter, bl, data, Auth, $scope) {
     var self = this;
+    self.ready = false;
     self.requests = [];
+    self.requestTypes = bl.getRequestTypes();
+    self.requestType = self.requestTypes[0];
 
     self.getTotal = function () {
       var total = 0;
@@ -37,7 +40,7 @@
     };
 
     self.loadRequests = function () {
-      data.getRequests(null, 'Annual Equipment Request')
+      data.getRequests(null, self.requestType)
         .then(function (response) {
           var items = response.data.Items;
           self.requests = items;
@@ -48,7 +51,7 @@
             return (request.createdBy == user);
           });
           self.requests = $filter('orderBy')(self.requests, 'requesterPriority');
-
+          self.ready = true;
         }).catch(function (err) { console.log(err) });
     }
 

@@ -3,23 +3,30 @@
     <div class="row">
       <div class="col-md-6">
         <h1>
-          <span class="text-muted font-weight-light">Requests / </span>Annual Equipment</h1>
+          <span class="text-muted font-weight-light">Requests / </span>{{ requests.requestType}}s </h1>
       </div>
-      <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right">
+      <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right form-inline">
+      
+        <div class="form-group">
+          <label for="requestType" class="text-muted">Request Type&nbsp;</label>
+          <select name="requestType" class="form-control" ng-change="requests.loadRequests()" ng-options="type for type in requests.requestTypes"
+            ng-model="requests.requestType">
+          </select>
+        </div>&nbsp;
         <a href ui-sref="requests.create-annual-equipment-request" class="btn btn-primary">
-          <span class="btn-label-icon left ion-plus-round"></span>Create a new request</a>
+            <span class="btn-label-icon left ion-plus-round"></span>Create request</a>
       </div>
     </div>
   </div>
   <div class="page-wide-block p-a-4 bg-white font-size-15">
     <p>
-      Annual Equipment Requests that you have submitted for the current review cycle. Click the request description to view or
+      {{ requests.requestType}}s that you have submitted. Click the request description to view or
       edit the request. Drag and drop rows to change the priority of your requests.
     </p>
   </div>
   <hr class="page-wide-block m-t-0">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" ng-class="{ 'form-loading' : !requests.ready }">
       <p ng-show="requests.requests.length == 0">You have not submitted any requests yet.
         <a href ui-sref="requests.create-annual-equipment-request">Create a request here</a>.</p>
 
