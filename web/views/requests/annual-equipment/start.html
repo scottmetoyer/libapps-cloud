@@ -7,7 +7,6 @@
   <hr class="page-wide-block m-t-0">
   <div class="row">
 
-
     <div class="col-md-12">
       <a href="files/Technology Equipment Requests 2017-2018 Call February 2018.pdf" target="_blank" class="label label-info label-ribbon right">
         <i class="fa fa-calendar"></i> Request calendar and instructions
@@ -124,6 +123,20 @@
                     <div class="form-group">
                       <label>Location / staff member</label>
                       <input type="text" class="form-control" ng-model="request.request.location"></input>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Fund from Student Tech Fee?</label>
+                      <label for="switcher-success" class="switcher switcher-success" style="margin-top: 10px">
+                        <input type="checkbox" id="switcher-success" ng-model="request.request.isStudentTechFee"></input>
+                        <div class="switcher-indicator">
+                          <div class="switcher-yes">YES</div>
+                          <div class="switcher-no">NO</div>
+                        </div>
+                      </label>
                     </div>
                   </div>
                 </div>

@@ -24,6 +24,12 @@
 
     self.create = function (isValid) {
       if (isValid) {
+        console.log(self.request.isStudentTechFee);
+
+        if (self.request.isStudentTechFee == true) {
+          self.request.type = 'Student Tech Fee Request';
+        }
+
         saveRequest(function () {
           $state.go('requests.annual-equipment-request-submitted');
         });
