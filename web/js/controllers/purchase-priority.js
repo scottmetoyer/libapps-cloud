@@ -155,7 +155,7 @@
     };
 
     self.loadRequests = function () {
-      data.getRequests(null, 'Annual Equipment Request')
+      data.getRequests(null, self.requestType)
         .then(function (response) {
           var items = response.data.Items;
           self.requests = items;
