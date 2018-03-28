@@ -7,6 +7,7 @@
     var self = this;
     var showUpdatedAlert = false;
     self.costCenters = data.getCostCenters();
+    self.requestTypes = bl.getRequestTypes();
     self.comment = {
       text: '',
       avatar: Auth.getUser().picture,

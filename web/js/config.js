@@ -191,7 +191,7 @@
           },
         },
       })
-      .state('requests.annual-equipment', {
+      .state('requests.list', {
         url: '/list',
         templateUrl: 'views/requests/list.html',
         resolve: {
