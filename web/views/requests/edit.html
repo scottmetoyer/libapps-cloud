@@ -84,6 +84,7 @@
                             <fieldset class="form-group">
                                 <label>Tags</label>
                                 <tags-input class="bootstrap" ng-model="request.request.tags" replace-spaces-with-dashes="false">
+                                    <auto-complete source="request.loadTags($query)"></auto-complete>
                                 </tags-input>
                             </fieldset>
                         </div>

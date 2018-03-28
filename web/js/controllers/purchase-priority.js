@@ -13,7 +13,7 @@
     self.selected;
     self.overBudgetTrigger;
 
-    self.allocatedBudget = 200000;
+    self.allocatedBudget = 0;
     self.totalRequestedAmount = 0;
     self.totalPrioritizedAmount = 0;
     self.totalNeedsReviewAmount = 0;
@@ -155,6 +155,12 @@
     };
 
     self.loadRequests = function () {
+      if (self.requestType == "Annual Equipment Request") {
+        self.allocatedBudget = 200000;
+      } else if (self.requestType == "Student Tech Fee Request") {
+        self.allocatedBudget = 15000;
+      }
+
       data.getRequests(null, self.requestType)
         .then(function (response) {
           var items = response.data.Items;

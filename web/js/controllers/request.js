@@ -3,7 +3,7 @@
   // Controllers / Request
   //
 
-  function RequestCtrl($http, $stateParams, $anchorScroll, $location, $state, $scope, bl, data, Auth) {
+  function RequestCtrl($http, $stateParams, $anchorScroll, $location, $state, $scope, $q, bl, data, Auth) {
     var self = this;
     var showUpdatedAlert = false;
     self.costCenters = data.getCostCenters();
@@ -50,6 +50,21 @@
           self.comment.text = '';
         });
       }
+    }
+
+    self.loadTags = function(query) {
+      var tags = [
+        { 'text': 'Public Workstations' },
+        { 'text': 'Laptops' },
+        { 'text': 'Book Scanners' },
+        { 'text': 'Displays' },
+        { 'text': 'Software' },
+        { 'text': 'Makerspace' },
+        { 'text': 'Support Staffing' },
+      ];
+      var deferred = $q.defer();
+      deferred.resolve(tags);
+      return deferred.promise;
     }
 
     var saveRequest = function(callback) {
