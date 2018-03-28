@@ -207,10 +207,10 @@
           },
         }
       })
-      .state('requests.annual-equipment-priority', {
-        url: '/annual-equipment/purchase-priority',
-        templateUrl: 'views/requests/annual-equipment/purchase-priority.html',
-        data: { pageTitle: 'Annual Equipment Request purchase priority' },
+      .state('requests.purchase-priority', {
+        url: '/purchase-priority',
+        templateUrl: 'views/requests/purchase-priority.html',
+        data: { pageTitle: 'Purchase Request prioritization' },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([

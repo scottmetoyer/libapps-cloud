@@ -19,6 +19,12 @@
     self.totalNeedsReviewAmount = 0;
     self.balance = 0;
 
+    self.requestTypes = [
+      "Annual Equipment Request",
+      "Student Tech Fee Request"
+    ];
+    self.requestType = self.requestTypes[0];
+
     self.getTotal = function () {
       var total = 0;
       for (var i = 0; i < self.requests.length; i++) {
@@ -33,8 +39,6 @@
 
     self.calculateTotalNeedsReviewAmount = function() {
       var total = 0;
-console.log('hi');
-
       self.denied.forEach(function (e) {
         e.cost && e.quantity ? total += (e.cost * e.quantity) : null;
       });

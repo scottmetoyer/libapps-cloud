@@ -31,7 +31,6 @@
     $scope.$on('user-login', function (event, args) {
       main.user = args;
     });
-
   }
 
   angular.module('pixeladmin')

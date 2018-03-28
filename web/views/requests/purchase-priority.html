@@ -1,11 +1,11 @@
 <div ng-controller="PurchasePriorityCtrl as priority">
     <div class="alert alert-success" ng-show="priority.showCreatedAlert == true">
         <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Recurring task created!</strong> The recurring task has been created.
+        <strong>Alert</strong> Text
     </div>
     <div class="alert alert-success" ng-show="priority.showUpdatedAlert == true">
         <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Recurring task saved!</strong> The recurring task has been updated.
+        <strong>Alert</strong> Text
     </div>
     <div class="alert alert-danger" ng-show="priority.hasError == true">
         <button type="button" class="close" data-dismiss="alert">×</button>
@@ -15,10 +15,14 @@
         <div class="row">
             <div class="col-md-6">
                 <h1>
-                    <span class="text-muted font-weight-light">Annual Equipment Request/ </span>Purchase Priority</h1>
+                    <span class="text-muted font-weight-light">Purchase Request / </span>Prioritization</h1>
             </div>
-            <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right">
-
+            <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right form-inline">
+                <div class="form-group">
+                    <label for="requestType" class="text-muted">Request Type&nbsp;</label>
+                    <select name="requestType" class="form-control" ng-options="type for type in priority.requestTypes" ng-model="priority.requestType">
+                    </select>
+                </div>
             </div>
         </div>
     </div>
@@ -135,8 +139,7 @@
                 </div>
                 <div class="widget-comments-item" ng-show="priority.prioritized.length == 0"></div>
                 <span ui-sortable="priority.sortableOptions" ng-model="priority.prioritized">
-                    <div class="widget-comments-item request" ng-repeat="r in priority.prioritized" ng-click="priority.setSelected(r.id)" 
-                        ng-class="{ selected: r.id === priority.selected, 'over-budget': r.id == priority.overBudgetTrigger }">
+                    <div class="widget-comments-item request" ng-repeat="r in priority.prioritized" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected, 'over-budget': r.id == priority.overBudgetTrigger }">
                         <div class="widget-comments-avatar font-size-16">
                             <span>{{ $index + 1 }}
                                 <br>

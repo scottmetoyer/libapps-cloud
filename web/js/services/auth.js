@@ -16,7 +16,15 @@
           if (authResult && authResult.accessToken && authResult.idToken) {
             service.setSession(authResult);
             $rootScope.$broadcast('user-login', service.getUser());
-            $state.go('dashboard.view');
+
+            // Check if there is a stored state - redirect as needed
+            var current_state = localStorage.getItem('current_state');
+            if (current_state) {
+              localStorage.removeItem('current_state');
+              $state.go(current_state);
+            } else {
+              $state.go('dashboard.view');
+            }
           } else if (err) {
             // Send them to the Auth0 login page if there are exceptions
             console.log(err);
@@ -48,6 +56,7 @@
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
+        localStorage.removeItem('current_state');
       };
 
       service.isAuthenticated = function () {
@@ -103,6 +112,8 @@
 
       service.responseError = function (response) {
         if (response.status == 401 || response.status == 403) {
+          // Save the users current location so we can send them back after login
+          localStorage.setItem('current_state', $state.current.name);
           Auth.login();
         }
 
