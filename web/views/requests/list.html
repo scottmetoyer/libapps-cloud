@@ -20,7 +20,7 @@
   </div>
   <div class="page-wide-block p-a-4 bg-white font-size-15">
     <p>
-      {{ requests.requestType}}s that you have submitted. Click the request description to view or
+      {{ requests.requestType }}s that you have submitted. Click the request description to view or
       edit the request. Drag and drop rows to change the priority of your requests.
     </p>
   </div>
@@ -28,7 +28,7 @@
   <div class="row">
     <div class="col-md-12" ng-class="{ 'form-loading' : !requests.ready }">
       <p ng-show="requests.requests.length == 0">You have not submitted any requests yet.
-        <a href ui-sref="requests.create-annual-equipment-request">Create a request here</a>.</p>
+        Create a request using the 'Create request' button above.</p>
 
       <div class="table-primary" ng-show="requests.requests.length > 0">
         <table class="table table-bordered bg-white" id="requests">
