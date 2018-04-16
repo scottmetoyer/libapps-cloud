@@ -124,7 +124,7 @@
                         <strong>{{ r.department.code }} ({{ r.location }})</strong>
                         <div class="pull-right">
                             <button class="btn btn-xs btn-success" ng-click="priority.toPrioritized($index)">Prioritize</button>
-                            <button class="btn btn-xs btn-danger" ng-click="priority.toDenied($index)">Needs Review</button>
+                            <button class="btn btn-xs btn-danger" ng-click="priority.toNeedsReview($index)">Needs Review</button>
                         </div>
                     </div>
                 </div>
@@ -151,6 +151,8 @@
                             <strong>
                                 <a target="_blank" href ui-sref="requests.view({ id: r.id })">{{ r.description }}</a>
                             </strong>
+                            <span class="label label-success label-outline label-pill pull-right" ng-show="r.approval === 'approved'">Approved</span>
+                            <span class="label label-danger label-outline label-pill pull-right" ng-show="r.approval === 'denied'">Denied</span>
                         </div>
 
                         <div class="widget-comments-text">
@@ -165,10 +167,10 @@
                                 <button class="btn btn-xs btn-default" ng-click="priority.toSubmitted($index, priority.prioritized)">
                                     <i class="ion-arrow-return-left"></i>
                                 </button>
-                                <button class="btn btn-xs btn-success" ng-click="priority.toSubmitted($index, priority.prioritized)">
+                                <button class="btn btn-xs btn-success" ng-click="priority.setApproval($index, 'approved')">
                                     Approve
                                 </button>
-                                <button class="btn btn-xs btn-danger" ng-click="priority.toSubmitted($index, priority.prioritized)">
+                                <button class="btn btn-xs btn-danger" ng-click="priority.setApproval($index, 'denied')">
                                     Deny
                                 </button>
                             </div>
@@ -181,12 +183,12 @@
                 <div class="panel-heading">
                     <span class="panel-title">Needs Review</span>
                     <div class="panel-heading-controls">
-                        <span class="panel-heading-text">{{ priority.denied.length}} requests - {{ priority.totalNeedsReviewAmount | currency }}</span>
+                        <span class="panel-heading-text">{{ priority.needsReview.length}} requests - {{ priority.totalNeedsReviewAmount | currency }}</span>
                     </div>
                 </div>
                 <div>
-                    <div class="widget-comments-item" ng-show="priority.denied.length == 0"></div>
-                    <div class="widget-comments-item request" ng-repeat="r in priority.denied" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected}">
+                    <div class="widget-comments-item" ng-show="priority.needsReview.length == 0"></div>
+                    <div class="widget-comments-item request" ng-repeat="r in priority.needsReview" ng-click="priority.setSelected(r.id)" ng-class="{ selected: r.id === priority.selected}">
                         <div class="widget-comments-avatar font-size-16">
                             <span>{{ $index + 1 }}
                                 <br>
@@ -208,7 +210,7 @@
                             <strong>{{ r.createdBy.replace('@ucr.edu', '') }}</strong> requested for
                             <strong>{{ r.department.code }} ({{ r.location }})</strong>
                             <div class="pull-right">
-                                <button class="btn btn-xs btn-default" ng-click="priority.toSubmitted($index, priority.denied)">
+                                <button class="btn btn-xs btn-default" ng-click="priority.toSubmitted($index, priority.needsReview)">
                                     <i class="ion-arrow-return-left"></i>
                                 </button>
                             </div>

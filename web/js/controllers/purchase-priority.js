@@ -123,6 +123,10 @@
       data.setRequestStatus(item[0], 'new');
     };
 
+    self.setApproval = function(index, value) {
+      self.prioritized[index].approval = value;
+    }
+
     self.sortableOptions = {
       stop: function (e, ui) {
         data.saveRequestPriorities(self.prioritized, 'aul');
