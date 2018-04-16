@@ -20,7 +20,8 @@
             <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right form-inline">
                 <div class="form-group">
                     <label for="requestType" class="text-muted">Request Type&nbsp;</label>
-                    <select name="requestType" class="form-control" ng-change="priority.loadRequests()" ng-options="type for type in priority.requestTypes" ng-model="priority.requestType">
+                    <select name="requestType" class="form-control" ng-change="priority.loadRequests()" ng-options="type for type in priority.requestTypes"
+                        ng-model="priority.requestType">
                     </select>
                 </div>
             </div>
@@ -163,6 +164,12 @@
                             <div class="pull-right">
                                 <button class="btn btn-xs btn-default" ng-click="priority.toSubmitted($index, priority.prioritized)">
                                     <i class="ion-arrow-return-left"></i>
+                                </button>
+                                <button class="btn btn-xs btn-success" ng-click="priority.toSubmitted($index, priority.prioritized)">
+                                    Approve
+                                </button>
+                                <button class="btn btn-xs btn-danger" ng-click="priority.toSubmitted($index, priority.prioritized)">
+                                    Deny
                                 </button>
                             </div>
                         </div>

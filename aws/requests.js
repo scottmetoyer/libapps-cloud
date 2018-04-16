@@ -54,7 +54,7 @@ module.exports.handler = (event, context, callback) => {
     params.tags ? item.tags = params.tags : null;
     params.status ? item.status = params.status : null;
     params.comments ? item.comments = params.comments : null;
-    params.approved ? item.approved = params.approved : null;
+    params.approval ? item.approval = params.approval : null;
 
     docClient.put({
       "TableName": tableName,

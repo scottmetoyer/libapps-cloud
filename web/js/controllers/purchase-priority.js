@@ -8,7 +8,7 @@
     self.ready = false;
     self.requests = [];
     self.prioritized = [];
-    self.denied = [];
+    self.needsReview = [];
     self.prioritizedTags = [];
     self.selected;
     self.overBudgetTrigger;
@@ -36,7 +36,7 @@
 
     self.calculateTotalNeedsReviewAmount = function() {
       var total = 0;
-      self.denied.forEach(function (e) {
+      self.needsReview.forEach(function (e) {
         e.cost && e.quantity ? total += (e.cost * e.quantity) : null;
       });
 
@@ -103,13 +103,13 @@
       data.saveRequestPriorities(self.prioritized, 'aul');
     };
 
-    self.toDenied = function (index) {
+    self.toNeedsReview = function (index) {
       var item = self.requests.splice(index, 1);
-      self.denied.push(item[0]);
+      self.needsReview.push(item[0]);
       self.calculateTotalNeedsReviewAmount();
 
       // Set the request status
-      data.setRequestStatus(item[0], 'denied');
+      data.setRequestStatus(item[0], 'needsReview');
     };
 
     self.toSubmitted = function (index, source) {
@@ -143,8 +143,8 @@
       return request.status == 'prioritized';
     };
 
-    self.aulDeniedFilter = function (request) {
-      return request.status == 'denied';
+    self.aulNeedsReviewFilter = function (request) {
+      return request.status == 'needsReview';
     };
 
     self.unPrioritizedFilter = function (request) {
@@ -165,10 +165,10 @@
           self.requests = $filter('orderBy')(self.requests, ['createdBy', 'requesterPriority']);
           self.calculateTotalRequestedAmount();
 
-          // Move prioritized and denied requests to the their respective lists
+          // Move prioritized and needs review requests to the their respective lists
           self.prioritized = $filter('filter')(self.requests, self.aulPrioritizedFilter);
           self.prioritized = $filter('orderBy')(self.prioritized, ['aulPriority']);
-          self.denied = $filter('filter')(self.requests, self.aulDeniedFilter);
+          self.needsReview = $filter('filter')(self.requests, self.aulNeedsReviewFilter);
 
           // Remove dispositioned requests from the submitted list
           self.requests = $filter('filter')(self.requests, self.unPrioritizedFilter);
