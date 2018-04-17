@@ -8,10 +8,11 @@
     self.ready = false;
     self.requests = [];
     self.prioritized = [];
-    self.denied = [];
+    self.needsReview = [];
     self.prioritizedTags = [];
     self.selected;
     self.overBudgetTrigger;
+    self.toggled = false;
 
     self.allocatedBudget = 0;
     self.totalRequestedAmount = 0;
@@ -22,21 +23,14 @@
     self.requestTypes = bl.getRequestTypes();
     self.requestType = self.requestTypes[0];
 
-    self.getTotal = function () {
-      var total = 0;
-      for (var i = 0; i < self.requests.length; i++) {
-        var request = self.requests[i];
+    self.toggleSubmittedColumn = function () {
+      self.toggled = !self.toggled;
+      localStorage.setItem('toggled', JSON.stringify(self.toggled));
+    }
 
-        if (request.cost && request.quantity) {
-          request.cost && request.quantity ? total += (request.cost * request.quantity) : null;
-        }
-      }
-      return total;
-    };
-
-    self.calculateTotalNeedsReviewAmount = function() {
+    self.calculateTotalNeedsReviewAmount = function () {
       var total = 0;
-      self.denied.forEach(function (e) {
+      self.needsReview.forEach(function (e) {
         e.cost && e.quantity ? total += (e.cost * e.quantity) : null;
       });
 
@@ -103,13 +97,13 @@
       data.saveRequestPriorities(self.prioritized, 'aul');
     };
 
-    self.toDenied = function (index) {
+    self.toNeedsReview = function (index) {
       var item = self.requests.splice(index, 1);
-      self.denied.push(item[0]);
+      self.needsReview.push(item[0]);
       self.calculateTotalNeedsReviewAmount();
 
       // Set the request status
-      data.setRequestStatus(item[0], 'denied');
+      data.setRequestStatus(item[0], 'needsReview');
     };
 
     self.toSubmitted = function (index, source) {
@@ -122,6 +116,10 @@
       // Set the request status
       data.setRequestStatus(item[0], 'new');
     };
+
+    self.setApproval = function (index, value) {
+      self.prioritized[index].approval = value;
+    }
 
     self.sortableOptions = {
       stop: function (e, ui) {
@@ -143,15 +141,33 @@
       return request.status == 'prioritized';
     };
 
-    self.aulDeniedFilter = function (request) {
-      return request.status == 'denied';
+    self.aulNeedsReviewFilter = function (request) {
+      return request.status == 'needsReview';
     };
 
     self.unPrioritizedFilter = function (request) {
       return request.status == 'new';
     };
 
+    function loadLocalStorageVariables() {
+      if (localStorage.getItem('toggled') != null) {
+        self.toggled = JSON.parse(localStorage.getItem('toggled'));
+      }
+
+      if (localStorage.getItem('selectedRequestType') != null) {
+        self.requestType = JSON.parse(localStorage.getItem('selectedRequestType'));
+      }
+    }
+
+    self.setRequestType = function() {
+      // Save the selected request type to local storage
+      localStorage.setItem('selectedRequestType', JSON.stringify(self.requestType));
+      self.loadRequests();
+    }
+
     self.loadRequests = function () {
+      loadLocalStorageVariables();
+
       if (self.requestType == "Annual Equipment Request") {
         self.allocatedBudget = 200000;
       } else if (self.requestType == "Student Tech Fee Request") {
@@ -165,10 +181,10 @@
           self.requests = $filter('orderBy')(self.requests, ['createdBy', 'requesterPriority']);
           self.calculateTotalRequestedAmount();
 
-          // Move prioritized and denied requests to the their respective lists
+          // Move prioritized and needs review requests to the their respective lists
           self.prioritized = $filter('filter')(self.requests, self.aulPrioritizedFilter);
           self.prioritized = $filter('orderBy')(self.prioritized, ['aulPriority']);
-          self.denied = $filter('filter')(self.requests, self.aulDeniedFilter);
+          self.needsReview = $filter('filter')(self.requests, self.aulNeedsReviewFilter);
 
           // Remove dispositioned requests from the submitted list
           self.requests = $filter('filter')(self.requests, self.unPrioritizedFilter);
@@ -177,7 +193,9 @@
           self.calculateTotalNeedsReviewAmount();
 
           self.ready = true;
-        }).catch(function (err) { console.log(err) });
+        }).catch(function (err) {
+          console.log(err)
+        });
     };
 
     self.loadRequests();
