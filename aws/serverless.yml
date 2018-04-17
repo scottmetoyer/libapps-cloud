@@ -113,11 +113,19 @@ functions:
           method: any
           cors: true
           authorizer: auth
-  request-statuse:
+  request-status:
     handler: request-status.handler
     events:
       - http:
           path: /request-status
+          method: put
+          cors: true
+          authorizer: auth
+  purchase-approval:
+    handler: purchase-approval.handler
+    events:
+      - http:
+          path: /purchase-approval
           method: put
           cors: true
           authorizer: auth
