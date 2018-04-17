@@ -171,7 +171,7 @@
       if (self.requestType == "Annual Equipment Request") {
         self.allocatedBudget = 200000;
       } else if (self.requestType == "Student Tech Fee Request") {
-        self.allocatedBudget = 15000;
+        self.allocatedBudget = 259750;
       }
 
       data.getRequests(null, self.requestType)
