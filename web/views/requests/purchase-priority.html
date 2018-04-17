@@ -203,8 +203,8 @@
                             <strong>
                                 <a target="_blank" href ui-sref="requests.view({ id: r.id })">{{ r.description }}</a>
                             </strong>
-                            <span class="label label-success label-outline label-pill pull-right" ng-show="r.approval === 'approved'">Approved</span>
-                            <span class="label label-danger label-outline label-pill pull-right" ng-show="r.approval === 'denied'">Denied</span>
+                            <a class="label label-success label-outline label-pill pull-right" ng-click="priority.setApproval($index, '-')" ng-show="r.approval === 'approved'">Approved</a>
+                            <a class="label label-danger label-outline label-pill pull-right" ng-click="priority.setApproval($index, '-')" ng-show="r.approval === 'denied'">Denied</a>
                         </div>
 
                         <div class="widget-comments-text">
