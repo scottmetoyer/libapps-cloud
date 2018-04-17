@@ -118,7 +118,7 @@
       self.requests = $filter('orderBy')(self.requests, ['createdBy', 'requesterPriority']);
       self.calculateTotalPrioritizedAmount();
       self.calculateTotalNeedsReviewAmount();
-      
+
       // Set the request status
       data.setRequestStatus(item[0], 'new');
     };
@@ -155,7 +155,7 @@
       if (self.requestType == "Annual Equipment Request") {
         self.allocatedBudget = 200000;
       } else if (self.requestType == "Student Tech Fee Request") {
-        self.allocatedBudget = 15000;
+        self.allocatedBudget = 259750;
       }
 
       data.getRequests(null, self.requestType)
