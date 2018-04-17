@@ -12,6 +12,7 @@
     self.prioritizedTags = [];
     self.selected;
     self.overBudgetTrigger;
+    self.toggled = false;
 
     self.allocatedBudget = 0;
     self.totalRequestedAmount = 0;
@@ -21,6 +22,10 @@
 
     self.requestTypes = bl.getRequestTypes();
     self.requestType = self.requestTypes[0];
+
+    self.toggleSubmittedColumn = function() {
+      self.toggled = !self.toggled;
+    }
 
     self.getTotal = function () {
       var total = 0;
@@ -156,6 +161,8 @@
     };
 
     self.loadRequests = function () {
+      // TODO: Toggle submitted column visibility and request type selector based on values saved in local storage
+
       if (self.requestType == "Annual Equipment Request") {
         self.allocatedBudget = 200000;
       } else if (self.requestType == "Student Tech Fee Request") {
