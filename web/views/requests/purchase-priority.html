@@ -20,7 +20,7 @@
             <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right form-inline">
                 <div class="form-group">
                     <label for="requestType" class="text-muted">Request Type&nbsp;</label>
-                    <select name="requestType" class="form-control" ng-change="priority.loadRequests()" ng-options="type for type in priority.requestTypes"
+                    <select name="requestType" class="form-control" ng-change="priority.setRequestType()" ng-options="type for type in priority.requestTypes"
                         ng-model="priority.requestType">
                     </select>
                 </div>

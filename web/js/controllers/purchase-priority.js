@@ -23,23 +23,12 @@
     self.requestTypes = bl.getRequestTypes();
     self.requestType = self.requestTypes[0];
 
-    self.toggleSubmittedColumn = function() {
+    self.toggleSubmittedColumn = function () {
       self.toggled = !self.toggled;
+      localStorage.setItem('toggled', JSON.stringify(self.toggled));
     }
 
-    self.getTotal = function () {
-      var total = 0;
-      for (var i = 0; i < self.requests.length; i++) {
-        var request = self.requests[i];
-
-        if (request.cost && request.quantity) {
-          request.cost && request.quantity ? total += (request.cost * request.quantity) : null;
-        }
-      }
-      return total;
-    };
-
-    self.calculateTotalNeedsReviewAmount = function() {
+    self.calculateTotalNeedsReviewAmount = function () {
       var total = 0;
       self.needsReview.forEach(function (e) {
         e.cost && e.quantity ? total += (e.cost * e.quantity) : null;
@@ -123,12 +112,12 @@
       self.requests = $filter('orderBy')(self.requests, ['createdBy', 'requesterPriority']);
       self.calculateTotalPrioritizedAmount();
       self.calculateTotalNeedsReviewAmount();
-      
+
       // Set the request status
       data.setRequestStatus(item[0], 'new');
     };
 
-    self.setApproval = function(index, value) {
+    self.setApproval = function (index, value) {
       self.prioritized[index].approval = value;
     }
 
@@ -160,8 +149,24 @@
       return request.status == 'new';
     };
 
+    function loadLocalStorageVariables() {
+      if (localStorage.getItem('toggled') != null) {
+        self.toggled = JSON.parse(localStorage.getItem('toggled'));
+      }
+
+      if (localStorage.getItem('selectedRequestType') != null) {
+        self.requestType = JSON.parse(localStorage.getItem('selectedRequestType'));
+      }
+    }
+
+    self.setRequestType = function() {
+      // Save the selected request type to local storage
+      localStorage.setItem('selectedRequestType', JSON.stringify(self.requestType));
+      self.loadRequests();
+    }
+
     self.loadRequests = function () {
-      // TODO: Toggle submitted column visibility and request type selector based on values saved in local storage
+      loadLocalStorageVariables();
 
       if (self.requestType == "Annual Equipment Request") {
         self.allocatedBudget = 200000;
@@ -188,7 +193,9 @@
           self.calculateTotalNeedsReviewAmount();
 
           self.ready = true;
-        }).catch(function (err) { console.log(err) });
+        }).catch(function (err) {
+          console.log(err)
+        });
     };
 
     self.loadRequests();
