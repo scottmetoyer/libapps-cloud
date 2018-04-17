@@ -75,6 +75,10 @@
         return $http.put(urlBase + '/request-status', JSON.stringify(request));
       }
 
+      dataFactory.setPurchaseApproval = function(request, approval) {
+        return $http.put(urlBase + '/purchase-approval', JSON.stringify({ id: request.id, approval: approval}));
+      }
+
       dataFactory.saveRequestPriorities = function(requests, type) {
         var data = {
           type: type,

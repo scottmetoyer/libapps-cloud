@@ -119,6 +119,7 @@
 
     self.setApproval = function (index, value) {
       self.prioritized[index].approval = value;
+      data.setPurchaseApproval(self.prioritized[index], value);
     }
 
     self.sortableOptions = {
