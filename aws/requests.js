@@ -94,6 +94,8 @@ module.exports.handler = (event, context, callback) => {
   function getRequests() {
     var params = { TableName: tableName };
 
+    // TODO: Filter out old requests here
+
     if (event['queryStringParameters'] && event['queryStringParameters']['type']) {
       params.FilterExpression = '#type = :t',
       params.ExpressionAttributeValues = { ':t': event['queryStringParameters']['type'] },
