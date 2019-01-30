@@ -16,7 +16,7 @@ provider:
     PROJECTS_TABLE: projects-${opt:stage, self:provider.stage}
     PROJECT_UPDATES_TABLE: project-updates-${opt:stage, self:provider.stage}
     REQUESTS_TABLE: requests-${opt:stage, self:provider.stage}
-    COST_CENTERS_TABLE: cost-centers-${opt:stage, self:provider.stage}
+    ACTIVITY_CODES_TABLE: activity-codes-${opt:stage, self:provider.stage}
     TASKS_TABLE: recurring-tasks-${opt:stage, self:provider.stage}
     AUTH0_CLIENT_ID: ${file(./secrets.json):AUTH0_CLIENT_ID}
     AUTH0_SIGNING_SECRET: ${file(./secrets.json):AUTH0_SIGNING_SECRET}
@@ -34,7 +34,7 @@ provider:
         - { "Fn::GetAtt": ["ProjectsDynamoDbTable", "Arn"] }
         - { "Fn::GetAtt": ["ProjectUpdatesDynamoDbTable", "Arn"] }
         - { "Fn::GetAtt": ["RequestsDynamoDbTable", "Arn"] }
-        - { "Fn::GetAtt": ["CostCentersDynamoDbTable", "Arn"] }
+        - { "Fn::GetAtt": ["ActivityCodesDynamoDbTable", "Arn"] }
         - { "Fn::GetAtt": ["RecurringTasksDynamoDbTable", "Arn"] }
 
 functions:
@@ -49,28 +49,28 @@ functions:
           method: get
           cors: true
           authorizer: auth
-  cost-centers:
-    handler: cost-centers.handler
+  activity-codes:
+    handler: activity-codes.handler
     events:
       - http:
-          path: /cost-centers
+          path: /activity-codes
           method: get
           cors: true
           authorizer: auth
       - http:
-          path: /cost-centers
+          path: /activity-codes
           method: post
           cors: true
           authorizer: auth
       - http:
-          path: /cost-center/{costCenter}
+          path: /activity-codes/{activityCode}
           method: any
           cors: true
           authorizer: auth
           request:
             parameters:
               paths:
-                costCenter: true
+                activityCode: true
   projects:
     handler: projects.handler
     events:
@@ -188,7 +188,7 @@ functions:
 
 resources:
   Resources:
-    CostCentersDynamoDbTable:
+    ActivityCodesDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       Properties:
         AttributeDefinitions:
@@ -202,7 +202,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
-        TableName: ${self:provider.environment.COST_CENTERS_TABLE}
+        TableName: ${self:provider.environment.ACTIVITY_CODES_TABLE}
     ProjectsDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       Properties:

@@ -5,8 +5,8 @@ var uuidv1 = require('uuid/v1');
 var utility = require('utility');
 
 module.exports.handler = (event, context, callback) => {
-  var tableName = process.env.COST_CENTERS_TABLE;
-  let id = (event.pathParameters !== null ? event.pathParameters.costCenter : false);
+  var tableName = process.env.ACTIVITY_CODES_TABLE;
+  let id = (event.pathParameters !== null ? event.pathParameters.activityCode : false);
 
   switch (event.httpMethod) {
     case "GET":
