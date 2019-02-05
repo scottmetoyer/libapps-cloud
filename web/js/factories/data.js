@@ -6,7 +6,7 @@
       var dataFactory = {};
 
       // Check to make sure we can still get to our data services
-      dataFactory.heartbeat = function() {
+      dataFactory.heartbeat = function () {
         $http.get(__env.apiUrl + '/heartbeat');
       }
 
@@ -70,16 +70,19 @@
         }
       }
 
-      dataFactory.setRequestStatus = function(request, status) {
+      dataFactory.setRequestStatus = function (request, status) {
         request.status = status;
         return $http.put(urlBase + '/request-status', JSON.stringify(request));
       }
 
-      dataFactory.setPurchaseApproval = function(request, approval) {
-        return $http.put(urlBase + '/purchase-approval', JSON.stringify({ id: request.id, approval: approval}));
+      dataFactory.setPurchaseApproval = function (request, approval) {
+        return $http.put(urlBase + '/purchase-approval', JSON.stringify({
+          id: request.id,
+          approval: approval
+        }));
       }
 
-      dataFactory.saveRequestPriorities = function(requests, type) {
+      dataFactory.saveRequestPriorities = function (requests, type) {
         var data = {
           type: type,
           requests: requests
@@ -88,33 +91,90 @@
         return $http.put(urlBase + '/purchase-priority', JSON.stringify(data));
       }
 
-      dataFactory.getCostCenters = function() {
-        var costCenters = [
-          { description: 'Access Services',	code: 'ALSLA' },
-          { description: 'Acquisitions Accounting',	code: 'ALACQ' },
-          { description: 'Acquisitions Unit',	code: 'ALAUA' },
-          { description: 'Circulation Reserves',	code: 'ALCCR' },
-          { description: 'Collection Maintenance',	code: 'ALCM' },
-          { description: 'Collection Services',	code: 'ALCDD' },
-          { description: 'Communications',	code: 'LCOM' },
-          { description: 'Cyberinfrastructure',	code: 'ALLS' },
-          { description: 'Digital Initiatives',	code: 'ALDIP' },
-          { description: 'Facilities',	code: 'ALLR' },
-          { description: 'Interlibrary Loan',	code: 'ALGI' },
-          { description: 'Library Administration',	code: 'ALAD' },
-          { description: 'Library Security Services',	code: 'ALSS' },
-          { description: 'Medical Library Programs',	code: 'ALMLS' },
-          { description: 'Metadata and Technical Services',	code: 'ALTS' },
-          { description: 'Music Library',	code: 'ALMU' },
-          { description: 'Preservation Services',	code: 'ALPA' },
-          { description: 'Records, Authority, Metadata',	code: 'ALRAM' },
-          { description: 'Research Services',	code: 'ALISD' },
-          { description: 'Special Collections & University Archives',	code: 'ALCS' },
-          { description: 'Special Materials and Language',	code: 'ALSML' },
-          { description: 'Teaching & Learning',	code: 'ALRR' }
+      dataFactory.getActivityCodes = function () {
+        var activityCodes = [{
+            description: 'Teaching & Learning - Library',
+            code: 'A01453'
+          },
+          {
+            description: 'Special Research Proj-Library',
+            code: 'A01172'
+          },
+          {
+            description: 'M&TS Special Materials/Languag',
+            code: 'A01455'
+          },
+          {
+            description: 'Special Collect/Archives - Lib',
+            code: 'A01140'
+          },
+          {
+            description: 'Research Services - Library',
+            code: 'A02461'
+          },
+          {
+            description: 'M&TS Records Auth & Meta Mgmt',
+            code: 'A01454'
+          },
+          {
+            description: 'Preservation - Library',
+            code: 'A01170'
+          },
+          {
+            description: 'Music - Library',
+            code: 'A01173'
+          },
+          {
+            description: 'Medical Library Services',
+            code: 'A01168'
+          },
+          {
+            description: 'Library Security',
+            code: 'A02462'
+          },
+          {
+            description: 'Library Gen Operations',
+            code: 'A01165'
+          },
+          {
+            description: 'Interlibrary Loans',
+            code: 'A01171'
+          },
+          {
+            description: 'Library Facilities',
+            code: 'A01536'
+          },
+          {
+            description: 'Digitation Services - Library',
+            code: 'A01565'
+          },
+          {
+            description: 'Cyber Infrastructure - Library',
+            code: 'A01588'
+          },
+          {
+            description: 'Communications - Library',
+            code: 'A01451'
+          },
+          {
+            description: 'Collections Strategy - Library',
+            code: 'A01174'
+          },
+          {
+            description: 'Collections Maint Bin-Library',
+            code: 'A01167'
+          },
+          {
+            description: 'Circulation/Reserves - Library',
+            code: 'A01166'
+          },
+          {
+            description: 'Books / Acquisitions - Library',
+            code: 'A01169'
+          }
         ];
 
-        return costCenters;
+        return activityCodes;
       }
 
       return dataFactory;

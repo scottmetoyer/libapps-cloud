@@ -6,7 +6,7 @@
   function RequestCtrl($http, $stateParams, $anchorScroll, $location, $state, $scope, $q, bl, data, Auth) {
     var self = this;
     var showUpdatedAlert = false;
-    self.costCenters = data.getCostCenters();
+    self.activityCodes = data.getActivityCodes();
     self.requestTypes = bl.getRequestTypes();
     self.comment = {
       text: '',
