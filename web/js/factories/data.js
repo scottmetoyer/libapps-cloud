@@ -93,83 +93,83 @@
 
       dataFactory.getActivityCodes = function () {
         var activityCodes = [{
-            description: 'Teaching & Learning - Library',
+            description: 'A01453 | Teaching & Learning - Library',
             code: 'A01453'
           },
           {
-            description: 'Special Research Proj-Library',
+            description: 'A01172 | Special Research Proj-Library',
             code: 'A01172'
           },
           {
-            description: 'M&TS Special Materials/Languag',
+            description: 'A01455 | M&TS Special Materials/Languag',
             code: 'A01455'
           },
           {
-            description: 'Special Collect/Archives - Lib',
+            description: 'A01140 | Special Collect/Archives - Lib',
             code: 'A01140'
           },
           {
-            description: 'Research Services - Library',
+            description: 'A02461 | Research Services - Library',
             code: 'A02461'
           },
           {
-            description: 'M&TS Records Auth & Meta Mgmt',
+            description: 'A01454 | M&TS Records Auth & Meta Mgmt',
             code: 'A01454'
           },
           {
-            description: 'Preservation - Library',
+            description: 'A01170 | Preservation - Library',
             code: 'A01170'
           },
           {
-            description: 'Music - Library',
+            description: 'A01173 | Music - Library',
             code: 'A01173'
           },
           {
-            description: 'Medical Library Services',
+            description: 'A01168 | Medical Library Services',
             code: 'A01168'
           },
           {
-            description: 'Library Security',
+            description: 'A02462 | Library Security',
             code: 'A02462'
           },
           {
-            description: 'Library Gen Operations',
+            description: 'A01165 | Library Gen Operations',
             code: 'A01165'
           },
           {
-            description: 'Interlibrary Loans',
+            description: 'A01171 | Interlibrary Loans',
             code: 'A01171'
           },
           {
-            description: 'Library Facilities',
+            description: 'A01536 | Library Facilities',
             code: 'A01536'
           },
           {
-            description: 'Digitation Services - Library',
+            description: 'A01565 | Digitation Services - Library',
             code: 'A01565'
           },
           {
-            description: 'Cyber Infrastructure - Library',
+            description: 'A01588 | Cyber Infrastructure - Library',
             code: 'A01588'
           },
           {
-            description: 'Communications - Library',
+            description: 'A01451 | Communications - Library',
             code: 'A01451'
           },
           {
-            description: 'Collections Strategy - Library',
+            description: 'A01174 | Collections Strategy - Library',
             code: 'A01174'
           },
           {
-            description: 'Collections Maint Bin-Library',
+            description: 'A01167 | Collections Maint Bin-Library',
             code: 'A01167'
           },
           {
-            description: 'Circulation/Reserves - Library',
+            description: 'A01166 | Circulation/Reserves - Library',
             code: 'A01166'
           },
           {
-            description: 'Books / Acquisitions - Library',
+            description: 'A01169 | Books / Acquisitions - Library',
             code: 'A01169'
           }
         ];
