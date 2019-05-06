@@ -7,8 +7,35 @@
 </button>
 
 <ul class="px-nav-content">
-    <!--
-    <li class="px-nav-item px-nav-dropdown active">
+    <li class="px-nav-item px-nav-dropdown px-open" ui-sref-active="px-open">
+        <a href="#">
+            <i class="px-nav-icon ion-android-attach"></i>
+            <span class="px-nav-label">Requests</span>
+        </a>
+        <ul class="px-nav-dropdown-menu">
+            <li class="px-nav-item" ui-sref-active="active">
+                <a ui-sref="requests.create">
+                    <i class="px-nav-icon ion-plus text-success"></i>
+                    <span class="px-nav-label">New Request</span>
+                </a>
+            </li>
+            <li class="px-nav-item" ui-sref-active="active">
+                <a href ui-sref="requests.list">
+                    <i class="px-nav-icon ion-monitor"></i>
+                    <span class="px-nav-label">Request List</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="px-nav-item" ui-sref-active="active" ng-show="main.user['https://library.ucr.edu/roles'].includes('aul')">
+        <a href ui-sref="requests.purchase-priority">
+            <i class="px-nav-icon ion-thumbsup"></i>
+            <span class="px-nav-label">Purchase Prioritization</span>
+        </a>
+    </li>
+
+    <li class="px-nav-item px-nav-dropdown px-open" ui-sref-active="px-open" ng-show="main.user['https://library.ucr.edu/roles'].includes('project-manager')">
         <a href="#">
             <i class="px-nav-icon ion-ios-pulse-strong"></i>
             <span class="px-nav-label">Process Management</span>
@@ -54,34 +81,5 @@
                 </a>
             </li>
         </ul>
-    </li>
-    -->
-
-    <li class="px-nav-item px-nav-dropdown px-open" ui-sref-active="px-open">
-        <a href="#">
-            <i class="px-nav-icon ion-android-attach"></i>
-            <span class="px-nav-label">Requests</span>
-        </a>
-        <ul class="px-nav-dropdown-menu">
-            <li class="px-nav-item" ui-sref-active="active">
-                <a ui-sref="requests.create">
-                    <i class="px-nav-icon ion-plus text-success"></i>
-                    <span class="px-nav-label">New Request</span>
-                </a>
-            </li>
-            <li class="px-nav-item" ui-sref-active="active">
-                <a href ui-sref="requests.list">
-                    <i class="px-nav-icon ion-monitor"></i>
-                    <span class="px-nav-label">Request List</span>
-                </a>
-            </li>
-        </ul>
-    </li>
-
-    <li class="px-nav-item" ui-sref-active="active" ng-show="main.user['https://library.ucr.edu/roles'].includes('aul')">
-        <a href ui-sref="requests.purchase-priority">
-            <i class="px-nav-icon ion-thumbsup"></i>
-            <span class="px-nav-label">Purchase Prioritization</span>
-        </a>
     </li>
 </ul>

@@ -1,36 +1,43 @@
 <div ng-controller="ProjectListCtrl as projects">
-<div class="page-header m-b-0">
-    <h1><span class="text-muted font-weight-light">Projects / </span>Archive</h1>
-</div>
-<div class="page-wide-block p-a-4 bg-white font-size-15">
+  <div class="page-header m-b-0">
+    <div class="row">
+      <div class="col-md-6">
+        <h1><span class="text-muted font-weight-light">Projects / </span>Archive</h1>
+      </div>
+      <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right">
+        <a href ui-sref="projects.create" class="btn btn-primary"><span
+            class="btn-label-icon left ion-plus-round"></span>Create a project</a>
+      </div>
+    </div>
+  </div>
+  <div class="page-wide-block p-a-4 bg-white font-size-15">
     <p>
       Archived projects that have been completed and/or closed.
     </p>
-</div>
-<hr class="page-wide-block m-t-0">
-<div class="row">
-  <div class="col-md-12">
+  </div>
+  <hr class="page-wide-block m-t-0">
+  <div class="row">
+    <div class="col-md-12">
       <p ng-show="projects.projects.length == 0">There are no projects in the archive.</p>
       <div class="table-light">
 
-          <table class="table table-bordered table-striped" id="projects" ng-show="projects.projects.length > 0">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Lead</th>
-                  <th>Owner</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="p in projects.projects">
-                  <td><a href ui-sref="projects.view({ id: p.id })">{{ p.name }}</a></td>
-                  <td>{{ p.lead }}</td>
-                  <td>{{ p.owner }}</td>
-                </tr>
-              </tbody>
-          </table>
+        <table class="table table-bordered table-striped" id="projects" ng-show="projects.projects.length > 0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Lead</th>
+              <th>Owner</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="p in projects.projects">
+              <td><a href ui-sref="projects.view({ id: p.id })">{{ p.name }}</a></td>
+              <td>{{ p.lead }}</td>
+              <td>{{ p.owner }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+    </div>
   </div>
-</div>
-
 </div>
