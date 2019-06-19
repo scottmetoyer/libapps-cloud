@@ -19,7 +19,7 @@
   <div class="col-md-12">
       <p ng-show="projects.projects.length == 0">There are no projects in the backlog. Great work!</p>
       <div class="table-light">
-        <table class="table table-bordered table-striped" id="projects" ng-show="projects.projects.length > 0">
+        <table datatable="ng" class="table table-bordered table-striped" id="projects" ng-show="projects.projects.length > 0">
             <thead>
               <tr>
                 <th>Name</th>

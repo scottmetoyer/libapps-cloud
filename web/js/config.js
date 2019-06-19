@@ -43,16 +43,22 @@
       .state('projects.in-flight', {
         url: '/in-flight',
         templateUrl: 'views/projects/in-flight-list.html',
-        data: { pageTitle: 'In-flight projects' },
+        data: {
+          pageTitle: 'In-flight projects'
+        },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
-            return $ocLazyLoad.load([
-              {
+            return $ocLazyLoad.load([{
                 serie: true,
                 name: 'ng-sortable',
                 files: [
                   'js/libs/jquery-sortable.js'
                 ]
+              },
+              {
+                serie: true,
+                name: 'datatables',
+                files: ['js/libs/jquery.dataTables.js', 'js/libs/dataTables.bootstrap.js', 'js/pixeladmin/extensions/datatables.js', 'js/libs/angular-datatables.js']
               },
             ]);
           },
@@ -61,16 +67,22 @@
       .state('projects.backlog', {
         url: '/backlog',
         templateUrl: 'views/projects/backlog-list.html',
-        data: { pageTitle: 'Backlog projects' },
+        data: {
+          pageTitle: 'Backlog projects'
+        },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
-            return $ocLazyLoad.load([
-              {
+            return $ocLazyLoad.load([{
                 serie: true,
                 name: 'ng-sortable',
                 files: [
                   'js/libs/jquery-sortable.js'
                 ]
+              },
+              {
+                serie: true,
+                name: 'datatables',
+                files: ['js/libs/jquery.dataTables.js', 'js/libs/dataTables.bootstrap.js', 'js/pixeladmin/extensions/datatables.js', 'js/libs/angular-datatables.js']
               },
             ]);
           },
@@ -79,7 +91,9 @@
       .state('projects.create', {
         url: '/create',
         templateUrl: 'views/projects/create.html',
-        data: { pageTitle: 'Create a project' },
+        data: {
+          pageTitle: 'Create a project'
+        },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([]);
@@ -89,7 +103,9 @@
       .state('projects.view', {
         url: '/view/:id',
         templateUrl: 'views/projects/view.html',
-        data: { pageTitle: 'Project dashboard' },
+        data: {
+          pageTitle: 'Project dashboard'
+        },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([]);
@@ -99,17 +115,25 @@
       .state('projects.archive', {
         url: '/archive',
         templateUrl: 'views/projects/archive-list.html',
-        data: { pageTitle: 'Archived projects' },
+        data: {
+          pageTitle: 'Archived projects'
+        },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
-            return $ocLazyLoad.load([]);
+            return $ocLazyLoad.load([{
+              serie: true,
+              name: 'datatables',
+              files: ['js/libs/jquery.dataTables.js', 'js/libs/dataTables.bootstrap.js', 'js/pixeladmin/extensions/datatables.js', 'js/libs/angular-datatables.js']
+            }]);
           },
         },
       })
       .state('projects.edit', {
         url: '/edit/:id',
         templateUrl: 'views/projects/edit.html',
-        data: { pageTitle: 'Edit project' },
+        data: {
+          pageTitle: 'Edit project'
+        },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([]);
@@ -126,7 +150,9 @@
       .state('recurring-tasks.list', {
         url: '/list',
         templateUrl: 'views/recurring-tasks/list.html',
-        data: { pageTitle: 'Recurring tasks' },
+        data: {
+          pageTitle: 'Recurring tasks'
+        },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([]);
@@ -136,7 +162,9 @@
       .state('recurring-tasks.create', {
         url: '/create',
         templateUrl: 'views/recurring-tasks/create.html',
-        data: { pageTitle: 'Create a recurring task' },
+        data: {
+          pageTitle: 'Create a recurring task'
+        },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([]);
@@ -146,7 +174,9 @@
       .state('recurring-tasks.edit', {
         url: '/edit/:id',
         templateUrl: 'views/recurring-tasks/edit.html',
-        data: { pageTitle: 'Edit task' },
+        data: {
+          pageTitle: 'Edit task'
+        },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([]);
@@ -167,7 +197,9 @@
       .state('requests.view', {
         url: '/view/:id',
         templateUrl: 'views/requests/view.html',
-        data: { pageTitle: 'View request' },
+        data: {
+          pageTitle: 'View request'
+        },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([]);
@@ -177,17 +209,17 @@
       .state('requests.edit', {
         url: '/edit/:id',
         templateUrl: 'views/requests/edit.html',
-        data: { pageTitle: 'Edit request' },
+        data: {
+          pageTitle: 'Edit request'
+        },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
-            return $ocLazyLoad.load([
-              {
-                name: 'bootstrap-tags',
-                files: [
-                  'js/libs/bootstrap-tagsinput.js'
-                ]
-              },
-            ]);
+            return $ocLazyLoad.load([{
+              name: 'bootstrap-tags',
+              files: [
+                'js/libs/bootstrap-tagsinput.js'
+              ]
+            }, ]);
           },
         },
       })
@@ -196,55 +228,55 @@
         templateUrl: 'views/requests/list.html',
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
-            return $ocLazyLoad.load([
-              {
-                name: 'ui.sortable',
-                files: [
-                  'js/libs/sortable.min.js'
-                ]
-              },
-            ]);
+            return $ocLazyLoad.load([{
+              name: 'ui.sortable',
+              files: [
+                'js/libs/sortable.min.js'
+              ]
+            }, ]);
           },
         }
       })
       .state('requests.purchase-priority', {
         url: '/purchase-priority',
         templateUrl: 'views/requests/purchase-priority.html',
-        data: { pageTitle: 'Purchase Request prioritization' },
+        data: {
+          pageTitle: 'Purchase Request prioritization'
+        },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
-            return $ocLazyLoad.load([
-              {
-                name: 'ui.sortable',
-                files: [
-                  'js/libs/sortable.min.js'
-                ]
-              },
-            ]);
+            return $ocLazyLoad.load([{
+              name: 'ui.sortable',
+              files: [
+                'js/libs/sortable.min.js'
+              ]
+            }, ]);
           },
         },
       })
       .state('requests.create-annual-equipment-request', {
         url: '/annual-equipment/create',
         templateUrl: 'views/requests/annual-equipment/start.html',
-        data: { pageTitle: 'New Annual Equipment purchase request' },
+        data: {
+          pageTitle: 'New Annual Equipment purchase request'
+        },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
-            return $ocLazyLoad.load([
-              {
-                name: 'px-wizard',
-                files: [
-                  'js/pixeladmin/plugins/px-wizard.js'
-                ]
-              },
-            ]);
+            return $ocLazyLoad.load([{
+              name: 'px-wizard',
+              files: [
+                'js/pixeladmin/plugins/px-wizard.js'
+              ]
+            }, ]);
           },
         },
       })
       .state('requests.annual-equipment-request-submitted', {
         url: '/annual-equipment/success',
         templateUrl: 'views/requests/annual-equipment/success.html',
-        data: { pageTitle: 'Annual Equipment purchase request submitted' },
+        data: {
+          pageTitle: 'Annual Equipment purchase request submitted'
+        },
         resolve: {
           loadPlugin: function ($ocLazyLoad) {
             return $ocLazyLoad.load([]);
@@ -288,6 +320,7 @@
       '$ocLazyLoadProvider',
       'angularAuth0Provider',
       'jwtOptionsProvider',
-      '__env', config])
+      '__env', config
+    ])
     .run(['$rootScope', '$state', '$http', 'Auth', '$transitions', run]);
 })();

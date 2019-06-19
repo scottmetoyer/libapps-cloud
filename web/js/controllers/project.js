@@ -38,7 +38,7 @@
     self.createProject = function (isValid) {
       if (isValid) {
         saveProject(function () {
-          $location.path('/projects/view/' + self.project.id).search({ new: 'true' });
+          $location.path('/projects/in-flight').search({ new: 'true' });
         });
       }
     }
