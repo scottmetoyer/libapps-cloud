@@ -21,7 +21,7 @@
       <p ng-show="projects.projects.length == 0">There are no projects in-flight. Kick some off from the <a href
           ui-sref="projects.backlog">backlog</a>.</p>
       <div class="table-light">
-        <table datatable="ng" class="table table-bordered table-striped" id="projects" ng-show="projects.projects.length > 0">
+        <table datatable="ng" class="table table-bordered table-striped" id="projects" ng-show="projects.projects.length > 0" dt-column-defs="projects.columnDefs">
           <thead>
             <tr>
               <th>Name</th>

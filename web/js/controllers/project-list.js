@@ -3,9 +3,14 @@
   // Controllers / ProjectList
   //
 
-  function ProjectListCtrl($http, $state, $filter, bl, data) {
+  function ProjectListCtrl($state, $filter, bl, data, DTDefaultOptions, DTColumnDefBuilder) {
     var self = this;
     self.projects = [];
+
+    // Set default page size to 100
+    DTDefaultOptions.setDisplayLength(100);
+
+    self.columnDefs = [];
 
     self.loadProjects = function () {
       data.getProjects()
