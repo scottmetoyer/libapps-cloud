@@ -1,16 +1,20 @@
 {
-  "name": "projects",
+  "name": "libapps-cloud",
   "version": "1.0.0",
-  "description": "",
+  "description": "UCR Library LibApps Cloud web services",
   "main": "handler.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type" : "git",
+    "url" : "http://smetoyer@ul-stash.ul.ucr.edu:7990/scm/lc/libapps-cloud.git"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "request": "^2.83.0",
-    "uuid": "^3.2.1",
-    "jsonwebtoken": "^8.1.0"
+    "jsonwebtoken": "^8.5.1",
+    "request": "^2.88.0",
+    "uuid": "^3.3.2"
   }
 }
