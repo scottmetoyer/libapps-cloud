@@ -3,15 +3,18 @@
   // Controllers / Project
   //
 
-  function ProjectCtrl($http, $stateParams, $anchorScroll, $location, bl, data) {
+  function ProjectCtrl($http, $state, $timeout, $window, $stateParams, $anchorScroll, $location, bl, data) {
     var self = this;
 
     // Initialize with sensible defaults
     self.project = {};
     self.statusUpdateList = {};
-    self.statusUpdate = { 'user': 'Choose a team member...' };
+    self.statusUpdate = {
+      'user': 'Choose a team member...'
+    };
     self.project.executionStatus = 'backlog';
     self.showStatusUpdateForm = false;
+    self.currentDate = new Date();
 
     self.saveStatusUpdate = function (isValid) {
       if (isValid) {
@@ -28,7 +31,9 @@
 
     self.cancelStatusUpdate = function () {
       self.showStatusUpdateForm = false;
-      self.statusUpdate = { 'user': 'Choose a team member...' };
+      self.statusUpdate = {
+        'user': 'Choose a team member...'
+      };
     }
 
     self.toggleStatusUpdateForm = function () {
@@ -38,7 +43,9 @@
     self.createProject = function (isValid) {
       if (isValid) {
         saveProject(function () {
-          $location.path('/projects/in-flight').search({ new: 'true' });
+          $location.path('/projects/in-flight').search({
+            new: 'true'
+          });
         });
       }
     }
@@ -46,7 +53,9 @@
     self.updateProject = function (isValid) {
       if (isValid) {
         saveProject(function () {
-          $location.path('/projects/view/' + self.project.id).search({ updated: 'true' });
+          $location.path('/projects/view/' + self.project.id).search({
+            updated: 'true'
+          });
         });
       }
     }
@@ -81,7 +90,7 @@
           self.project = response.data.Item;
 
           if (self.project != null) {
-            self.project.status = bl.calculateStatus(self.project);
+            self.project.statusClass = bl.getStatusClass(self.project.status);
 
             // Toggle visibility on the new and updated project indicators
             if ('new' in $location.search()) {
@@ -97,6 +106,7 @@
 
           // Load up the project status updates
           getStatusUpdates($stateParams.id);
+
         }, function (response) {
           $anchorScroll();
           self.hasError = true;

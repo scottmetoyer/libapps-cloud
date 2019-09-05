@@ -1,0 +1,100 @@
+<style>
+    body {
+        background-color: #fff;
+    }
+</style>
+<div ng-controller="ProjectCtrl as project" class="scorecard">
+    <div class="page-header" ng-hide="project.hasError" style="border-bottom: none; margin-bottom: 8px;">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>
+                    {{ project.project.name }}
+                    <span class="text-muted font-weight-light"> project scorecard</span>
+                </h1><br>
+                <p style="margin-bottom: 0px;">{{ project.currentDate | date: 'medium' }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-hide="project.hasError">
+        <div class="col-md-6">
+            <div class="panel box">
+                <div class="box-row">
+                    <div class="box-container">
+                        <div class="box-cell p-a-3 valign-middle bg-transparent">
+                            <i class="box-bg-icon middle right font-size-52 ion-ios-information-outline"></i>
+                            <div class="font-size-17"><strong>Project Overview</strong></div>
+                            <div class="text-muted font-size-12">{{ project.project.description }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-row">
+                    <div class="box-container text-xs-center">
+
+                        <div class="box-row valign-middle">
+                            <div class="box-cell p-y-1 b-r-1 b-b-1 b-t-1">
+                                <div class="font-size-15">
+                                    <strong>&nbsp;{{ project.project.lead }}&nbsp;</strong>
+                                </div>
+                                <div class="font-size-11">TECH LEAD</div>
+                            </div>
+
+                            <div class="box-cell p-y-1 b-r-1 b-b-1 b-t-1">
+                                <div class="font-size-15">
+                                    <strong>&nbsp;{{ project.project.owner }}&nbsp;</strong>
+                                </div>
+                                <div class="font-size-11">OWNER</div>
+                            </div>
+
+                            <div class="box-cell p-y-1 b-b-1 b-t-1">
+                                <div class="font-size-15">
+                                    <strong>&nbsp;{{ project.project.status }}&nbsp;</strong>
+                                </div>
+                                <div class="font-size-11"><span title="{{ project.project.status }}">STATUS</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-footer pull-right">
+                    <span class="font-size-11 text-muted">EXECUTION STATUS</span>&nbsp;
+                    <span class="font-size-11 text-uppercase">
+                        <strong>{{ project.project.executionStatus}}</strong>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading">
+                    <span class="panel-title">Latest Update</span>
+                    <div class="panel-heading-controls">
+                    </div>
+                </div>
+
+                <div class="widget-comments-item"
+                    ng-repeat="comment in project.statusUpdateList.Items | orderBy: '-created' | limitTo: 1">
+                    <div class="widget-comments-header">
+                        <a href="#" title="">{{ comment.user }}</a> commented on
+                        <a href="#" title="">{{ project.project.name }}</a>
+                    </div>
+                    <div class="widget-comments-text">
+                        {{ comment.text }}
+                    </div>
+                    <div class="widget-comments-footer">
+                        {{ comment.timestamp | humandate }}
+                    </div>
+                </div>
+
+                <div class="panel-footer text-xs-right">
+                    Showing {{ project.statusUpdateList.Count }} of {{ project.statusUpdateList.Count }} updates.
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

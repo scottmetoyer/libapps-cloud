@@ -34,7 +34,26 @@
                         <label>Cyberinfrastructure Lead</label>
                         <input class="form-control" type="text" ng-model="project.project.lead">
                     </fieldset>
-
+                       
+                    <div class="form-group">
+                        <label class="control-label">Project Status</label>
+                        <div class="radio m-t-0">
+                            <label>
+                                <input type="radio" name="project-status" ng-model="project.project.status" value="On track"> On track
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="project-status" ng-model="project.project.status" value="Needs attention"> Needs attention
+                            </label>
+                        </div>
+                        <div class="radio m-b-0">
+                            <label>
+                                <input type="radio" name="project-status" ng-model="project.project.status" value="At risk"> At risk
+                            </label>
+                        </div>
+                    </div>
+       
                     <fieldset class="form-group">
                         <label class="control-label">Has a Project Plan?</label>
                         <label class="switcher switcher-success">

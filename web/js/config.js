@@ -140,6 +140,18 @@
           },
         },
       })
+      .state('print-scorecard', {
+        url: '/print-scorecard/:id',
+        templateUrl: 'views/projects/print.html',
+        data: {
+          pageTitle: 'Print project'
+        },
+        resolve: {
+          loadPlugin: function ($ocLazyLoad) {
+            return $ocLazyLoad.load([]);
+          },
+        },
+      })
 
       // Recurring Task routes
       .state('recurring-tasks', {

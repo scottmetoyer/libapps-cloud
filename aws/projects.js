@@ -51,7 +51,8 @@ module.exports.handler = (event, context, callback) => {
     params.jiraLink != null ? item.jiraLink = params.jiraLink : null;
     params.codeRepositoryLink != null ? item.codeRepositoryLink = params.codeRepositoryLink : null;
     params.executionStatus != null ? item.executionStatus = params.executionStatus : null;
-
+    params.status != null ? item.status = params.status : null;
+    
     docClient.put({
       "TableName": tableName,
       "Item": item

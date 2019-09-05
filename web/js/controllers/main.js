@@ -9,6 +9,7 @@
     main.user = Auth.getUser();
     main.showAlert = false;
     main.isAul = false;
+    main.appVersionNumber = '1.2.001';
 
     main.logout = function () {
       Auth.logout();

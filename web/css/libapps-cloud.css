@@ -229,3 +229,7 @@ button.tag {
 .over-budget {
     border-top: solid 2px red !important;
 }
+
+.scorecard {
+    padding: 20px;
+}

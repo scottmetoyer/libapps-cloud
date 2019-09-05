@@ -32,7 +32,7 @@
             });
 
             self.projects.forEach(function (project) {
-              project.status = bl.calculateStatus(project);
+              project.statusClass = bl.getStatusClass(project.status);
 
               data.getStatusUpdates(project.id)
                 .then(function (res) {
