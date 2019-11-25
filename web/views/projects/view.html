@@ -157,7 +157,7 @@
                 </div>
 
                 <div class="widget-comments-item"
-                    ng-repeat="comment in project.statusUpdateList.Items | orderBy: '-created'">
+                    ng-repeat="comment in project.statusUpdateList.Items | orderBy: '-timestamp'">
                     <div class="widget-comments-header">
                         <a href="#" title="">{{ comment.user }}</a> commented on
                         <a href="#" title="">{{ project.project.name }}</a>
