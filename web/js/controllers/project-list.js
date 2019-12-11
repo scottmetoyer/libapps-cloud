@@ -9,6 +9,7 @@
 
     // Set default page size to 100
     DTDefaultOptions.setDisplayLength(100);
+    DTDefaultOptions.setOption('stateSave', 'true');
 
     self.columnDefs = [];
 

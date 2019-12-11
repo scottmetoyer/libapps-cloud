@@ -102,7 +102,7 @@
       })
       .state('projects.view', {
         url: '/view/:id',
-        templateUrl: 'views/projects/view.html',
+        templateUrl: 'views/projects/view.html?t=56798109783',
         data: {
           pageTitle: 'Project dashboard'
         },
@@ -268,7 +268,7 @@
       })
       .state('requests.create-annual-equipment-request', {
         url: '/annual-equipment/create',
-        templateUrl: 'views/requests/annual-equipment/start.html',
+        templateUrl: 'views/requests/annual-equipment/start.html?t=56798109783',
         data: {
           pageTitle: 'New Annual Equipment purchase request'
         },
