@@ -13,7 +13,7 @@
             <div class="panel">
                 <div class="panel-body">
                     <div class="owl-carousel">
-                        <div owl-carousel-item ng-repeat="p in projects.projects | orderObjectBy:'lead'">
+                        <div owl-carousel-item ng-repeat="p in projects.projects">
                             <h2><i class="ion-record {{ p.statusClass }}"></i>&nbsp;<a href
                                     ui-sref="projects.view({ id: p.id })">{{ p.name }}</a></h2>
                             <table class="table table-bordered big">
