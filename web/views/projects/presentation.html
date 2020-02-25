@@ -1,0 +1,53 @@
+<div ng-controller="ProjectPresentationCtrl as projects">
+    <div class="page-header m-b-0">
+        <div class="row">
+            <div class="col-md-6">
+                <h1><span class="text-muted font-weight-light">Projects / </span>Weekly Kickoff Presentation Mode</h1>
+            </div>
+            <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 p-t-1">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="owl-carousel">
+                        <div owl-carousel-item ng-repeat="p in projects.projects | orderObjectBy:'lead'">
+                            <h2><i class="ion-record {{ p.statusClass }}"></i>&nbsp;<a href
+                                    ui-sref="projects.view({ id: p.id })">{{ p.name }}</a></h2>
+                            <table class="table table-bordered big">
+                                <tr>
+                                    <td class="head">
+                                        Lead
+                                    </td>
+                                    <td>
+                                        {{ p.lead }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="head">
+                                        Owner
+                                    </td>
+                                    <td>
+                                        {{ p.owner }}
+                                    </td>
+                                </tr>
+                            </table>
+                            <p class="small" style="margin-top: 40px;"> {{ p.latestUpdate.timestamp | humandate }}
+                                <b>{{ p.latestUpdate.user }}</b></a> commented:</p>
+                            <p class="big">
+                                {{ p.latestUpdate.text }}
+                            </p>
+                            <hr>
+                        </div>
+                        </owl-carousel>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            $(function () {});
+        </script>
+    </div>

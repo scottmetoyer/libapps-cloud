@@ -53,8 +53,20 @@
   function complexDirective() {
   }
 
+  function owlCarouselItemDirective() {
+    return {
+      restrict  : "A",
+      transclude: false,
+      link      : function ($scope, element, attributes) {
+        if ( $scope.$last )
+          $scope.initCarousel();
+      }
+    };
+  }
+  
   angular.module('pixeladmin')
     .directive('pageTitle', ['$rootScope', pageTitleDirective])
     .directive('disallowSpaces', ['$rootScope', disallowSpacesDirective])
-    .directive('compareTo', ['$rootScope', compareToDirective]);
+    .directive('compareTo', ['$rootScope', compareToDirective])
+    .directive('owlCarouselItem', ['$rootScope', owlCarouselItemDirective])
 })();

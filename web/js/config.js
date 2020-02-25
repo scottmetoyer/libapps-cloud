@@ -40,9 +40,25 @@
         url: '/projects',
         templateUrl: 'views/common/layout.html',
       })
+      .state('projects.presentation', {
+        url: '/presentation',
+        templateUrl: 'views/projects/presentation.html',
+        data: {
+          pageTitle: 'Project list presentation'
+        },
+        resolve: {
+          loadPlugin: function ($ocLazyLoad) {
+            return $ocLazyLoad.load([{
+              serie: true,
+              name: 'owl.carousel',
+              files: ['js/libs/owl.carousel.js', 'js/pixeladmin/directives/angular-owl.carousel.js'],
+            }, ]);
+          },
+        }
+      })
       .state('projects.in-flight', {
         url: '/in-flight',
-        templateUrl: 'views/projects/in-flight-list.html',
+        templateUrl: 'views/projects/in-flight-list.html?v=2',
         data: {
           pageTitle: 'In-flight projects'
         },

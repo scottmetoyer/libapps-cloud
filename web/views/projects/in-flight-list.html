@@ -5,6 +5,9 @@
         <h1><span class="text-muted font-weight-light">Projects / </span>In-flight</h1>
       </div>
       <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right">
+        <a href ui-sref="projects.presentation" class="btn btn-success"><span
+            class="btn-label-icon left ion-images" target="_blank"></span>Presentation mode</a>&nbsp;
+
         <a href ui-sref="projects.create" class="btn btn-primary"><span
             class="btn-label-icon left ion-plus-round"></span>Create a project</a>
       </div>
@@ -21,7 +24,8 @@
       <p ng-show="projects.projects.length == 0">There are no projects in-flight. Kick some off from the <a href
           ui-sref="projects.backlog">backlog</a>.</p>
       <div class="table-light">
-        <table datatable="ng" class="table table-bordered table-striped" id="projects" ng-show="projects.projects.length > 0" dt-column-defs="projects.columnDefs" dt-state-save="true">
+        <table datatable="ng" class="table table-bordered table-striped" id="projects"
+          ng-show="projects.projects.length > 0" dt-column-defs="projects.columnDefs" dt-state-save="true">
           <thead>
             <tr>
               <th>Name</th>

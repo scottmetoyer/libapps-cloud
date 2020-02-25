@@ -233,3 +233,21 @@ button.tag {
 .scorecard {
     padding: 20px;
 }
+
+.owl-item h2 {
+    margin-top: 0;
+}
+
+.big {
+    font-size: 20px;
+}
+
+.head {
+    background-color: #e8e8e8;
+    font-weight: bold;
+    width: 150px;
+}
+
+.owl-nav [class*=owl-] {
+    padding: 8px;
+}
